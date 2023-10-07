@@ -4,12 +4,6 @@
       <!-- <div class="preloader flex-column justify-content-center align-items-center">
         <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
       </div> -->
-  
-      <!-- Navbar -->
-
-      <!-- /.navbar -->
-  
-      <!-- Main Sidebar Container -->
 
   
       <!-- Content Wrapper. Contains page content -->
@@ -19,7 +13,7 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">Price Plans</h1>
+                <h1 class="m-0">Positions</h1>
               </div>
               <!-- /.col -->
               <div class="col-sm-6">
@@ -45,7 +39,7 @@
             <div class="card">
               <div class="card-header">
                 <!-- <h3 class="card-title d-inline float-left">Bordered Table</h3> -->
-                <a href="/addprice" class="btn  btn-outline-primary float-right">ADD</a>
+                <a href="/addposition" class="btn  btn-outline-primary float-right">ADD</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -53,9 +47,10 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Plan name</th>
-                      <th>Price</th>
-                      <th>Duration</th>
+                      <th>Position ID</th>
+                      <th>Position Name</th>
+                      <th>Department</th>
+                      <th>Action</th>
                      
                      
          
@@ -64,13 +59,13 @@
                   <tbody>
                     <tr>
                       <td>1.</td>
-                      <td>Basic</td>
+                      <td>ABC123</td>
                       <td>
-                        $100
+                        Software Developer
                       </td>
 
                       <td>
-                        1 year
+                        Development
                       </td>
                      
                      
@@ -87,13 +82,16 @@
                     </tr>
                     <tr>
                       <td>1.</td>
-                      <td>Standard</td>
+                      <td>ABC123</td>
                       <td>
-                        $230
+                        Software Developer
                       </td>
+
                       <td>
-                        1 year
+                        Development
                       </td>
+                     
+                     
                        
                       
                     
@@ -105,33 +103,11 @@
                       </td>
                     
                     </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>Advanced</td>
-                      <td>
-                        $400
-                      </td>
-                      <td>
-                        1 year
-                      </td>
-                       
-                      
-                    
-                      <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">Edit</a>
-
-                        <a href="/addemployee" class="btn btn-sm btn-danger ml-2 ">Delete</a>
-
-                      </td>
-                    
-                    </tr>
-                  
                    
                  
                   
                   </tbody>
                 </table>
-                <div class="bs-stepper"></div>
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
@@ -157,7 +133,7 @@
         </section>
         <!-- /.content -->
       </div>
-  
+
     </div>
   </template>
       
@@ -165,7 +141,6 @@
 
   export default {
 
-
-  };
+  }
   </script>
       

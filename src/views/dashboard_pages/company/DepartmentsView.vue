@@ -5,13 +5,8 @@
         <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
       </div> -->
   
-      <!-- Navbar -->
-
-      <!-- /.navbar -->
   
-      <!-- Main Sidebar Container -->
 
-  
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -19,7 +14,7 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">Price Plans</h1>
+                <h1 class="m-0">Departments</h1>
               </div>
               <!-- /.col -->
               <div class="col-sm-6">
@@ -45,7 +40,7 @@
             <div class="card">
               <div class="card-header">
                 <!-- <h3 class="card-title d-inline float-left">Bordered Table</h3> -->
-                <a href="/addprice" class="btn  btn-outline-primary float-right">ADD</a>
+                <a href="/adddepartment" class="btn  btn-outline-primary float-right">ADD</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -53,9 +48,9 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Plan name</th>
-                      <th>Price</th>
-                      <th>Duration</th>
+                      <th>Department ID</th>
+                      <th>Department Name</th>
+                      <th>Action</th>
                      
                      
          
@@ -64,15 +59,10 @@
                   <tbody>
                     <tr>
                       <td>1.</td>
-                      <td>Basic</td>
+                      <td>ABC123</td>
                       <td>
-                        $100
+                        Accounts
                       </td>
-
-                      <td>
-                        1 year
-                      </td>
-                     
                      
                        
                       
@@ -87,13 +77,11 @@
                     </tr>
                     <tr>
                       <td>1.</td>
-                      <td>Standard</td>
+                      <td>ABC123</td>
                       <td>
-                        $230
+                        Accounts
                       </td>
-                      <td>
-                        1 year
-                      </td>
+                     
                        
                       
                     
@@ -107,13 +95,11 @@
                     </tr>
                     <tr>
                       <td>1.</td>
-                      <td>Advanced</td>
+                      <td>ABC123</td>
                       <td>
-                        $400
+                        Accounts
                       </td>
-                      <td>
-                        1 year
-                      </td>
+                     
                        
                       
                     
@@ -125,13 +111,13 @@
                       </td>
                     
                     </tr>
+                    
                   
                    
                  
                   
                   </tbody>
                 </table>
-                <div class="bs-stepper"></div>
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
@@ -164,8 +150,7 @@
       <script>
 
   export default {
-
-
-  };
+  
+  }
   </script>
       

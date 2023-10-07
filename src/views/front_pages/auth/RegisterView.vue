@@ -5,7 +5,7 @@
 
 
   <div class="col-lg-7  h-100 auth-bannar ">
-    <i style="position: fixed;top: 50px;left: 50px;;font-size: 180%;" class="fa-solid fa-arrow-left"></i>
+    <!-- <i style="position: fixed;top: 50px;left: 50px;;font-size: 180%;" class="fa-solid fa-arrow-left"></i> -->
 
    <div class="text-center mt-3"> 
 
@@ -26,7 +26,7 @@
 
 
     <div class="auth-box">
-          <h3 class="primary-color">Register to HRM</h3>
+          <h3 class="primary-color">Fill information</h3>
 
           <form>
 
@@ -52,7 +52,9 @@
 
 
             </div>
-       
+            <label class="mt-2 form-lebel">Company name</label>
+          <input v-model="email" @input="clearError('email')" class="common-form" type="text" />
+
             
             <label class="mt-2 form-lebel">Email</label>
           <input v-model="email" @input="clearError('email')" class="common-form" type="text" />

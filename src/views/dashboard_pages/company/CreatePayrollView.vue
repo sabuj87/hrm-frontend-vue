@@ -5,13 +5,7 @@
         <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
       </div> -->
   
-      <!-- Navbar -->
-      <navbar-view></navbar-view>
-      <!-- /.navbar -->
-  
-      <!-- Main Sidebar Container -->
-      <sidebar-view></sidebar-view>
-  
+
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -412,44 +406,16 @@
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
-      <footer-view></footer-view>
-      <!-- Control Sidebar -->
-      <control-sidebar-view></control-sidebar-view>
-      <!-- /.control-sidebar -->
+   
     </div>
   </template>
       
       <script>
-  import SidebarView from "@/views/dashboard_pages/companyadmin/SidebarView.vue";
-  import NavbarView from "@/views/dashboard_pages/companyadmin/NavbarView.vue";
-  import FooterView from "@/views/dashboard_pages/companyadmin/FooterView.vue";
-  import ControlSidebarView from "@/views/dashboard_pages/companyadmin/ControlSidebarView.vue";
+
   export default {
-    components: { SidebarView, NavbarView, FooterView, ControlSidebarView },
-  
-    data() {
-      return {
-        name: "",
-        features:[],
-   
-      };
-    },
-  
-    methods: {
-      userInfo() {},
-      addFeature(){
 
-        var feature={feature:this.feature,value:this.value}
-        this.features.push(feature);
-
-
-
-      }
-    },
-  
-    mounted: function () {
-      this.name = JSON.parse(localStorage.getItem("user")).user.name;
-    },
-  };
+    
+ 
+  }
   </script>
       

@@ -9,6 +9,7 @@
 
     <!--Footer -->
     <footer-view></footer-view>
+    <div class="bs-stepper" ></div>
 
 </template>
 

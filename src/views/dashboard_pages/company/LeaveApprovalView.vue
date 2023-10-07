@@ -19,7 +19,7 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">Payrolls</h1>
+                <h1 class="m-0">Leave Approval</h1>
               </div>
               <!-- /.col -->
               <div class="col-sm-6">
@@ -45,70 +45,96 @@
             <div class="card">
               <div class="card-header">
                 <!-- <h3 class="card-title d-inline float-left">Bordered Table</h3> -->
-                <a href="/createpayroll" class="btn  btn-outline-primary float-right">Create</a>
+                <!-- <a href="/addemployee" class="btn  btn-outline-primary float-right">ADD</a> -->
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table text-center table-bordered">
+                <table class="table table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Payroll ID</th>
-                      <th>Payroll Name</th>
-                      <th>Departments</th>
+                      <th>Employee Id</th>
+                      <th>Employee Name</th>
+                      <th>From </th>
+                      <th>Till</th>
                       <th>Action</th>
-                     
-                     
-                     
+                    
          
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td>1.</td>
-                      <td>002</td>
+                      <td>2022</td>
+                      <td>Abu Saeeed Sabuj</td>
                       <td>
-                     Sr. Sofware Developer
+                      12/6/2023
                       </td>
                       <td>
-                       Developments
+                      12/6/2023
                       </td>
+                   
+                   
+                   
                      
-                       
-                      
-                    
-                      <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">Edit</a>
-
-                        <a href="/addemployee" class="btn btn-sm btn-danger ml-2 ">Delete</a>
-
-                      </td>
-                    
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>001</td>
-                      <td>
-                     Sofware Developer
-                      </td>
-                      <td>
-                       Developments
-                      </td>
                      
-                       
-                      
-                    
                       <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">Edit</a>
-
-                        <a href="/addemployee" class="btn btn-sm btn-danger ml-2 ">Delete</a>
-
+                        <a href="/addemployee" class="btn btn-sm btn-default ">View</a>
+                        <a href="/addemployee" class="btn btn-sm btn-success ml-2 ">Accept</a>
+                        <a href="/addemployee" class="btn btn-sm btn-danger ml-2 ">Reject</a>
                       </td>
                     
                     </tr>
                 
-                 
+                    <tr>
+                      <td>1.</td>
+                      <td>2022</td>
+                      <td>Abu Saeeed Sabuj</td>
+                      <td>
+                      12/6/2023
+                      </td>
+                      <td>
+                      12/6/2023
+                      </td>
                    
+                   
+                   
+                     
+                     
+                      <td>
+                        <a href="/addemployee" class="btn btn-sm btn-default ">View</a>
+                        <a href="/addemployee" class="btn btn-sm btn-success ml-2 ">Accept</a>
+                        <a href="/addemployee" class="btn btn-sm btn-danger ml-2 ">Reject</a>
+                      </td>
+                    
+                    </tr>
+                
+                    <tr>
+                      <td>1.</td>
+                      <td>2022</td>
+                      <td>Abu Saeeed Sabuj</td>
+                      <td>
+                      12/6/2023
+                      </td>
+                      <td>
+                      12/6/2023
+                      </td>
+                   
+                   
+                   
+                     
+                     
+                      <td>
+                        <a href="/addemployee" class="btn btn-sm btn-default ">View</a>
+                        <a href="/addemployee" class="btn btn-sm btn-success ml-2 ">Accept</a>
+                        <a href="/addemployee" class="btn btn-sm btn-danger ml-2 ">Reject</a>
+                      </td>
+                    
+                    </tr>
+                
+                   
+
+                  
                  
                   
                   </tbody>
@@ -139,34 +165,15 @@
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
-      <footer-view></footer-view>
-      <!-- Control Sidebar -->
-      <control-sidebar-view></control-sidebar-view>
-      <!-- /.control-sidebar -->
+ 
     </div>
   </template>
       
       <script>
-  import SidebarView from "@/views/dashboard_pages/companyadmin/SidebarView.vue";
-  import NavbarView from "@/views/dashboard_pages/companyadmin/NavbarView.vue";
-  import FooterView from "@/views/dashboard_pages/companyadmin/FooterView.vue";
-  import ControlSidebarView from "@/views/dashboard_pages/companyadmin/ControlSidebarView.vue";
+
   export default {
-    components: { SidebarView, NavbarView, FooterView, ControlSidebarView },
+
   
-    data() {
-      return {
-        name: "",
-      };
-    },
-  
-    methods: {
-      userInfo() {},
-    },
-  
-    mounted: function () {
-      this.name = JSON.parse(localStorage.getItem("user")).user.name;
-    },
-  };
+  }
   </script>
       

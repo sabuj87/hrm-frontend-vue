@@ -11,7 +11,7 @@
           <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
             
-            <a href="#" class="mb-4 mt-3 d-block text-center">Super Admin</a>
+            <a href="#" class="mb-4 mt-3 d-block text-center">Employee</a>
             
     
     
@@ -47,7 +47,7 @@
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-chart-pie"></i>
                     <p>
-                    Manage Company
+                    Manage Information
                       <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
@@ -55,43 +55,87 @@
                     <li class="nav-item">
                       <a href="/companies" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Companies</p>
+                        <p>Profile Update</p>
                       </a>
                     </li>
                     <li class="nav-item">
                       <a href="/pendingcompanies" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Pending</p>
+                        <p>Attendance integration</p>
                       </a>
                     </li>
-                   
-                   
-                    
-                  </ul>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-tree"></i>
-                    <p>
-                     Manage Price Plan
-                      <i class="fas fa-angle-left right"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                   
-                   
-                  
                    
                     <li class="nav-item">
-                      <a href="/prices" class="nav-link">
+                      <a href="/pendingcompanies" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Price Plans</p>
+                        <p>Roaster & Timesheet view</p>
                       </a>
                     </li>
+                   
+                    <li class="nav-item">
+                      <a href="/pendingcompanies" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Resource Demand Application </p>
+                      </a>
+                    </li>
+                   
+                    <li class="nav-item">
+                      <a href="/pendingcompanies" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Allocated Resource view </p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/pendingcompanies" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>TA/DA submission </p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/pendingcompanies" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>TA/DA submission </p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/pendingcompanies" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Loan/Advance payment </p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/pendingcompanies" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Payslip View</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/pendingcompanies" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Provident Fund View</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/pendingcompanies" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Self Assessment Submission</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/pendingcompanies" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Project Activity submission </p>
+                      </a>
+                    </li>
+                   
+                   
+                   
+                   
+                   
                     
-                  
                   </ul>
                 </li>
+           
 
                 <li class="nav-item">
                   <a href="#" class="nav-link">

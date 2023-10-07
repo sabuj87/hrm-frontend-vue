@@ -5,7 +5,7 @@
 
 
   <div class="col-lg-7  h-100 auth-bannar ">
-    <i style="position: fixed;top: 50px;left: 50px;;font-size: 180%;" class="fa-solid fa-arrow-left"></i>
+    <!-- <i style="position: fixed;top: 50px;left: 50px;;font-size: 180%;" class="fa-solid fa-arrow-left"></i> -->
 
    <div class="text-center mt-3"> 
 

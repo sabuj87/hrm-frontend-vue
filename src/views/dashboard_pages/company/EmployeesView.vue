@@ -217,34 +217,15 @@
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
-      <footer-view></footer-view>
-      <!-- Control Sidebar -->
-      <control-sidebar-view></control-sidebar-view>
-      <!-- /.control-sidebar -->
+ 
     </div>
   </template>
       
       <script>
-  import SidebarView from "@/views/dashboard_pages/companyadmin/SidebarView.vue";
-  import NavbarView from "@/views/dashboard_pages/companyadmin/NavbarView.vue";
-  import FooterView from "@/views/dashboard_pages/companyadmin/FooterView.vue";
-  import ControlSidebarView from "@/views/dashboard_pages/companyadmin/ControlSidebarView.vue";
+
   export default {
-    components: { SidebarView, NavbarView, FooterView, ControlSidebarView },
+
   
-    data() {
-      return {
-        name: "",
-      };
-    },
-  
-    methods: {
-      userInfo() {},
-    },
-  
-    mounted: function () {
-      this.name = JSON.parse(localStorage.getItem("user")).user.name;
-    },
-  };
+  }
   </script>
       

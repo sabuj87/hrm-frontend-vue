@@ -19,7 +19,7 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">Departments</h1>
+                <h1 class="m-0">Final Candidate</h1>
               </div>
               <!-- /.col -->
               <div class="col-sm-6">
@@ -45,86 +45,99 @@
             <div class="card">
               <div class="card-header">
                 <!-- <h3 class="card-title d-inline float-left">Bordered Table</h3> -->
-                <a href="/adddepartment" class="btn  btn-outline-primary float-right">ADD</a>
+                <!-- <a href="/addemployee" class="btn  btn-outline-primary float-right">ADD</a> -->
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table text-center table-bordered">
+                <table class="table table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Department ID</th>
-                      <th>Department Name</th>
-                      <th>Action</th>
-                     
-                     
+                      <th>Candidate Name</th>
+                      <th>Job title</th>
+                      <th>Date & Time</th>
+                      <th> Result </th>
+                      <th>Recommended</th>
+                    
          
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>1.</td>
-                      <td>ABC123</td>
-                      <td>
-                        Accounts
-                      </td>
-                     
-                       
-                      
-                    
-                      <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">Edit</a>
 
-                        <a href="/addemployee" class="btn btn-sm btn-danger ml-2 ">Delete</a>
+                        <td>1.</td>
+                        <td>Abu Saeed Sabuj</td>
+                      <td>Softawre Developer</td>
+                      <td>17/4/2023 12:23:00</td>
+                      <td >
+                       50.0
+
 
                       </td>
                     
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>ABC123</td>
                       <td>
-                        Accounts
-                      </td>
-                     
-                       
-                      
-                    
-                      <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">Edit</a>
-
-                        <a href="/addemployee" class="btn btn-sm btn-danger ml-2 ">Delete</a>
-
+                        <input type="checkbox" > Yes
+                        <input type="checkbox" > No
                       </td>
                     
                     </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>ABC123</td>
-                      <td>
-                        Accounts
-                      </td>
-                     
-                       
-                      
-                    
-                      <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">Edit</a>
-
-                        <a href="/addemployee" class="btn btn-sm btn-danger ml-2 ">Delete</a>
-
-                      </td>
-                    
-                    </tr>
-                    
-                  
+                
                    
+                    <tr>
+
+                        <td>1.</td>
+                        <td>Abu Saeed Sabuj</td>
+                      <td>Softawre Developer</td>
+                      <td>17/4/2023 12:23:00</td>
+                      <td >
+                        50.0
+
+                      </td>
+                    
+                      <td>
+                        <input type="checkbox" > Yes
+                        <input type="checkbox" > No
+                      </td>
+                    
+                    </tr>
+                
+                   
+                    <tr>
+
+                        <td>1.</td>
+                        <td>Abu Saeed Sabuj</td>
+                      <td>Softawre Developer</td>
+                      <td>17/4/2023 12:23:00</td>
+                      <td >
+                        50.0
+
+
+                      </td>
+                    
+                      <td>
+                        <input type="checkbox" > Yes
+                        <input type="checkbox" > No
+                      </td>
+                    
+                    </tr>
+                
+                   
+
+                  
                  
                   
                   </tbody>
                 </table>
-              </div>
+                <div class="mt-3">  
+                    <button class="btn btn-success" >Create Offer</button>
+              <button class="btn btn-primary ml-2"  >Send mail</button>
+              <button class="btn btn-warning ml-2" >Send sms</button>
+
+                </div>
+             
               <!-- /.card-body -->
+              </div>
+           
               <div class="card-footer clearfix">
                 <ul class="pagination pagination-sm m-0 float-right">
                   <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
@@ -149,34 +162,15 @@
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
-      <footer-view></footer-view>
-      <!-- Control Sidebar -->
-      <control-sidebar-view></control-sidebar-view>
-      <!-- /.control-sidebar -->
+ 
     </div>
   </template>
       
       <script>
-  import SidebarView from "@/views/dashboard_pages/companyadmin/SidebarView.vue";
-  import NavbarView from "@/views/dashboard_pages/companyadmin/NavbarView.vue";
-  import FooterView from "@/views/dashboard_pages/companyadmin/FooterView.vue";
-  import ControlSidebarView from "@/views/dashboard_pages/companyadmin/ControlSidebarView.vue";
+
   export default {
-    components: { SidebarView, NavbarView, FooterView, ControlSidebarView },
+
   
-    data() {
-      return {
-        name: "",
-      };
-    },
-  
-    methods: {
-      userInfo() {},
-    },
-  
-    mounted: function () {
-      this.name = JSON.parse(localStorage.getItem("user")).user.name;
-    },
-  };
+  }
   </script>
       

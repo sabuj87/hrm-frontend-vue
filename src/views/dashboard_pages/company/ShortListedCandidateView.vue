@@ -6,11 +6,11 @@
       </div> -->
   
       <!-- Navbar -->
-
+      <navbar-view></navbar-view>
       <!-- /.navbar -->
   
       <!-- Main Sidebar Container -->
-
+      <sidebar-view></sidebar-view>
   
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -19,7 +19,7 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">Price Plans</h1>
+                <h1 class="m-0">Short Listed</h1>
               </div>
               <!-- /.col -->
               <div class="col-sm-6">
@@ -41,97 +41,83 @@
           <div class="container-fluid">
             <div class="row">
 
+                <div class="col-lg-3">
+                        <div class="form-group">
+                          <label 
+                            >Search
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="Job title"
+                            class="form-control"
+                           
+                          />
+                        </div>
+                      </div>
+                      <div class="col-lg-3 pt-1">
+                     
+                        <a href="/addemployee" class="btn btn-sm btn-primary mt-4 ">Search</a>
+                      </div>
+
+
+            </div>
+
+
+            <div class="row">
+
                 <div class="col-lg-12">
             <div class="card">
               <div class="card-header">
                 <!-- <h3 class="card-title d-inline float-left">Bordered Table</h3> -->
-                <a href="/addprice" class="btn  btn-outline-primary float-right">ADD</a>
+                <!-- <a href="/addemployee" class="btn  btn-outline-primary float-right">ADD</a> -->
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table text-center table-bordered">
+                <table class="table table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Plan name</th>
-                      <th>Price</th>
-                      <th>Duration</th>
-                     
-                     
+                      <th>Applicant Name</th>
+                      <th>Job Title</th>
+                      <th>View</th>
+                 
+                 
+                    
          
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>1.</td>
-                      <td>Basic</td>
-                      <td>
-                        $100
-                      </td>
 
-                      <td>
-                        1 year
-                      </td>
-                     
-                     
-                       
-                      
-                    
-                      <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">Edit</a>
-
-                        <a href="/addemployee" class="btn btn-sm btn-danger ml-2 ">Delete</a>
-
-                      </td>
-                    
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>Standard</td>
-                      <td>
-                        $230
-                      </td>
-                      <td>
-                        1 year
-                      </td>
-                       
-                      
-                    
-                      <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">Edit</a>
-
-                        <a href="/addemployee" class="btn btn-sm btn-danger ml-2 ">Delete</a>
-
-                      </td>
-                    
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>Advanced</td>
-                      <td>
-                        $400
-                      </td>
-                      <td>
-                        1 year
-                      </td>
-                       
-                      
-                    
-                      <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">Edit</a>
-
-                        <a href="/addemployee" class="btn btn-sm btn-danger ml-2 ">Delete</a>
-
-                      </td>
-                    
-                    </tr>
+                        <td>1.</td>
+                        <td>Abu Saeed Sabuj</td>
+                      <td>Software Developer</td>
+                      <td>CV(icon) cover letter (icon) doc1, doc2, doc3</td>
+            
+                 
                   
-                   
+                    
+                    </tr>
+
+                    <tr>
+
+<td>1.</td>
+<td>Abu Saeed Sabuj</td>
+<td>Software Developer</td>
+<td>CV(icon) cover letter (icon) doc1, doc2, doc3</td>
+
+
+
+
+</tr>
+
+   
+                
+                  
                  
                   
                   </tbody>
                 </table>
-                <div class="bs-stepper"></div>
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
@@ -157,7 +143,8 @@
         </section>
         <!-- /.content -->
       </div>
-  
+      <!-- /.content-wrapper -->
+ 
     </div>
   </template>
       
@@ -165,7 +152,7 @@
 
   export default {
 
-
-  };
+  
+  }
   </script>
       
