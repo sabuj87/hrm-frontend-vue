@@ -8,21 +8,14 @@
    
   
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div class="content-wrapper bg-white">
         <!-- Content Header (Page header) -->
         <div class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
-              <div class="col-sm-6">
-                <h1 class="m-0">Payrolls</h1>
-              </div>
+            
               <!-- /.col -->
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Dashboard v1</li>
-                </ol>
-              </div>
+           
               <!-- /.col -->
             </div>
             <!-- /.row -->
@@ -38,17 +31,24 @@
 
                 <div class="col-lg-12">
             <div class="card">
-              <div class="card-header">
-                <!-- <h3 class="card-title d-inline float-left">Bordered Table</h3> -->
-                <a href="/createpayroll" class="btn  btn-outline-primary float-right">Create</a>
-              </div>
+              <div  class="card-header pc-bg ">
+                    <h3 class="card-title text-white float-left">Payrolls</h3>
+                
+                    <router-link  class=" float-right"  :to="{ name: 'createpayroll' }">
+
+<span class="btn-sc-sm" >Create</span>
+</router-link>
+                  </div>
+       
+             
+            
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table text-center table-bordered">
+                <table class="table text-center table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Payroll ID</th>
+
                       <th>Payroll Name</th>
                       <th>Departments</th>
                       <th>Action</th>
@@ -59,49 +59,25 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1.</td>
-                      <td>002</td>
+                    <tr v-for="payroll in payrolls" :key="payroll" >
+                      <td>{{ payroll.id  }}</td>
+                      <td>{{ payroll.designation_name}}</td>
                       <td>
-                     Sr. Sofware Developer
-                      </td>
-                      <td>
-                       Developments
+                      Software
                       </td>
                      
                        
                       
                     
                       <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">Edit</a>
+                        <a href="/addemployee" class="btn-sc-sm ">Edit</a>
 
-                        <a href="/addemployee" class="btn btn-sm btn-danger ml-2 ">Delete</a>
-
-                      </td>
-                    
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>001</td>
-                      <td>
-                     Sofware Developer
-                      </td>
-                      <td>
-                       Developments
-                      </td>
-                     
-                       
-                      
-                    
-                      <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">Edit</a>
-
-                        <a href="/addemployee" class="btn btn-sm btn-danger ml-2 ">Delete</a>
+                        <a href="/addemployee" class="btn-dn-sm  ml-2">Delete</a>
 
                       </td>
                     
                     </tr>
-                
+              
                  
                    
                  
@@ -139,8 +115,54 @@
       
   <script>
 
-  export default {
+ // import $ from "jquery";
+ import axios from "axios";
+export default {
 
-  }
+  data() {
+  return {
+    errors:{},
+    payrolls:""
+  };
+},
+methods: {
+  getpayroll() {
+    axios
+          .get("/company/payrolls")
+          .then((response) => {
+
+            if(response){
+              // alert(response.data.message)
+              this.payrolls=response.data.data;
+         
+             
+            }
+
+
+
+           
+
+          }).catch((error)=>{
+             
+
+           this.errors=error.response.data.errors
+
+        
+
+        
+
+          
+          })
+         
+
+  
+  },
+},
+mounted:function(){
+  this.getpayroll()
+}
+  
+
+}
   </script>
       

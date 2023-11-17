@@ -17,8 +17,9 @@ import RegisterView from '../views/front_pages/auth/RegisterView'
 
 
 import SuperAdminDashboardView from '../views/dashboard_pages/superadmin/SuperAdminDashboardView'
-import PriceView from '../views/dashboard_pages/superadmin/PriceView'
-import AddPriceView from '../views/dashboard_pages/superadmin/AddPriceView'
+import PriceView from '../views/dashboard_pages/superadmin/priceplan/PriceView'
+import AddPriceView from '../views/dashboard_pages/superadmin/priceplan/AddPriceView'
+import EditPriceView from '../views/dashboard_pages/superadmin/priceplan/EditPriceView'
 import CompaniesView from '../views/dashboard_pages/superadmin/CompaniesView'
 import PendingCompaniesView from '../views/dashboard_pages/superadmin/PendingCompaniesView'
 
@@ -35,7 +36,8 @@ import AddPositionView from '../views/dashboard_pages/company/AddPositionView'
 import PositionsView from '../views/dashboard_pages/company/PositionsView'
 import PayrollsView from '../views/dashboard_pages/company/PayrollsView'
 import CreatePayrollView from '../views/dashboard_pages/company/CreatePayrollView'
-import CompanyProfileView from '../views/dashboard_pages/company/CompanyProfileView'
+import CompanyProfileUpdateView from '../views/dashboard_pages/company/profile/CompanyProfileUpdateView'
+import CompanyProfileView from '../views/dashboard_pages/company/profile/CompanyProfileView'
 import AssignPayrollView from '../views/dashboard_pages/company/AssignPayrollView'
 import AdvancedPaymentView from '../views/dashboard_pages/company/AdvancedPaymentView'
 import RequestedLoanView from '../views/dashboard_pages/company/RequestedLoanView'
@@ -51,6 +53,7 @@ import CreateInterviewQuestionView from '../views/dashboard_pages/company/Create
 import ScheduleMangeView from '../views/dashboard_pages/company/ScheduleMangeView'
 import InterviewResultManageView from '../views/dashboard_pages/company/InterviewResultManageView'
 import FinalCandidateView from '../views/dashboard_pages/company/FinalCandidateView'
+import PerformanceIndicatorView from '../views/dashboard_pages/company/PerformanceIndicatorView'
 
 
 //Employee Component
@@ -59,6 +62,14 @@ import RequestLoanView from '../views/dashboard_pages/employee/RequestLoanView'
 import LeaveApplicationView from '../views/dashboard_pages/employee/LeaveApplicationView'
 import LeaveApplicationListView from '../views/dashboard_pages/employee/LeaveApplicationListView'
 import CreateJobDemandView from '../views/dashboard_pages/employee/CreateJobDemandView'
+import EmployeeProfileUpdateView from '../views/dashboard_pages/employee/EmployeeProfileUpdateView'
+import GiveAttendanceView from '../views/dashboard_pages/employee/GiveAttendanceView'
+import PerformanceView from '../views/dashboard_pages/employee/PerformanceView'
+import AllocatedAssetView from '../views/dashboard_pages/employee/AllocatedAssetView'
+import ResourceDemandApplyView from '../views/dashboard_pages/employee/ResourceDemandApplyView'
+import BillSubmisstionView from '../views/dashboard_pages/employee/BillSubmisstionView'
+import BillStatusView from '../views/dashboard_pages/employee/BillStatusView'
+import PaySlipView from '../views/dashboard_pages/employee/PaySlipView'
 
 
 
@@ -103,18 +114,19 @@ const routes = [
     children: [
         {
            path: 'dashboard',
-           name: 'dashboard',
+           name: 'superadmin-dashboard',
+   
            component: SuperAdminDashboardView,
         },
 
         {
           path: 'company',
-          name: 'company',
+          name: 'superadmin-company',
           children: [
 
             {
               path:'companies',
-              name:'companies',
+              name:'superadmin-companies',
               component: CompaniesView
             },
 
@@ -123,6 +135,8 @@ const routes = [
               name:'pendingcompanies',
               component: PendingCompaniesView
             }
+
+
 
 
           ]
@@ -137,16 +151,22 @@ const routes = [
 
             {
               path:'prices',
-              name:'prices',
+              name:'superadmin.prices',
               component: PriceView
             },
           
 
             {
-              path:'addprice',
-              name:'addprice',
+              path:'add',
+              name:'superadmin.prices.add',
               component: AddPriceView
             },
+            {
+              path:'edit',
+              name:'superadmin.prices.edit',
+              component: EditPriceView
+            },
+            
           
 
           ]
@@ -174,7 +194,7 @@ const routes = [
     children: [
         {
            path: 'dashboard',
-           name: 'dashboard',
+           name: 'company-dashboard',
            component:CompanyDashboardView,
         },
 
@@ -185,7 +205,12 @@ const routes = [
 
             {
               path:'update',
-              name:'update',
+              name:'company-profile-update',
+              component: CompanyProfileUpdateView
+            },
+            {
+              path:'view',
+              name:'company-profile-view',
               component: CompanyProfileView
             },
 
@@ -203,7 +228,7 @@ const routes = [
 
             {
               path:'employees',
-              name:'employees',
+              name:'administrative-employees',
               component: EmployeesView
             },
 
@@ -215,16 +240,22 @@ const routes = [
             },
 
             {
-              path:'departments',
-              name:'departments',
+              path:'adddepartments',
+              name:'administrative-adddepartments',
               component: AddDepartmentView
             },
 
             {
-              path:'adddepartment',
-              name:'adddepartment',
+              path:'departments',
+              name:'administrative-departments',
               component: DepartmentsView
             },
+            {
+              path: 'performanceindi',
+              name: 'performanceindi',
+              component:PerformanceIndicatorView,
+             },
+             
 
 
              
@@ -299,24 +330,8 @@ const routes = [
               component: LoanDetailsView
             },
             
-            {
-              path:'loandetails',
-              name:'loandetails',
-  
-              component: LoanDetailsView
-            },
-         
-           
-         
-            
-            
-
           
-
-
-
-        
-
+ 
 
           ]
        
@@ -410,6 +425,9 @@ const routes = [
              
 
            
+         
+
+           
             
 
           ]
@@ -431,30 +449,82 @@ const routes = [
     children: [
         {
            path: 'dashboard',
-           name: 'dashboard',
+           name: 'employee-dashboard', 
            component:EmployeeDashboardView,
         },
         {
-          path: 'requestloan',
-          name: 'requestloan',
-          component:RequestLoanView,
+          path: 'manageinfo',
+          name: 'manageinfo',
+          children: [
+
+
+            {
+              path: 'requestloan',
+              name: 'requestloan',
+              component:RequestLoanView,
+           },
+           {
+            path: 'leaveapplication',
+            name: 'leaveapplication',
+            component:LeaveApplicationView,
+         },
+           {
+            path: 'leavelist',
+            name: 'leavelist',
+            component:LeaveApplicationListView,
+         },
+         {
+          path: 'createjobdemand',
+          name: 'createjobdemand',
+          component:CreateJobDemandView,
+         },
+         {
+          path: 'profile',
+          name: 'profile',
+          component:EmployeeProfileUpdateView,
+         },
+      
+         {
+          path: 'giveattendance',
+          name: 'giveattendance',
+          component:GiveAttendanceView,
+         },
+         {
+          path: 'performance',
+          name: 'performance',
+          component:PerformanceView,
+         },
+         {
+          path: 'allocatedasset',
+          name: 'allocatedasset',
+          component:AllocatedAssetView,
+         },
+         {
+          path: 'resourcedemand',
+          name: 'resourcedemand',
+          component:ResourceDemandApplyView,
+         },
+      
+         {
+          path: 'billsubmission',
+          name: 'billsubmission',
+          component:BillSubmisstionView,
+         },
+         {
+          path: 'billstatus',
+          name: 'billstatus',
+          component:BillStatusView,
+         },
+         {
+          path: 'payslip',
+          name: 'payslip',
+          component:PaySlipView,
+         },
+      
+
+          ]
        },
-       {
-        path: 'leaveapplication',
-        name: 'leaveapplication',
-        component:LeaveApplicationView,
-     },
-       {
-        path: 'leavelist',
-        name: 'leavelist',
-        component:LeaveApplicationListView,
-     },
-     {
-      path: 'createjobdemand',
-      name: 'createjobdemand',
-      component:CreateJobDemandView,
-     },
-  
+        
      
        
     ]

@@ -11,16 +11,9 @@
       <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0">Add Employee</h1>
-            </div>
+           
             <!-- /.col -->
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard v1</li>
-              </ol>
-            </div>
+           
             <!-- /.col -->
           </div>
           <!-- /.row -->
@@ -35,9 +28,9 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Personal details</h3>
-                </div>
+                <div  class="card-header pc-bg ">
+                    <h3 class="card-title">Person Details</h3>
+                  </div>
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -58,7 +51,7 @@
                         <div class="form-group">
                           <label>Gender</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Male</option>
@@ -68,7 +61,7 @@
                         <div class="form-group">
                           <label>Nationality</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Bnagladeshi</option>
@@ -135,7 +128,7 @@
                         <div class="form-group">
                           <label>Matirial Status</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Single</option>
@@ -185,9 +178,9 @@
               </div>
 
               <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Service details</h3>
-                </div>
+                <div  class="card-header pc-bg ">
+                    <h3 class="card-title">Service Details</h3>
+                  </div>
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -198,7 +191,7 @@
                         <div class="form-group">
                           <label>Department</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Accounts</option>
@@ -251,7 +244,7 @@
                         <div class="form-group">
                           <label>Positions</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Accounts</option>
@@ -284,7 +277,7 @@
                         <div class="form-group">
                           <label>Reporting Authority</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Person</option>
@@ -345,7 +338,7 @@
                         <div class="form-group">
                           <label>Leave section Authority</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Person</option>
@@ -359,7 +352,7 @@
                         <div class="form-group">
                           <label>Employment Type</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Type 1</option>
@@ -386,9 +379,9 @@
               </div>
 
               <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Educational details</h3>
-                </div>
+                <div  class="card-header pc-bg ">
+                    <h3 class="card-title">Educational Details</h3>
+                  </div>
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -424,7 +417,7 @@
                         <div class="form-group">
                           <label>Subjects</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Accounts</option>
@@ -494,7 +487,7 @@
                         <div class="form-group">
                           <label>Employment Type</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Type 1</option>
@@ -531,9 +524,9 @@
               </div>
 
               <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Job Details</h3>
-                </div>
+                <div  class="card-header pc-bg ">
+                    <h3 class="card-title">Job Details</h3>
+                  </div>
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -621,7 +614,7 @@
                         <div class="form-group">
                           <label>Expriences</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">1 year</option>
@@ -638,9 +631,9 @@
               </div>
 
               <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Employee Training Details</h3>
-                </div>
+                <div  class="card-header pc-bg ">
+                    <h3 class="card-title">Employee Traning Details</h3>
+                  </div>
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -735,9 +728,9 @@
               </div>
 
               <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Emargency Contact Details</h3>
-                </div>
+                <div  class="card-header pc-bg ">
+                    <h3 class="card-title">Emargency Contact Details</h3>
+                  </div>
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -769,7 +762,7 @@
                         <div class="form-group">
                           <label>Relationship</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Son</option>
@@ -816,9 +809,9 @@
               </div>
        <!-- Certified Memnber Ship -->
               <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Certified Memnber Ship</h3>
-                </div>
+                <div  class="card-header pc-bg ">
+                    <h3 class="card-title">Certified Membership</h3>
+                  </div>
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -917,9 +910,10 @@
 
                 <!-- Contact information -->
                 <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Contact information(Corespondense Address)</h3>
-                </div>
+                  <div  class="card-header pc-bg ">
+                    <h3 class="card-title">Contact information(Corespondense Address)</h3>
+                  </div>
+         
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -1007,7 +1001,7 @@
                         <div class="form-group">
                           <label>Country</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Bangladesh</option>
@@ -1050,9 +1044,9 @@
               </div>
                 <!-- other document -->
                 <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Other Documents</h3>
-                </div>
+                  <div  class="card-header pc-bg ">
+                    <h3 class="card-title">Other documents</h3>
+                  </div>
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -1116,9 +1110,9 @@
 
 
               <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Passport details</h3>
-                </div>
+                <div  class="card-header pc-bg ">
+                    <h3 class="card-title">Passport Details</h3>
+                  </div>
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -1141,7 +1135,7 @@
                         <div class="form-group">
                           <label>Nationality</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Bangladeshi</option>
@@ -1284,9 +1278,11 @@
 
 
               <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Visa/BRP Details</h3>
-                </div>
+                
+                <div  class="card-header pc-bg ">
+                    <h3 class="card-title">Visa/BRP Details</h3>
+                  </div>
+               
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -1309,7 +1305,7 @@
                         <div class="form-group">
                           <label>Nationality</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Bangladeshi</option>
@@ -1321,7 +1317,7 @@
                         <div class="form-group">
                           <label>Country of Residense</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Bangladeshi</option>
@@ -1472,9 +1468,9 @@
               </div>
 
               <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Time unit details</h3>
-                </div>
+                <div  class="card-header pc-bg ">
+                    <h3 class="card-title">Time unit Details</h3>
+                  </div>
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -1497,7 +1493,7 @@
                         <div class="form-group">
                           <label>Nationality</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Bangladeshi</option>
@@ -1643,9 +1639,9 @@
               </div>
 
               <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">DBS details</h3>
-                </div>
+                <div  class="card-header pc-bg ">
+                    <h3 class="card-title">DBS Details</h3>
+                  </div>
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -1657,7 +1653,7 @@
                         <div class="form-group">
                           <label>DBS Type </label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Type 1</option>
@@ -1682,7 +1678,7 @@
                         <div class="form-group">
                           <label>Nationality</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Bangladeshi</option>
@@ -1829,9 +1825,9 @@
 
               
               <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">National Insurance Number</h3>
-                </div>
+                <div  class="card-header pc-bg ">
+                    <h3 class="card-title">National Insurance Details</h3>
+                  </div>
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -1843,7 +1839,7 @@
                         <div class="form-group">
                           <label>National Insurance Number </label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Type 1</option>
@@ -1887,9 +1883,9 @@
 
 
               <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Other  details</h3>
-                </div>
+                <div  class="card-header pc-bg ">
+                    <h3 class="card-title">Other Details</h3>
+                  </div>
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -1926,7 +1922,7 @@
                         <div class="form-group">
                           <label>Nationality</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Bangladeshi</option>
@@ -2071,9 +2067,9 @@
                 </form>
               </div>
               <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Pay details</h3>
-                </div>
+                <div  class="card-header pc-bg ">
+                    <h3 class="card-title">Pay Details</h3>
+                  </div>
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -2085,7 +2081,7 @@
                         <div class="form-group">
                           <label>Pay Group </label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Type 1</option>
@@ -2099,7 +2095,7 @@
                         <div class="form-group">
                           <label>Anual Pay </label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Type 1</option>
@@ -2111,7 +2107,7 @@
                         <div class="form-group">
                           <label>Wadges Pay Mood </label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Type 1</option>
@@ -2123,7 +2119,7 @@
                         <div class="form-group">
                           <label>Payment Type </label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Type 1</option>
@@ -2174,7 +2170,7 @@
                         <div class="form-group">
                           <label>Tax code </label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Type 1</option>
@@ -2210,7 +2206,7 @@
                         <div class="form-group">
                           <label>Payment mood </label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Type 1</option>
@@ -2222,7 +2218,7 @@
                         <div class="form-group">
                           <label>Select Bank </label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Type 1</option>
@@ -2283,7 +2279,7 @@
                         <div class="form-group">
                           <label>Payment currency</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
                           >
                             <option selected="selected">Type 1</option>
@@ -2331,9 +2327,9 @@
 
 
               <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Payment structure</h3>
-                </div>
+                <div  class="card-header pc-bg ">
+                    <h3 class="card-title">Payment Structure</h3>
+                  </div>
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -2437,9 +2433,9 @@
               </div>
 
               <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Deduction</h3>
-                </div>
+                <div  class="card-header pc-bg ">
+                    <h3 class="card-title">Deduction</h3>
+                  </div>
                 <!-- /.card-header -->
                 <!-- form start -->
 
@@ -2544,7 +2540,7 @@
 
               
 
-              <button type="submit" class="btn btn-success mb-3 px-3"  >Submit</button>
+              <button type="submit" class="btn-sc mb-3 px-3"  >Submit</button>
 
 
 

@@ -7,7 +7,7 @@
   
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div class="content-wrapper bg-white">
         <!-- Content Header (Page header) -->
         <div class="content-header">
           <div class="container-fluid">
@@ -16,12 +16,7 @@
                 <h1 class="m-0">Create Payrolls</h1>
               </div>
               <!-- /.col -->
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Dashboard v1</li>
-                </ol>
-              </div>
+           
               <!-- /.col -->
             </div>
             <!-- /.row -->
@@ -36,9 +31,7 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="card card-primary">
-                  <div class="card-header">
-                    <h3 class="card-title">Payrolls</h3>
-                  </div>
+                
                   <!-- /.card-header -->
                   <!-- form start -->
   
@@ -46,38 +39,21 @@
                     <div class="card-body">
                     <div class="row">
              
-                      <div class="col-lg-4">
-                       
-                          <div class="form-group">
-                            <label for="exampleInputEmail1"
-                              >Designation ID</label
-                            >
-                            <input
-                              type="email"
-                              class="form-control"
-                              id="exampleInputEmail1"
-                            
-                            />
-                          </div>
-
-                        
-                 
-                 
-                       
-                        </div>
-
+                  
                         <div class="col-lg-4">
                        
                        <div class="form-group">
                          <label for="exampleInputEmail1"
-                           >Designation </label
+                           >Designation name </label
                          >
                          <input
                            type="email"
                            class="form-control"
-                           id="exampleInputEmail1"
+                           v-model="designation_name"
                          
                          />
+                         <p class="text-danger mt-1" v-if="errors.designation_name" >{{ errors.designation_name[0] }}</p>
+
                        </div>
 
                      
@@ -91,11 +67,14 @@
                         <div class="form-group">
                           <label>Departments</label>
                           <select
-                            class="form-control select2"
+                            class="form-custom-select"
                             style="width: 100%"
+                            v-model="company_department_id"
                           >
-                            <option selected="selected">Development</option>
+                            <option :value="department.id"  v-for="department in departments" :key="department" >{{department.department_name}}</option>
                           </select>
+                          <p class="text-danger mt-1" v-if="errors.company_department_id" >{{ errors.company_department_id[0] }}</p>
+
                         </div>
                 
                          
@@ -108,176 +87,58 @@
                        
                        <div class="form-group">
                          <label for="exampleInputEmail1"
-                           >Basic </label
+                           >Basic  </label
                          >
                          <input
                            type="email"
                            class="form-control"
-                           id="exampleInputEmail1"
+                            v-model="basic"
                          
                          />
+                         <p class="text-danger mt-1" v-if="errors.basic" >{{ errors.basic[0] }}</p>
+
                        </div>
                      </div>
                       <div class="col-lg-4">
                        
                        <div class="form-group">
                          <label for="exampleInputEmail1"
-                           >House Allowance </label
+                           >Increment </label
                          >
                          <input
                            type="email"
                            class="form-control"
-                           id="exampleInputEmail1"
+                           v-model="increment"
                          
                          />
+                         <p class="text-danger mt-1" v-if="errors.increment" >{{ errors.increment[0] }}</p>
+
                        </div>
                      </div>
                       <div class="col-lg-4">
                        
                        <div class="form-group">
                          <label for="exampleInputEmail1"
-                           >Travel Allowance </label
+                           >Date </label
                          >
                          <input
                            type="email"
                            class="form-control"
-                           id="exampleInputEmail1"
+                           v-model="date"
                          
                          />
                        </div>
                      </div>
 
-                     <div class="col-lg-4">
-                       
-                       <div class="form-group">
-                         <label for="exampleInputEmail1"
-                           >Medical Allowance </label
-                         >
-                         <input
-                           type="email"
-                           class="form-control"
-                           id="exampleInputEmail1"
-                         
-                         />
-                       </div>
-                     </div>
-                     <div class="col-lg-4">
-                       
-                       <div class="form-group">
-                         <label for="exampleInputEmail1"
-                           >Other Allowance </label
-                         >
-                         <input
-                           type="email"
-                           class="form-control"
-                           id="exampleInputEmail1"
-                         
-                         />
-                       </div>
-                     </div>
-                     <div class="col-lg-4">
-                       
-                       <div class="form-group">
-                         <label for="exampleInputEmail1"
-                           >Number of Festival Bonus</label
-                         >
-                         <input
-                           type="email"
-                           class="form-control"
-                           id="exampleInputEmail1"
-                         
-                         />
-                       </div>
-                     </div> 
+                   
+                    
+                 
+                   
 
-                     <div class="col-lg-4">
-                       
-                       <div class="form-group">
-                         <label for="exampleInputEmail1"
-                           >Festival bonus amount</label
-                         >
-                         <input
-                           type="email"
-                           class="form-control"
-                           id="exampleInputEmail1"
-                         
-                         />
-                       </div>
-                     </div>
-                     <div class="col-lg-4">
-                       
-                       <div class="form-group">
-                         <label for="exampleInputEmail1"
-                           >Increment rate</label
-                         >
-                         <input
-                           type="email"
-                           class="form-control"
-                           id="exampleInputEmail1"
-                         
-                         />
-                       </div>
-                     </div>
 
-                     <div class="col-lg-4">
-                       
-                       <div class="form-group">
-                         <label for="exampleInputEmail1"
-                           >Increment period</label
-                         >
-                         <input
-                           type="email"
-                           class="form-control"
-                           id="exampleInputEmail1"
-                         
-                         />
-                       </div>
-                     </div>
+                  
 
-                     <div class="col-lg-4">
-                       
-                       <div class="form-group">
-                         <label for="exampleInputEmail1"
-                           >Income Tax</label
-                         >
-                         <input
-                           type="email"
-                           class="form-control"
-                           id="exampleInputEmail1"
-                         
-                         />
-                       </div>
-                     </div>
-                     <div class="col-lg-4">
-                       
-                       <div class="form-group">
-                         <label for="exampleInputEmail1"
-                           >Provident Fund</label
-                         >
-                         <input
-                           type="email"
-                           class="form-control"
-                           id="exampleInputEmail1"
-                         
-                         />
-                       </div>
-                     </div>
-
-                     <div class="col-lg-4">
-                       
-                       <div class="form-group">
-                         <label for="exampleInputEmail1"
-                           >Penalty</label
-                         >
-                         <input
-                           type="email"
-                           class="form-control"
-                           id="exampleInputEmail1"
-                         
-                         />
-                       </div>
-                     </div>
-
+                  
 
 
                
@@ -287,18 +148,18 @@
 
                     <div class="row">
              
-             <div class="col-lg-9">
+             <div class="col-lg-7">
               
                  <div class="form-group">
                    <label for="exampleInputEmail1"
-                     > Other Facilities
+                     > Allowances
 </label
                    >
                    <input
                      type="text"
                      class="form-control"
-                     v-model="feature"
-                     id="exampleInputEmail1"
+                     v-model="allowance"
+                 
                    
                    />
                  </div>
@@ -317,23 +178,35 @@
                      type="text"
                      class="form-control"
                      v-model="value"
-                     id="exampleInputEmail1"
+                    
               
                    />
                  </div>
-          
-
-                 
-                
          
-               
              </div>
+             
+             <div class="col-lg-2">
+           
+           <div class="form-group">
+             <label >Type</label>
+         
+                          <select
+                            v-model="type"
+                            class="form-control select2"
+                            style="width: 100%"
+                          >
+                            <option selected="selected">Adding</option>
+                            <option selected="selected">deduction</option>
+                          </select>
+           </div>
+   
+       </div>
 
 
              <div  class="col-lg-1 pt-1 ">
           
            
-              <button @click="addFeature" type="button" class="btn btn-primary mt-4  mb-4" >ADD</button>
+              <button @click="addallowance" type="button" class="btn btn-default btn-sm mt-4  mb-4" >ADD</button>
 
 
            
@@ -350,8 +223,10 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Other Facilities</th>
+                      <th>Allowance</th>
                       <th>Value</th>
+                      <th>Type</th>
+                      
                      
                      
                      
@@ -360,11 +235,14 @@
                   </thead>
                   <tbody>
                   
-                    <tr v-for="feature in features" :key="feature" >
+                    <tr v-for="allowance in allowances" :key="allowance" >
                       <td>1.</td>
-                      <td>{{feature.feature}}</td>
+                      <td>{{allowance.allowance}}</td>
                       <td>
-                        {{feature.value}}
+                        {{allowance.value}}
+                      </td>
+                      <td>
+                        {{allowance.type}}
                       </td>
                     
                        
@@ -379,7 +257,7 @@
                   </tbody>
                 </table>
 
-                    <button type="button" class="btn btn-primary  mt-4 mb-4" >Submit</button>
+                    <button type="button" @click.prevent="addpayroll" class="btn-sc mt-4 mb-4" >Submit</button>
                          
   
 
@@ -412,10 +290,117 @@
       
       <script>
 
+import $ from "jquery";
+ import axios from "axios";
+
   export default {
 
+    data() {
+      return {
     
- 
+        allowances:[],
+        departments:[],
+        errors:{},
+   
+      };
+    },
+  
+    methods: {
+      // Creating Feature list
+      addallowance(){
+
+        var allowance={allowance:this.allowance,value:this.value,type:this.type}
+        this.allowances.push(allowance);
+
+
+
+      },
+
+      //Adding price to database
+
+      addpayroll(){
+
+
+        axios
+          .post("/company/payrolls", {
+            designation_name: this.designation_name,
+            company_department_id: this.company_department_id,
+            basic: this.basic,
+            increment: this.increment,
+            date: this.date,
+            // features: JSON.stringify(Object.assign({}, this.features))
+            allowances: JSON.stringify(this.allowances)
+          })
+          .then((response) => {
+
+            if(response){
+              alert(response.data.message)
+              $(".form-control").val('')
+             
+            }
+
+
+
+           
+
+          }).catch((error)=>{
+             
+
+           this.errors=error.response.data.errors
+
+        
+
+        
+
+          
+          })
+         
+
+      
+
+
+
+      },
+      getdepartment() {
+         axios
+          .get("/company/departments")
+          .then((response) => {
+
+            if(response){
+              // alert(response.data.message)
+              this.departments=response.data.data;
+         
+             
+            }
+
+
+
+           
+
+          }).catch((error)=>{
+             
+
+           console.log(error)
+
+        
+
+        
+
+          
+          })
+         
+
+  
+  },
+
+
+     
+      
+    },
+  
+    mounted: function () {
+       this.getdepartment()
+    },
   }
   </script>
       

@@ -18,16 +18,9 @@
         <div class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
-              <div class="col-sm-6">
-                <h1 class="m-0">Job Details</h1>
-              </div>
+         
               <!-- /.col -->
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Dashboard v1</li>
-                </ol>
-              </div>
+            
               <!-- /.col -->
             </div>
             <!-- /.row -->
@@ -43,10 +36,9 @@
 
                 <div class="col-lg-12">
             <div class="card">
-              <div class="card-header">
-                <!-- <h3 class="card-title d-inline float-left">Bordered Table</h3> -->
-                <!-- <a href="/addemployee" class="btn  btn-outline-primary float-right">ADD</a> -->
-              </div>
+              <div  class="card-header pc-bg ">
+                    <h3 class="card-title text-white">Job Details</h3>
+                  </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <span><strong>JobID :</strong> 00343</span> <br><br>
@@ -58,8 +50,8 @@
                 <span><strong>Special Qualification :</strong> java,python</span> <br><br>
                 <span><strong>Salary Range :</strong>30-40</span> <br><br>
                 
-                <button type="button" class="btn btn-primary  " >Approve</button>
-                <button type="button" class="btn btn-danger ml-2 " >Reject</button>
+                <button type="button" class="btn-sc  " >Approve</button>
+                <button type="button" class="btn-pc ml-2 " >Reject</button>
               </div>
               <!-- /.card-body -->
            

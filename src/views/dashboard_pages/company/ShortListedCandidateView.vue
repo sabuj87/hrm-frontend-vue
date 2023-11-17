@@ -13,21 +13,16 @@
       <sidebar-view></sidebar-view>
   
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div class="content-wrapper bg-white">
         <!-- Content Header (Page header) -->
         <div class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">Short Listed</h1>
+                <h1 class="m-0 pc">Short Listed</h1>
               </div>
               <!-- /.col -->
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Dashboard v1</li>
-                </ol>
-              </div>
+            
               <!-- /.col -->
             </div>
             <!-- /.row -->
@@ -54,9 +49,9 @@
                           />
                         </div>
                       </div>
-                      <div class="col-lg-3 pt-1">
-                     
-                        <a href="/addemployee" class="btn btn-sm btn-primary mt-4 ">Search</a>
+                      <div class="col-lg-3 mt-4 pt-2">
+                      
+                        <a href="/addemployee" class="btn-sc-sm mt-5 ">Search</a>
                       </div>
 
 
@@ -67,13 +62,10 @@
 
                 <div class="col-lg-12">
             <div class="card">
-              <div class="card-header">
-                <!-- <h3 class="card-title d-inline float-left">Bordered Table</h3> -->
-                <!-- <a href="/addemployee" class="btn  btn-outline-primary float-right">ADD</a> -->
-              </div>
+             
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>

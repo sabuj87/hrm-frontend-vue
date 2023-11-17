@@ -8,21 +8,14 @@
      
   
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div class="content-wrapper bg-white">
         <!-- Content Header (Page header) -->
         <div class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
-              <div class="col-sm-6">
-                <h1 class="m-0">Request Loan</h1>
-              </div>
+            
               <!-- /.col -->
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Dashboard v1</li>
-                </ol>
-              </div>
+            
               <!-- /.col -->
             </div>
             <!-- /.row -->
@@ -37,9 +30,13 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="card card-primary">
-                  <div class="card-header">
-                    <h3 class="card-title">Request Loan</h3>
+
+                  
+                  <div  class="card-header pc-bg ">
+                    <h3 class="card-title text-white">Loan Request</h3>
                   </div>
+              
+                  
                   <!-- /.card-header -->
                   <!-- form start -->
   
@@ -50,7 +47,7 @@
 
                         <div class="row">
                         
-                          <div class="col-lg-3">
+                          <div class="col-lg-4">
                         <div class="form-group">
                           <label 
                             >Loan amount
@@ -62,7 +59,7 @@
                           />
                         </div>
                       </div>
-                      <div class="col-lg-3">
+                      <div class="col-lg-4">
                         <div class="form-group">
                           <label 
                             >Loan duration
@@ -74,23 +71,12 @@
                           />
                         </div>
                       </div>
-                      <div class="col-lg-3">
-                        <div class="form-group">
-                          <label 
-                            >Loan Reason
-                          </label>
-                          <input
-                            type="text"
-                            class="form-control"
-                           
-                          />
-                        </div>
-                      </div>
+                   
                  
                  
                  
                  
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                       <div class="form-group">
                         <label>Recommended officer</label>
                         <select
@@ -102,6 +88,18 @@
                         </select>
                       </div>
                     </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                          <label 
+                            >Loan Reason
+                          </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                           
+                          />
+                        </div>
+                      </div>
              
 
                    
@@ -114,7 +112,7 @@
 
 
 
-                  <button type="button" class="btn btn-primary  " >Request</button>
+                  <button type="button" class="btn-sc" >Request</button>
                     </div>
 
 

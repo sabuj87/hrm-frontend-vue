@@ -13,21 +13,14 @@
       <sidebar-view></sidebar-view>
   
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div class="content-wrapper bg-white">
         <!-- Content Header (Page header) -->
         <div class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
-              <div class="col-sm-6">
-                <h1 class="m-0">Job Demand List</h1>
-              </div>
+       
               <!-- /.col -->
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Dashboard v1</li>
-                </ol>
-              </div>
+          
               <!-- /.col -->
             </div>
             <!-- /.row -->
@@ -43,13 +36,12 @@
 
                 <div class="col-lg-12">
             <div class="card">
-              <div class="card-header">
-                <!-- <h3 class="card-title d-inline float-left">Bordered Table</h3> -->
-                <!-- <a href="/addemployee" class="btn  btn-outline-primary float-right">ADD</a> -->
-              </div>
+              <div  class="card-header pc-bg ">
+                    <h3 class="card-title text-white">Job Demand List</h3>
+                  </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
@@ -73,9 +65,10 @@
                  
                     
                       <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">View</a>
-                        <a href="/addemployee" class="btn btn-sm btn-success ml-1 ">Approve</a>
-                        <a href="/addemployee" class="btn btn-sm btn-danger m-1 ">Reject</a>
+                        <router-link    :to="{ name: 'jobdetails' }">
+
+<span class="btn-sc-outline-sm" >View</span>
+</router-link>   
                       </td>
                     
                     </tr>
@@ -89,9 +82,27 @@
                  
                     
                       <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">View</a>
-                        <a href="/addemployee" class="btn btn-sm btn-success ml-1 ">Approve</a>
-                        <a href="/addemployee" class="btn btn-sm btn-danger m-1 ">Reject</a>
+                        <router-link    :to="{ name: 'jobdetails' }">
+
+<span class="btn-sc-outline-sm" >View</span>
+</router-link>    
+                      </td>
+                    
+                    </tr>
+                     <tr>
+
+                        <td>1.</td>
+                        <td>00123</td>
+                      <td>Development</td>
+                      <td>Softawre Developer</td>
+                      <td>12/10/2023</td>
+                 
+                    
+                      <td>
+                        <router-link    :to="{ name: 'jobdetails' }">
+
+<span class="btn-sc-outline-sm" >View</span>
+</router-link>    
                       </td>
                     
                     </tr>

@@ -8,21 +8,12 @@
      
   
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div class="content-wrapper  bg-white">
         <!-- Content Header (Page header) -->
         <div class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
-              <div class="col-sm-6">
-                <h1 class="m-0">Assign Payroll</h1>
-              </div>
-              <!-- /.col -->
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Dashboard v1</li>
-                </ol>
-              </div>
+              
               <!-- /.col -->
             </div>
             <!-- /.row -->
@@ -37,11 +28,11 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="card card-primary">
-                  <div class="card-header">
-                    <h3 class="card-title">Assign Payroll </h3>
+               
+               
+                  <div  class="card-header pc-bg ">
+                    <h3 class="card-title">Assign Payroll</h3>
                   </div>
-                  <!-- /.card-header -->
-                  <!-- form start -->
   
                   <form>
 
@@ -53,7 +44,7 @@
                       <div class="form-group">
                         <label>Select employee</label>
                         <select
-                          class="form-control select2"
+                          class="form-custom-select"
                           style="width: 100%"
                         >
                           <option selected="selected">employee 1</option>
@@ -66,7 +57,7 @@
                       <div class="form-group">
                         <label>Department</label>
                         <select
-                          class="form-control select2"
+                          class="form-custom-select"
                           style="width: 100%"
                         >
                           <option selected="selected">Department 1</option>
@@ -78,7 +69,7 @@
                       <div class="form-group">
                         <label>Postion</label>
                         <select
-                          class="form-control select2"
+                          class="form-custom-select"
                           style="width: 100%"
                         >
                           <option selected="selected">Postion 1</option>
@@ -90,7 +81,7 @@
                       <div class="form-group">
                         <label>Reporting Authority</label>
                         <select
-                          class="form-control select2"
+                          class="form-custom-select"
                           style="width: 100%"
                         >
                           <option selected="selected">Authority 1</option>
@@ -110,7 +101,7 @@
 
 
 
-                  <button type="button" class="btn btn-primary  " >Assign</button>
+                  <button type="button" class="btn-sc  " >Assign</button>
                     </div>
 
 

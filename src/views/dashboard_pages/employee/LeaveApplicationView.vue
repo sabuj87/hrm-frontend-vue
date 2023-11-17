@@ -13,16 +13,9 @@
         <div class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
-              <div class="col-sm-6">
-                <h1 class="m-0">Leave Application</h1>
-              </div>
+            
               <!-- /.col -->
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Dashboard v1</li>
-                </ol>
-              </div>
+            
               <!-- /.col -->
             </div>
             <!-- /.row -->
@@ -37,9 +30,10 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="card card-primary">
-                  <div class="card-header">
+                  <div  class="card-header pc-bg ">
                     <h3 class="card-title">Leave Application</h3>
                   </div>
+             
                   <!-- /.card-header -->
                   <!-- form start -->
   
@@ -51,25 +45,25 @@
                         
                         <div class="col-lg-3 border p-2">
 
-                            <span><strong>Total Leave days :</strong> 22 </span>
+                            <span style="font-size: 120%;" ><strong class="sc" >Total Leave days :</strong> 22 </span>
                     
                     </div>
                    
                         <div class="col-lg-3 border p-2">
 
-                            <span><strong>Casual Leave :</strong> 15 </span>
+                            <span style="font-size: 120%;" ><strong class="sc" >Casual Leave :</strong> 15 </span>
                     
                     </div>
                    
                         <div class="col-lg-3 border p-2">
 
-                            <span><strong>Medical Leave :</strong> 12</span>
+                            <span style="font-size: 120%;" ><strong class="sc" >Medical Leave :</strong> 12</span>
                     
                     </div>
                    
                         <div class="col-lg-3 border p-2">
 
-                            <span><strong>Casual Remaining :</strong> 8</span>
+                            <span style="font-size: 120%;" ><strong class="sc">Casual Remaining :</strong> 8</span>
                     
                     </div>
                    
@@ -170,7 +164,7 @@
 
 
 
-                  <button type="button" class="btn btn-primary  " >Apply</button>
+                  <button type="button" class="btn-sc" >Apply</button>
                     </div>
 
 

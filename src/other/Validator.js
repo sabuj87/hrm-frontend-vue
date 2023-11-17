@@ -16,10 +16,13 @@ export class Validator {
 
 
 
-                if (data[i].type == "required") {
+                if (data[i].type == "required" ) {
+                   
 
          
-                    if (data[i].value == "") {
+                    if (data[i].value == "" || data[i].value == null) {
+                        
+
                         error = "This filed is required !"
                         $('#' + data[i].field).css("display","block")
                         $('#' + data[i].field).html(error)
@@ -37,8 +40,8 @@ export class Validator {
                 if (data[i].type == "required|length") {
 
 
-                    if (data[i].value == "") {
-                        alert("test")
+                    if (data[i].value == "" || data[i].value == null ) {
+        
                         error = "This filed is required !"
                         $('#' + data[i].field).css("display","block")
                         $('#' + data[i].field).html(error)
@@ -78,6 +81,42 @@ export class Validator {
 
 
                 }
+
+                
+
+
+                if (data[i].type == "required|email") {
+                    
+                    if (data[i].value == "" || data[i].value == null) {
+                    
+                        error = "This filed is required !"
+                        $('#' + data[i].field).css("display","block")
+                        $('#' + data[i].field).html(error)
+
+
+                       
+
+                  
+
+
+                    }else if(!data[i].value.includes("@")){
+
+                        
+                        error = "Email is not valid !"
+                        $('#' + data[i].field).css("display","block")
+                        $('#' + data[i].field).html(error)
+
+
+
+
+                    }
+                    
+
+
+
+                }
+
+                
 
 
 

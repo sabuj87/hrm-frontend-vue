@@ -12,9 +12,6 @@ import EmployeeMasterView from './views/master/EmployeeMasterView'
 const app = createApp(App)
 app.use(store)
 app.use(router)
-app.component('MasterView',MasterView);
-app.component('DashboardMasterView',SuperAdminMasterView,CompanyMasterView,EmployeeMasterView);
-
-
+app.component(MasterView,SuperAdminMasterView,CompanyMasterView,EmployeeMasterView);
 app.mount('#app')
 

@@ -4,7 +4,7 @@
 <div class="row h-100 ">
 
 
-  <div class="col-lg-7  h-100 auth-bannar ">
+  <div class="col-lg-6  h-100 auth-bannar ">
     <!-- <i style="position: fixed;top: 50px;left: 50px;;font-size: 180%;" class="fa-solid fa-arrow-left"></i> -->
 
    <div class="text-center mt-3"> 
@@ -21,57 +21,94 @@
 
 
   </div>
-  <div class="col-lg-5  auth-form">
+  <div class="col-lg-6  auth-form">
    
 
 
     <div class="auth-box">
-          <h3 class="primary-color">Fill information</h3>
+          <h3 class="primary-color mt-3">Register in hrm !</h3>
 
           <form>
 
             <div class=" m-20 row">
 
               <div class="col-lg-6">
-                <label class=" form-lebel">First name</label>
-          <input v-model="first" @input="clearError('first')" class="common-form" type="text" />
-
-          <span id="first" class="error" ></span>
-
-
-              </div>
+                        <div class="form-group">
+                          <label 
+                            >Company Name*
+                          </label>
+                          <input v-model="company_name" @input="clearError('company_name')" class="common-form" type="text" />
+                          <span id="company_name" class="error" ></span>
+                        </div>
+                      </div>
+                      
               <div class="col-lg-6">
-                <label class=" form-lebel">Last name</label>
-          <input v-model="last_name" @input="clearError('last_name')" class="common-form" type="text" />
+                        <div class="form-group">
+                          <label 
+                            >Country*
+                          </label>
+                          <select v-model="country_id" @change="clearError('country_id')" class="common-select" >
+                            <option disabled value=null >Select country</option>
+                            <option :value="country.id" v-for="country in countries" :key="country" >{{country.country_name}}</option>
+                        
 
-          <span id="last_name" class="error" ></span>
+
+                          </select>
+                           <span id="country_id" class="error" ></span>
+                        </div>
+                      </div>
 
 
-                
-              </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <label 
+                            >Full Name*
+                          </label>
+                          <input v-model="name" @input="clearError('name')" class="common-form" type="text" />
+                          <span id="name" class="error" ></span>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <label 
+                            >Email*
+                          </label>
+                          <input v-model="email" @input="clearError('email')" class="common-form" type="text" />
+                          <span id="email" class="error" ></span>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label 
+                            >Password*
+                          </label>
+                          <input v-model="password" @input="clearError('password')" class="common-form" type="text" />
+                          <span id="password" class="error" ></span>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label 
+                            >Comfirm password*
+                          </label>
+                          <input v-model="confirm_password" @input="clearError('confirm_password')" class="common-form" type="text" />
+                          <span id="confirm_password" class="error" ></span>
+                        </div>
+                      </div>
+
+
+
+
+           
+            
 
 
             </div>
-            <label class="mt-2 form-lebel">Company name</label>
-          <input v-model="email" @input="clearError('email')" class="common-form" type="text" />
-
-            
-            <label class="mt-2 form-lebel">Email</label>
-          <input v-model="email" @input="clearError('email')" class="common-form" type="text" />
-
-          <span id="email" class="error" ></span>
-
-          <label class="form-lebel">Password</label>
-        
-          <input v-model="password" @input="clearError('password')"  class="common-form" type="password" />
-          <span id="password" class="error"></span>
-
+     
           
-    
-          <label class="form-lebel">Confirm password</label>
-        
-        <input   class="common-form" type="text" />
-  
+
+
           
           <!-- <div class="mt-2">
             <span class="float-left">Remember me</span>
@@ -118,6 +155,9 @@ export default {
   
   data() {
     return {
+
+      countries:[],
+      country_id:null
     
     }
 
@@ -129,14 +169,23 @@ export default {
       var validator = new Validator();
       var error = validator.validated([
 
-      { field: "email", value: this.email, type: "required" },
-
+      { field: "company_name", value: this.company_name, type: "required" },
+      { field: "country_id", value: this.country_id, type: "required" },
+      { field: "name", value: this.name, type: "required" },
+      { field: "email", value: this.email, type: "required|email"},
       {
           field: "password",
           value: this.password,
           type: "required|length",
-          size: 4,
+          size: 8,
       },
+      {
+          field: "confirm_password",
+          value: this.confirm_password,
+          type: "required|length",
+          size: 8,
+      },
+ 
  
     
 
@@ -150,9 +199,12 @@ export default {
           
         axios
           .post("register", {
-            name: this.first+" "+this.last_name,
+            name: this.name,
+            company_name: this.company_name,
+            country_id: this.country_id,
             email: this.email,
             password: this.password,
+            confirm_password: this.confirm_password,
           })
           .then((response) => {
 
@@ -164,9 +216,15 @@ export default {
           }).catch((error)=>{
              
 
+           
             if(error.response.data.errors.password){
               $('#password').css("display","block")
               $('#password').html(error.response.data.errors.password[0])
+            }
+
+            if(error.response.data.errors.confirm_password){
+              $('#confirm_password').css("display","block")
+              $('#confirm_password').html(error.response.data.errors.confirm_password[0])
             }
             if(error.response.data.errors.email){
               $('#email').css("display","block")
@@ -188,10 +246,27 @@ export default {
       }
     },
 
+    getCountry(){
+
+
+      axios.get("public/countries").then((response) => {
+
+  
+      this.countries=response.data.data;
+
+
+}).catch((error)=>{
+  console.log(error.response)
+})
+    },
+
     clearError(field) {
       $("#" + field).css("display", "none");
     },
   },
+  mounted:function(){
+    this.getCountry()
+  }
 };
 </script>
 

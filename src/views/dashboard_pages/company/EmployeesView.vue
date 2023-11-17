@@ -13,21 +13,12 @@
       <sidebar-view></sidebar-view>
   
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div class="content-wrapper bg-white">
         <!-- Content Header (Page header) -->
         <div class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
-              <div class="col-sm-6">
-                <h1 class="m-0">Employees</h1>
-              </div>
-              <!-- /.col -->
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Dashboard v1</li>
-                </ol>
-              </div>
+              
               <!-- /.col -->
             </div>
             <!-- /.row -->
@@ -43,23 +34,28 @@
 
                 <div class="col-lg-12">
             <div class="card">
-              <div class="card-header">
-                <!-- <h3 class="card-title d-inline float-left">Bordered Table</h3> -->
-                <a href="/addemployee" class="btn  btn-outline-primary float-right">ADD</a>
-              </div>
+        
+              <div  class="card-header pc-bg ">
+                <h3 class="card-title d-inline float-left text-white">Employees</h3>
+                <router-link  class=" float-right"  :to="{ name: 'addemployee' }">
+
+<span class="btn-sc-sm" >Add</span>
+</router-link>
+                  </div>
+              
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Employee ID</th>
                       <th>Employee Name</th>
-                      <th>Visa Expired</th>
+              
                       <th>Position</th>
-                      <th>Departments</th>
-                      <th>DOB</th>
-                      <th>Mobile</th>
+              
+       
+               
                       <th>Email</th>
                       <th>Action</th>
                      
@@ -73,26 +69,17 @@
                       <td>
                         Abu Saeeed Sabuj
                       </td>
-                      <td>
-                        28-12-2024
-                      </td>
+                     
                       <td>
                         Software Developer
                        </td>
+                     
                        <td>
-                       Development
-                       </td>
-                      <td>
-                        28-12-2024
-                      </td>
-                      <td>
-                       01710121630
-                      </td>
-                      <td>
                        sabujsaeed@gmail.com
                       </td>
+                    
                       <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">View</a>
+                        <a href="/addemployee" class="btn-sc-outline-sm ">View</a>
                       </td>
                     
                     </tr>
@@ -102,26 +89,17 @@
                       <td>
                         Abu Saeeed Sabuj
                       </td>
-                      <td>
-                        28-12-2024
-                      </td>
+                     
                       <td>
                         Software Developer
                        </td>
+                     
                        <td>
-                       Development
-                       </td>
-                      <td>
-                        28-12-2024
-                      </td>
-                      <td>
-                       01710121630
-                      </td>
-                      <td>
                        sabujsaeed@gmail.com
                       </td>
+                    
                       <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">View</a>
+                        <a href="/addemployee" class="btn-sc-outline-sm ">View</a>
                       </td>
                     
                     </tr>
@@ -131,59 +109,23 @@
                       <td>
                         Abu Saeeed Sabuj
                       </td>
-                      <td>
-                        28-12-2024
-                      </td>
+                     
                       <td>
                         Software Developer
                        </td>
+                     
                        <td>
-                       Development
-                       </td>
-                      <td>
-                        28-12-2024
-                      </td>
-                      <td>
-                       01710121630
-                      </td>
-                      <td>
                        sabujsaeed@gmail.com
                       </td>
+                    
                       <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">View</a>
+                        <a href="/addemployee" class="btn-sc-outline-sm ">View</a>
                       </td>
                     
                     </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>ABC123</td>
-                      <td>
-                        Abu Saeeed Sabuj
-                      </td>
-                      <td>
-                        28-12-2024
-                      </td>
-                      <td>
-                        Software Developer
-                       </td>
-                       <td>
-                       Development
-                       </td>
-                      <td>
-                        28-12-2024
-                      </td>
-                      <td>
-                       01710121630
-                      </td>
-                      <td>
-                       sabujsaeed@gmail.com
-                      </td>
-                      <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">View</a>
-                      </td>
-                    
-                    </tr>
-
+                
+                
+                
                    
 
                   

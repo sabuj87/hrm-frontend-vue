@@ -8,21 +8,14 @@
   
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div class="content-wrapper bg-white">
         <!-- Content Header (Page header) -->
         <div class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
-              <div class="col-sm-6">
-                <h1 class="m-0">Departments</h1>
-              </div>
+           
               <!-- /.col -->
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Dashboard v1</li>
-                </ol>
-              </div>
+            
               <!-- /.col -->
             </div>
             <!-- /.row -->
@@ -38,17 +31,20 @@
 
                 <div class="col-lg-12">
             <div class="card">
-              <div class="card-header">
-                <!-- <h3 class="card-title d-inline float-left">Bordered Table</h3> -->
-                <a href="/adddepartment" class="btn  btn-outline-primary float-right">ADD</a>
-              </div>
+              <div  class="card-header pc-bg ">
+                <h3 class="card-title d-inline float-left text-white">Departments</h3>
+                <router-link  class=" float-right"  :to="{ name: 'administrative-adddepartments' }">
+
+<span class="btn-sc-sm" >Add</span>
+</router-link>
+                  </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table text-center table-bordered">
+                <table class="table text-center table-striped table-bordered">
                   <thead>
-                    <tr>
+                    <tr >
                       <th style="width: 10px">#</th>
-                      <th>Department ID</th>
+
                       <th>Department Name</th>
                       <th>Action</th>
                      
@@ -57,61 +53,24 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1.</td>
-                      <td>ABC123</td>
-                      <td>
-                        Accounts
-                      </td>
+                    <tr v-for="department in departments" :key="department"  >
+                      <td>#</td>
+                      <td>{{department.department_name}}</td>
+                    
                      
                        
                       
                     
                       <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">Edit</a>
+                        <a href="/addemployee" class="btn-sc-sm btn-default ">Edit</a>
 
-                        <a href="/addemployee" class="btn btn-sm btn-danger ml-2 ">Delete</a>
-
-                      </td>
-                    
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>ABC123</td>
-                      <td>
-                        Accounts
-                      </td>
-                     
-                       
-                      
-                    
-                      <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">Edit</a>
-
-                        <a href="/addemployee" class="btn btn-sm btn-danger ml-2 ">Delete</a>
+                        <a href="/addemployee" class="btn-pc-sm ml-2 ">Delete</a>
 
                       </td>
                     
                     </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>ABC123</td>
-                      <td>
-                        Accounts
-                      </td>
-                     
-                       
-                      
-                    
-                      <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">Edit</a>
-
-                        <a href="/addemployee" class="btn btn-sm btn-danger ml-2 ">Delete</a>
-
-                      </td>
-                    
-                    </tr>
-                    
+              
+                  
                   
                    
                  
@@ -148,9 +107,54 @@
   </template>
       
       <script>
+  // import $ from "jquery";
+ import axios from "axios";
+export default {
 
-  export default {
+  data() {
+  return {
+    errors:{},
+    departments:""
+  };
+},
+methods: {
+  getdepartment() {
+    axios
+          .get("/company/departments")
+          .then((response) => {
+
+            if(response){
+              alert(response.data.message)
+              this.departments=response.data.data;
+         
+             
+            }
+
+
+
+           
+
+          }).catch((error)=>{
+             
+
+           this.errors=error.response.data.errors
+
+        
+
+        
+
+          
+          })
+         
+
   
-  }
+  },
+},
+mounted:function(){
+  this.getdepartment()
+}
+  
+
+}
   </script>
       

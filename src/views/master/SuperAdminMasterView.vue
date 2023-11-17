@@ -20,10 +20,11 @@
   
      
       <!-- /.content-wrapper -->
-      <footer-view></footer-view>
+      <!-- <footer-view></footer-view> -->
       <!-- Control Sidebar -->
       <control-sidebar-view></control-sidebar-view>
       <div class="bs-stepper" ></div>
+    
       <!-- /.control-sidebar -->
     </div>
   </template>
@@ -31,11 +32,11 @@
       <script>
   import SidebarView from "@/views/dashboard_pages/superadmin/SidebarView.vue";
   import NavbarView from "@/views/dashboard_pages/superadmin/NavbarView.vue";
-  import FooterView from "@/views/dashboard_pages/superadmin/FooterView.vue";
+  // import FooterView from "@/views/dashboard_pages/superadmin/FooterView.vue";
   import ControlSidebarView from "@/views/dashboard_pages/superadmin/ControlSidebarView.vue";
   export default {
-    components: { SidebarView, NavbarView, FooterView, ControlSidebarView },
-  
+    components: { SidebarView, NavbarView,  ControlSidebarView },
+
   };
   </script>
       

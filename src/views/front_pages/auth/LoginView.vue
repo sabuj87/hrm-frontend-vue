@@ -4,7 +4,7 @@
 <div class="row h-100 ">
 
 
-  <div class="col-lg-7  h-100 auth-bannar ">
+  <div class="col-lg-6  h-100 auth-bannar ">
     <!-- <i style="position: fixed;top: 50px;left: 50px;;font-size: 180%;" class="fa-solid fa-arrow-left"></i> -->
 
    <div class="text-center mt-3"> 
@@ -21,7 +21,7 @@
 
 
   </div>
-  <div class="col-lg-5  auth-form">
+  <div class="col-lg-6  auth-form">
    
 
 
@@ -76,7 +76,7 @@
 
 import { Validator } from "@/other/Validator";
 import $ from "jquery";
-import axios from "axios";
+ import axios from "axios";
 
 
 
@@ -109,6 +109,42 @@ export default {
       if (error) {
         console.log(error);
       } else {
+
+      //   if(this.email=="superadmin@gmail.com" && this.password=="superadmin"){
+
+      //     this.$router.push({ path: 'superadmin' })
+      // .then(() => {
+      //   window.location.reload();
+      // })
+      // .catch(error => {
+      //   console.error(error);
+      // });
+
+
+      //   }
+      //   if(this.email=="company@gmail.com" && this.password=="company"){
+      //     this.$router.push({ path: 'company' })
+      // .then(() => {
+      //   window.location.reload();
+      // })
+      // .catch(error => {
+      //   console.error(error);
+      // });
+
+
+      //   }
+
+      //   if(this.email=="employee@gmail.com" && this.password=="employee"){
+      //     this.$router.push({ path: 'employee' })
+      // .then(() => {
+      //   window.location.reload();
+      // })
+      // .catch(error => {
+      //   console.error(error);
+      // });
+
+
+      //   }
           
         axios
           .post("login", {
@@ -117,22 +153,43 @@ export default {
           })
           .then((response) => {
 
-
+              
               localStorage.setItem("user", JSON.stringify(response.data));
              
              
               if(response.data.user.roles[0]=="superadmin"){
-                this.$router.push({ name: "superadmin" });
+                this.$router.push({ name: "superadmin" }).then(() => {
+       window.location.reload();
+     })
+      .catch(error => {
+      console.error(error);
+      });
+
 
  
               }
-              if(response.data.user.roles[0]=="customer"){
-                this.$router.push({ name: "companyadmin" });
+              if(response.data.user.roles[0]=="company"){
+                this.$router.push({ name: "company" }).then(() => {
+       window.location.reload();
+     })
+      .catch(error => {
+      console.error(error);
+      });
             
 
  
               }
+              if(response.data.user.roles[0]=="employee"){
+                this.$router.push({ name: "employee" }).then(() => {
+       window.location.reload();
+     })
+      .catch(error => {
+      console.error(error);
+      });
+            
 
+ 
+              }
 
            
 

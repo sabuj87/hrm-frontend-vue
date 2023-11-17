@@ -5,12 +5,17 @@
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
+       
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="index3.html" class="nav-link">Home</a>
+          <a href="#" class="nav-link">Help</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Contact</a>
+          <a href="#" class="nav-link "> Sunday, 12-10-2023</a>
         </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="#" class="nav-link sc">  12:45 PM</a>
+        </li>
+       
       </ul>
     
       <!-- Right navbar links -->
@@ -127,10 +132,35 @@
             <i class="fas fa-expand-arrows-alt"></i>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
             <i class="fas fa-th-large"></i>
           </a>
+        </li> -->
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="fa-solid fa-user"></i>
+            <!-- <span class="badge badge-warning navbar-badge">15</span> -->
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <!-- <span class="dropdown-item dropdown-header">15 Notifications</span> -->
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-envelope mr-2"></i> Profile
+              <!-- <span class="float-right text-muted text-sm">3 mins</span> -->
+            </a>
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-envelope mr-2"></i> Change Password
+              <!-- <span class="float-right text-muted text-sm">3 mins</span> -->
+            </a>
+         
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-users mr-2"></i> Logout
+              <!-- <span class="float-right text-muted text-sm">12 hours</span> -->
+            </a>
+            <div class="dropdown-divider"></div>
+          
+          
+          </div>
         </li>
       </ul>
     </nav>

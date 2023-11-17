@@ -37,9 +37,7 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="card card-primary">
-                  <div class="card-header">
-                    <h3 class="card-title">Create job demand</h3>
-                  </div>
+               
                   <!-- /.card-header -->
                   <!-- form start -->
   
@@ -179,7 +177,7 @@
 
 
 
-                  <button type="button" class="btn btn-primary  " >Request</button>
+                  <button type="button" class="btn btn-outline-primary  " >Request</button>
                     </div>
 
 

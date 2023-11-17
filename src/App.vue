@@ -16,6 +16,8 @@ import EmployeeMasterView from "./views/master/EmployeeMasterView";
 
 export default {
   components: { MasterView,SuperAdminMasterView,CompanyMasterView,EmployeeMasterView},
+
+
 };
 </script>
   
