@@ -37,7 +37,7 @@
                 <div class="col-lg-12">
             <div class="card">
               <div  class="card-header pc-bg ">
-                    <h3 class="card-title text-white">Leave list</h3>
+                    <h3 class="card-title text-white">Your leave list</h3>
                   </div>
               
               <!-- /.card-header -->
@@ -46,6 +46,7 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
+                      <th>Leave Type</th>
                       <th>From</th>
                       <th>Till</th>
                       <th>Status</th>
@@ -55,14 +56,19 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                        <td>1.</td>
-                      <td>12/4/2023</td>
-                      <td>17/4/2023</td>
-                      <td class="text-success" >Approved</td>
-                    
+                    <tr v-for="leave in leaves" :key="leave">
+                        <td>{{ leave.id }}</td>
+                        <td>{{ leave.leave_type }}</td>
+                      <td>{{ leave.from }}</td>
+                      <td>{{ leave.to }}</td>
+
+                 
+                      <td v-if="leave.status==1"  class="text-success" >Approved</td>
+                      <td v-if="leave.status==null"  class="text-success" >Pending</td>
+
                       <td>
-                        <a href="/addemployee" class="btn btn-sm btn-default ">View</a>
+                        
+                        <a href="/addemployee" class="btn btn-sm btn-default "><i class="fa-solid fa-eye"></i></a>
                       </td>
                     
                     </tr>
@@ -103,12 +109,30 @@
  
     </div>
   </template>
-      
       <script>
-
-  export default {
+      import axios from "axios";
+      export default {
+        data() {
+          return {
+           
+            leaves:[],
+          
+          };
+        },
+        methods: {
+      
+    getLeaves(){
+     axios.get("employee/leaves").then((response)=>{
+        this.leaves=response.data.data;
+     }).catch((error)=>{
+         console.log(error);  
+     })
+    },
 
   
-  }
-  </script>
-      
+        },
+        mounted: function () {
+          this.getLeaves();
+        }
+      };
+      </script>

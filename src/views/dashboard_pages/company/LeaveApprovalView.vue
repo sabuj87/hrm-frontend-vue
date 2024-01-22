@@ -71,9 +71,9 @@
                      
                      
                       <td>
-                        <a href="/addemployee" class="btn-sc-sm ">View</a>
-                        <a href="/addemployee" class="btn-pc-sm  ml-2 ">Accept</a>
-                        <a href="/addemployee" class="btn-dn-sm ml-2 ">Reject</a>
+                        <a href="/addemployee" class=" "><i class="fa-solid fa-eye"></i></a>
+                        <a href="/addemployee" class=" ml-2 "><i class="fa-solid fa-check"></i></a>
+                        <a href="/addemployee" class=" ml-2 "><i class="fa-solid fa-xmark"></i></a>
                       </td>
                     
                     </tr>
@@ -93,9 +93,9 @@
                    
                      
                       <td>
-                        <a href="/addemployee" class="btn-sc-sm ">View</a>
-                        <a href="/addemployee" class="btn-pc-sm  ml-2 ">Accept</a>
-                        <a href="/addemployee" class="btn-dn-sm ml-2 ">Reject</a>
+                        <a href="/addemployee" class=" "><i class="fa-solid fa-eye"></i></a>
+                        <a href="/addemployee" class=" ml-2 "><i class="fa-solid fa-check"></i></a>
+                        <a href="/addemployee" class=" ml-2 "><i class="fa-solid fa-xmark"></i></a>
                       </td>
                     
                     
@@ -115,9 +115,9 @@
                    
                    
                       <td>
-                        <a href="/addemployee" class="btn-sc-sm ">View</a>
-                        <a href="/addemployee" class="btn-pc-sm  ml-2 ">Accept</a>
-                        <a href="/addemployee" class="btn-dn-sm ml-2 ">Reject</a>
+                        <a href="/addemployee" class=" "><i class="fa-solid fa-eye"></i></a>
+                        <a href="/addemployee" class=" ml-2 "><i class="fa-solid fa-check"></i></a>
+                        <a href="/addemployee" class=" ml-2 "><i class="fa-solid fa-xmark"></i></a>
                       </td>
                     
                     

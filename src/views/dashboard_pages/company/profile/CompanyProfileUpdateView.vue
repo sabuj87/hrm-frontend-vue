@@ -30,6 +30,70 @@
           <div class=""></div>
           <div class="accordion" id="accordionExample">
             <div class="accordion-item">
+              <h2 class="accordion-header" id="headingZero">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseZero"
+                  aria-expanded="false"
+                  aria-controls="collapseZero"
+                >
+                  Company Logo
+                </button>
+              </h2>
+              <div
+                id="collapseZero"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingZero"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <label
+                        for="file-input"
+                        style="height: 100px; width: 100px; position: relative"
+                      >
+                        <img
+                         cursor="pointer"
+                         title="Upload Logo"
+                          onerror="this.onerror=null;this.src='/assets/images/logo/user.png';"
+                          :src="imageUrl"
+                          class=" "
+                          alt="User Image"
+                          style="
+                            height: 100px;
+                            width: 100px;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                          "
+                        />
+                      </label>
+                      <input
+                        @change="handleImageSelect"
+                        style="display: none"
+                        id="file-input"
+                        type="file"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <button
+                      @click.prevent="uploadCompanyLogo"
+                      class="btn-sc-wd btn-primary mr-2"
+                    >
+                      Save
+                    </button>
+                    <button class="btn-pc-wd btn-warning">Next</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
               <h2 class="accordion-header" id="headingOne">
                 <button
                   class="accordion-button"
@@ -67,20 +131,53 @@
 
                       <div class="col-lg-3">
                         <div class="form-group">
-                          <label>Company_category</label>
+                          {{ profile.company_cetegory }}
+                          <label>Company category</label>
                           <select
                             class="form-custom-select"
                             style="width: 100%"
-                            v-model="profile.company_cetegory"
-                          > 
-                            <option disable  value="null" >Select a category</option>
-                            <option value="Service" >Service</option>
-                            <option value="Technology" >Technology</option>
-                            <option value="Finance" >Finance</option>
+                            @change="
+                              getCompanySector(profile.company_category_id)
+                            "
+                            v-model="profile.company_category_id"
+                          >
+                            <option disabled value="null">
+                              Select a category
+                            </option>
+
+                            <option
+                              :value="category.id"
+                              v-for="category in company_categories"
+                              :key="category"
+                            >
+                              {{ category.name }}
+                            </option>
                           </select>
                           <span id="company_cetegory" class="error"></span>
                         </div>
                       </div>
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <label>Sector</label>
+                          <select
+                            v-model="profile.company_sector_id"
+                            class="form-custom-select"
+                            style="width: 100%"
+                          >
+                            <option disabled value="null">
+                              Select a sector
+                            </option>
+                            <option
+                              :value="sector.id"
+                              v-for="sector in company_sectors"
+                              :key="sector"
+                            >
+                              {{ sector.name }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
                       <div class="col-lg-4">
                         <div class="form-group">
                           <label>Registration Number</label>
@@ -107,7 +204,7 @@
                           <span id="contact_number" class="error"></span>
                         </div>
                       </div>
-          
+
                       <div class="col-lg-5">
                         <div class="form-group">
                           <label> Company email* </label>
@@ -118,6 +215,19 @@
                             class="form-control"
                           />
                           <span id="company_email" class="error"></span>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <label>Details info </label>
+                          <textarea
+                            style="height: 100px !important"
+                            v-model="basic_information.details_info"
+                            type="text"
+                            row="4"
+                            class="form-control"
+                          ></textarea>
                         </div>
                       </div>
                       <div class="col-lg-4">
@@ -131,7 +241,8 @@
                           />
                         </div>
                       </div>
-                      <div class="col-lg-3">
+
+                      <div class="col-lg-4">
                         <div class="form-group">
                           <label> Telephone Number </label>
                           <input
@@ -140,113 +251,6 @@
                             min="0"
                             class="form-control"
                           />
-                        </div>
-                      </div>
-                      <div class="col-lg-5">
-                        <div class="form-group">
-                          <label>Name of Trading</label>
-                          <input
-                            type="text"
-                            v-model="basic_information.name_of_trading"
-                            min="0"
-                            class="form-control"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4">
-                        <div class="form-group">
-                          <label>Period in Trading </label>
-                          <select
-                            class="form-custom-select"
-                            style="width: 100%"
-                            v-model="basic_information.period_of_trading"
-                          >
-                            <option selected="selected">Trading 1</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-lg-5">
-                        <div class="form-group">
-                          <label>Name of sector</label>
-                          <select
-                            v-model="basic_information.name_of_sector"
-                            class="form-custom-select"
-                            style="width: 100%"
-                          > 
-                          <option :value="null" >Select a sector</option>
-
-                            <option
-                              :value="ICT"
-                           
-                            >
-                              Information and communication
-                            </option>
-                            <option
-                              :value="Foods"
-                           
-                            >
-                            Food and grocary
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="col-lg-3">
-                        <div class="form-group">
-                          <label>Changed orgnization</label>
-                          <select
-                            class="form-custom-select"
-                            style="width: 100%"
-                            value="basic_information.changed_organization"
-                          > 
-                          <option disable value="null">Select</option>
-                            <option value="Yes">No</option>
-                            <option value="No">Yes</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label>Details info </label>
-                          <input
-                            v-model="basic_information.details_info"
-                            type="text"
-                            class="form-control"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-3">
-                        <div class="form-group">
-                          <label>Faced Penalty?</label>
-                          <select
-                            v-model="faced_penalty"
-                            class="form-custom-select"
-                            style="width: 100%"
-                          >
-                            <option disable value="null">Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="col-lg-3">
-                        <div class="form-group">
-                          <label for="exampleInputFile">Logo</label>
-                          <div class="input-group">
-                            <div class="custom-file">
-                              <input
-                                type="file"
-                                class="custom-file-input"
-                                id="exampleInputFile"
-                              />
-                              <label
-                                class="custom-file-label"
-                                for="exampleInputFile"
-                                >Choose file</label
-                              >
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -291,7 +295,7 @@
                         <label>First name* </label>
                         <input
                           type="text"
-                          v-model="auth_first_name"
+                          v-model="auth_person.auth_first_name"
                           class="form-control"
                         />
                         <span id="auth_first_name" class="error"></span>
@@ -301,7 +305,7 @@
                       <div class="form-group">
                         <label>Last name </label>
                         <input
-                          v-model="auth_last_name"
+                          v-model="auth_person.auth_last_name"
                           type="text"
                           class="form-control"
                         />
@@ -312,7 +316,7 @@
                       <div class="form-group">
                         <label>Designation </label>
                         <input
-                          v-model="auth_designation"
+                          v-model="auth_person.auth_designation"
                           type="text"
                           class="form-control"
                         />
@@ -323,7 +327,7 @@
                       <div class="form-group">
                         <label>Phone No* </label>
                         <input
-                          v-model="auth_phone_no"
+                          v-model="auth_person.auth_phone_no"
                           type="number"
                           min="0"
                           class="form-control"
@@ -335,32 +339,38 @@
                       <div class="form-group">
                         <label>Email </label>
                         <input
-                          v-model="auth_email"
+                          v-model="auth_person.auth_email"
                           type="email"
                           class="form-control"
                         />
                       </div>
                     </div>
-
-                    <div class="col-lg-3">
-                      <div class="form-group">
-                        <label for="exampleInputFile">Photo</label>
-                        <div class="input-group">
-                          <div class="custom-file">
-                            <input
-                              type="file"
-                              class="custom-file-input"
-                              id="exampleInputFile"
-                            />
-                            <label
-                              class="custom-file-label"
-                              for="exampleInputFile"
-                              >Choose file</label
-                            >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <label
+                      for="file-input"
+                      style="height: 100px; width: 100px; position: relative"
+                    >
+                      <img
+                        onerror="this.onerror=null;this.src='/assets/images/logo/user.png';"
+                        :src="authPersonImageUrl"
+                        class=" "
+                        alt="User Image"
+                        style="
+                          height: 100px;
+                          width: 100px;
+                          position: absolute;
+                          top: 0;
+                          left: 0;
+                        "
+                      />
+                    </label>
+                    <input
+                      @change="handleImageSelect"
+                      style="display: none"
+                      id="file-input"
+                      type="file"
+                    />
                   </div>
 
                   <div>
@@ -376,7 +386,7 @@
               </div>
             </div>
 
-            <div class="accordion-item">
+            <!-- <div class="accordion-item">
               <h2 class="accordion-header" id="headingThree">
                 <button
                   class="accordion-button collapsed"
@@ -499,8 +509,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="accordion-item">
+            </div> -->
+            <!-- <div class="accordion-item">
               <h2 class="accordion-header" id="headingFour">
                 <button
                   class="accordion-button collapsed"
@@ -597,7 +607,7 @@
                           <div class="custom-file">
                             <input
                               type="file"
-                              class="custom-file-input"
+                              class=""
                               id="exampleInputFile"
                             />
                             <label
@@ -622,7 +632,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingFive">
@@ -649,7 +659,7 @@
                       <div class="form-group">
                         <label>Post Code*</label>
                         <input
-                          v-model="post_code"
+                          v-model="company_address.post_code"
                           type="text"
                           class="form-control"
                         />
@@ -660,7 +670,7 @@
                       <div class="form-group">
                         <label>Address line 1* </label>
                         <input
-                          v-model="address_line_1"
+                          v-model="company_address.address_line_1"
                           type="text"
                           class="form-control"
                         />
@@ -672,7 +682,7 @@
                       <div class="form-group">
                         <label>Address line 2 </label>
                         <input
-                          v-model="address_line_2"
+                          v-model="company_address.address_line_2"
                           type="text"
                           class="form-control"
                         />
@@ -682,7 +692,7 @@
                       <div class="form-group">
                         <label>Address line 3 </label>
                         <input
-                          v-model="address_line_3"
+                          v-model="company_address.address_line_3"
                           type="text"
                           class="form-control"
                         />
@@ -692,7 +702,7 @@
                       <div class="form-group">
                         <label>City/county*</label>
                         <input
-                          v-model="city"
+                          v-model="company_address.city"
                           type="text"
                           class="form-control"
                         />
@@ -706,10 +716,18 @@
                         <select
                           class="form-custom-select"
                           style="width: 100%"
-                          v-model="country"
+                          v-model="company_address.country_id"
                         >
-                          <option value="BD" selected="selected">BD</option>
-                          <option value="UK">UK</option>
+                          <option disabled value="null">
+                            Select a country
+                          </option>
+                          <option
+                            :value="country.id"
+                            v-for="country in countries"
+                            :key="country"
+                          >
+                            {{ country.country_name }}
+                          </option>
                         </select>
                         <span id="country" class="error"></span>
                       </div>
@@ -738,7 +756,7 @@
                   aria-expanded="false"
                   aria-controls="collapseSix"
                 >
-                  Trading Hour
+                  Compnay hour
                 </button>
               </h2>
               <div
@@ -751,35 +769,9 @@
                   <div class="row">
                     <div class="col-lg-3">
                       <div class="form-group">
-                        <label>Day</label>
-                        <input
-                          v-model="trade_day"
-                          type="text"
-                          class="form-control"
-                        />
-                        <span id="trade_day" class="error"></span>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-3">
-                      <div class="form-group">
-                        <label>Status</label>
-                        <select
-                          class="form-custom-select"
-                          style="width: 100%"
-                          v-model="trade_status"
-                        >
-                          <option value="Open" selected="selected">Open</option>
-                          <option value="Close">Close</option>
-                        </select>
-                        <span id="trade_status" class="error"></span>
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="form-group">
                         <label>Opening Time</label>
                         <input
-                          v-model="trade_opening_time"
+                          v-model="company_hour.opening_time"
                           type="time"
                           class="form-control"
                         />
@@ -790,7 +782,7 @@
                       <div class="form-group">
                         <label>Closing Time</label>
                         <input
-                          v-model="trade_closing_time"
+                          v-model="company_hour.closing_time"
                           type="time"
                           class="form-control"
                         />
@@ -837,37 +829,162 @@
                       <div class="form-group">
                         <label>Document Name </label>
                         <input
-                          v-model="doc_name"
+                          v-model="document_name"
                           type="text"
                           class="form-control"
                         />
                         <span id="doc_name" class="error"></span>
                       </div>
                     </div>
+                  
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                          <label>Document Type</label>
+                          <select
+                            v-model="document_type"
+                            class="form-custom-select"
+                            style="width: 100%"
+                          >
+                            <option disabled value="">
+                              Select a type
+                            </option>
+                            <option>
+                              Trade licence
+                            </option>
+                            <option>
+                              BIN Certificate
+                            </option>
+                           
+                          </select>
+                        </div>
+                      </div>
                     <div class="col-lg-3">
                       <div class="form-group">
                         <label for="exampleInputFile">File</label>
-                        <div class="input-group">
-                          <div class="custom-file">
+               
                             <input
-                              type="file"
-                              class="custom-file-input"
+                                                            type="file"
+                              @change="handleMultipleFileUpload"
+class="form-control"
                               id="exampleInputFile"
                             />
-                            <label
-                              class="custom-file-label"
-                              for="exampleInputFile"
-                              >Choose file</label
-                            >
-                          </div>
-                        </div>
+                         
+                          
+                       
                       </div>
                     </div>
+
+                    <div class="col-1 pt-1">
+                      <button
+                        @click="createDocument"
+                        type="button"
+                        class="btn btn-default btn-sm mt-4 mb-4"
+                      >
+                        <i class="fa-solid fa-plus"></i>
+                      </button>
+                    </div>
+
+                   
+
+   
                   </div>
 
-                  <div>
+                  <p>New file</p>
+
+                  <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+   
+                      <th>Document name</th>
+                      <th>Document Type</th>
+                      <th>Date</th>
+                      <th>View</th>
+                     
+         
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="doc in docs" :key="doc">
+                      <td>{{ doc.document_name }}</td>
+                      <td>{{ doc.document_type }}</td>
+                      <td>{{ doc.date }}</td>
+
+                    <td> <a href="">
+                      <img style="height: 50px; width: 50px" src="/assets/images/resource/pdf.png" alt="" />
+                          <p>{{ doc.file.name }}</p>
+
+                    </a>
+                    </td> 
+                     
+                     
+                     
+                      
+                    
+                    
+                    
+                    </tr>
+               
+                
+                
+                
+                   
+
+                  
+                 
+                  
+                  </tbody>
+                </table>
+                <p>Exiting  file</p>
+
+<table class="table table-striped table-bordered">
+<thead>
+  <tr>
+
+    <th>Document name</th>
+    <th>Document Type</th>
+    <th>Date</th>
+    <th>View</th>
+   
+
+  </tr>
+</thead>
+<tbody>
+  <tr v-for="pdoc in pdocs" :key="pdoc">
+    <td>{{ pdoc.name }}</td>
+    <td>{{ pdoc.type }}</td>
+    <td>{{ pdoc.date }}</td>
+
+  <td> <a href="">
+    <img style="height: 50px; width: 50px" src="/assets/images/resource/pdf.png" alt="" />
+        <p></p>
+
+  </a>
+  </td> 
+   
+   
+   
+    
+  
+  
+  
+  </tr>
+
+
+
+
+ 
+
+
+
+
+</tbody>
+</table>
+
+
+
+                  <div class="mt-2">
                     <button
-                      @click.prevent="addocuments"
+                      @click.prevent="uploadDocuments"
                       class="btn-sc-wd btn-primary mr-2"
                     >
                       Save
@@ -893,35 +1010,109 @@ import axios from "axios";
 export default {
   data() {
     return {
-      profile: "",
+      profile: {},
       uuid: "",
       email: "",
-      basic_information: "",
-      auth_person: "",
+      basic_information: {},
+      auth_person: {},
       key_person: "",
       levelone: "",
-      address: "",
+      company_address: {},
       trade_day: "",
-      
-
-
+      company_categories: "",
+      company_sectors: "",
+      countries: "",
+      company_hour: {},
+      file: "",
+      mfile: "",
+      imageUrl: "",
+      authPersonImageUrl: "",
+      document_name: "",
+      document_type: "",
+      pdocs:[],
+       docs: [],
+      images: [],
+      isDragging: false,
     };
   },
 
   methods: {
+    selectFiles() {
+      this.$refs.fileInput.click();
+    },
+    onFileSelect(event) {
+      const files = event.target.files;
+      if (files.length === 0) {
+        return;
+      }
+
+      for (let i = 0; i < files.length; i++) {
+        if (!this.docs.some((e) => e.name === files[i].name)) {
+          var doc = {
+            name: files[i].name,
+            file: files[i],
+            type: "document",
+            document_type: "document",
+            document_name: "company documents",
+            url: URL.createObjectURL(files[i]),
+          };
+          this.docs.push(doc);
+        }
+      }
+    },
+
+    onDragOver(event) {
+      event.preventDefault();
+      this.isDragging = true;
+      event.dataTransfer.dropEffect = "copy";
+    },
+    onDragLeave(event) {
+      event.preventDefault();
+      this.isDragging = false;
+    },
+
+    onDrop(event) {
+      event.preventDefault();
+      this.isDragging = false;
+      const files = event.dataTransfer.files;
+
+   
+      for (let i = 0; i < files.length; i++) {
+        if (!this.docs.some((e) => e.name === files[i].name)) {
+          var doc = {
+            name: files[i].name,
+            file: files[i],
+            type: "document",
+            document_type: "document",
+            document_name: "company documents",
+            url: URL.createObjectURL(files[i]),
+          };
+          this.docs.push(doc);
+        }
+      }
+    },
+
+    deleteimage(index) {
+      this.docs.splice(index, 1);
+    },
+
     // Creating Feature list
     addbasicinfo() {
       var validator = new Validator();
       var error = validator.validated([
-        { field: "company_name", value:this.basic_information.company_name, type: "required" },
+        {
+          field: "company_name",
+          value: this.basic_information.company_name,
+          type: "required",
+        },
         {
           field: "contact_number",
-          value: this.contact_number,
+          value: this.basic_information.contact_number,
           type: "required",
         },
         {
           field: "company_email",
-          value: this.company_email,
+          value: this.basic_information.company_email,
           type: "required|email",
         },
       ]);
@@ -931,34 +1122,74 @@ export default {
       } else {
         var basic_information = {
           company_name: this.basic_information.company_name,
-          company_type: this.company_type,
-          registration_number: this.registration_number,
-          contact_number: this.contact_number,
-          sigin_email: this.sigin_email,
-          company_email: this.company_email,
-          website: this.website,
-          telephone_number: this.telephone_number,
-          name_of_trading: this.name_of_trading,
-          period_of_trading: this.period_of_trading,
-          changed_organization: this.changed_organization,
-          details_info: this.details_info,
-          name_of_sector: this.name_of_sector,
-          faced_penalty: this.faced_penalty,
-          logo: "",
+          company_category_id: this.profile.company_category_id,
+          company_sector_id: this.profile.company_sector_id,
+          registration_number: this.basic_information.registration_number,
+          contact_number: this.basic_information.contact_number,
+          company_email: this.basic_information.company_email,
+          website: this.basic_information.website,
+          telephone_number: this.basic_information.telephone_number,
+          details_info: this.basic_information.details_info,
         };
 
         axios
-          .put("/company/profiles/"+this.uuid, {
-            
+          .put("/company/profiles/" + this.uuid, {
             basic_information: JSON.stringify(basic_information),
           })
           .then((response) => {
             if (response) {
-              alert(response.data.message);
+              this.$emit("get_message", response.data.message);
             }
           })
           .catch((error) => {
             this.errors = error.response.data.errors;
+          });
+      }
+    },
+
+    handleFileUpload(event) {
+      this.file = event.target.files[0];
+    },
+
+    handleImageSelect(event) {
+      this.file = event.target.files[0];
+
+      if (this.file) {
+        // Use FileReader to read file and generate a preview
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          this.imageUrl = e.target.result;
+        };
+
+        reader.readAsDataURL(this.file);
+      }
+    },
+
+    uploadCompanyLogo() {
+      if (this.file) {
+        var formData = new FormData();
+
+        formData.append("file", this.file);
+        formData.append("type", "image");
+        formData.append("document_type", "logo");
+        formData.append("document_name", "company_logo");
+        formData.append("_method", "put");
+
+        axios
+          .post("/company/profiles/" + this.uuid, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            if (response) {
+              this.$emit("get_message", response.data.message);
+
+            }
+          })
+          .catch((error) => {
+            console.log(error);
           });
       }
     },
@@ -968,34 +1199,117 @@ export default {
       var error = validator.validated([
         {
           field: "auth_first_name",
-          value: this.auth_first_name,
+          value: this.auth_person.auth_first_name,
           type: "required",
         },
-        { field: "auth_phone_no", value: this.auth_phone_no, type: "required" },
+        {
+          field: "auth_phone_no",
+          value: this.auth_person.auth_phone_no,
+          type: "required",
+        },
       ]);
 
       if (error) {
         console.log(error);
       } else {
         var auth_person = {
-          auth_first_name: this.auth_first_name,
-          auth_last_name: this.auth_last_name,
-          auth_designation: this.auth_designation,
-          logo: "",
+          auth_first_name: this.auth_person.auth_first_name,
+          auth_last_name: this.auth_person.auth_last_name,
+          auth_email: this.auth_person.auth_email,
+          auth_phone_no: this.auth_person.auth_phone_no,
+          auth_designation: this.auth_person.auth_designation,
         };
 
         axios
-        .put("/company/profiles/"+this.uuid, {
-            
+          .put("/company/profiles/" + this.uuid, {
             authorised_person_details: JSON.stringify(auth_person),
           })
           .then((response) => {
             if (response) {
-              alert(response.data.message);
+              this.$emit("get_message", response.data.message);
+              this.uploadAuthPersonPhoto();
             }
           })
           .catch((error) => {
             this.errors = error.response.data.errors;
+          });
+      }
+    },
+    handleMultipleFileUpload(event) {
+      this.mfile = event.target.files[0];
+    },
+    createDocument() {
+      if (this.mfile) {
+        var doc = {
+          file: this.mfile,
+          type: "document",
+          document_type: this.document_type,
+
+          document_name: this.document_name,
+          date: new Date().getDate()+"/"+(new Date().getMonth()+1)+"/"+new Date().getFullYear(),
+        };
+
+        this.docs.push(doc);
+      } else {
+        alert("select the file");
+      }
+    },
+
+    uploadDocuments() {
+      if (this.docs.length > 0) {
+        var formData = new FormData();
+
+        for (var i = 0; i < this.docs.length; i++) {
+          formData.append("files[]", this.docs[i].file);
+          formData.append("types[]", this.docs[i].type);
+          formData.append("document_types[]", this.docs[i].document_type);
+          formData.append("document_names[]", this.docs[i].document_name);
+        }
+
+        formData.append("_method", "put");
+
+        axios
+          .post("/company/profiles/" + this.uuid, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            if (response) {
+              this.$emit("get_message", response.data.message);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        alert("select the file");
+      }
+    },
+
+    uploadAuthPersonPhoto() {
+      if (this.file) {
+        var formData = new FormData();
+
+        formData.append("file", this.file);
+        formData.append("type", "image");
+        formData.append("document_type", "logo");
+        formData.append("document_name", "auth_person_logo");
+        formData.append("_method", "put");
+
+        axios
+          .post("/company/profiles/" + this.uuid, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            if (response) {
+              this.$emit("get_message", response.data.message);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
           });
       }
     },
@@ -1025,13 +1339,12 @@ export default {
         };
 
         axios
-        .put("/company/profiles/"+this.uuid, {
-          
+          .put("/company/profiles/" + this.uuid, {
             key_contact: JSON.stringify(key_person),
           })
           .then((response) => {
             if (response) {
-              alert(response.data.message);
+              this.$emit("get_message", response.data.message);
             }
           })
           .catch((error) => {
@@ -1069,13 +1382,12 @@ export default {
         };
 
         axios
-        .put("/company/profiles/"+this.uuid, {
-           
+          .put("/company/profiles/" + this.uuid, {
             lavel_one_user: JSON.stringify(levelone),
           })
           .then((response) => {
             if (response) {
-              alert(response.data.message);
+              this.$emit("get_message", response.data.message);
             }
           })
           .catch((error) => {
@@ -1087,36 +1399,43 @@ export default {
     addCompanyAddress() {
       var validator = new Validator();
       var error = validator.validated([
-        { field: "post_code", value: this.post_code, type: "required" },
         {
-          field: "address_line_1",
-          value: this.address_line_1,
+          field: "post_code",
+          value: this.company_address.post_code,
           type: "required",
         },
-        { field: "city", value: this.city, type: "required" },
-        { field: "country", value: this.country, type: "required" },
+        {
+          field: "address_line_1",
+          value: this.company_address.address_line_1,
+          type: "required",
+        },
+        { field: "city", value: this.company_address.city, type: "required" },
+        {
+          field: "country",
+          value: this.company_address.country_id,
+          type: "required",
+        },
       ]);
 
       if (error) {
         console.log(error);
       } else {
         var address = {
-          post_code: this.post_code,
-          address_line_1: this.address_line_1,
-          address_line_2: this.address_line_2,
-          address_line_3: this.address_line_3,
-          city: this.city,
-          country: this.country,
+          post_code: this.company_address.post_code,
+          address_line_1: this.company_address.address_line_1,
+          address_line_2: this.company_address.address_line_2,
+          address_line_3: this.company_address.address_line_3,
+          city: this.company_address.city,
+          country_id: this.company_address.country_id,
         };
 
         axios
-        .put("/company/profiles/"+this.uuid, {
-            
+          .put("/company/profiles/" + this.uuid, {
             company_address: JSON.stringify(address),
           })
           .then((response) => {
             if (response) {
-              alert(response.data.message);
+              this.$emit("get_message", response.data.message);
             }
           })
           .catch((error) => {
@@ -1128,16 +1447,14 @@ export default {
     addtradinghour() {
       var validator = new Validator();
       var error = validator.validated([
-        { field: "trade_day", value: this.trade_day, type: "required" },
-        { field: "trade_status", value: this.trade_status, type: "required" },
         {
           field: "trade_opening_time",
-          value: this.trade_opening_time,
+          value: this.company_hour.opening_time,
           type: "required",
         },
         {
           field: "trade_closing_time",
-          value: this.trade_closing_time,
+          value: this.company_hour.closing_time,
           type: "required",
         },
       ]);
@@ -1146,20 +1463,17 @@ export default {
         console.log(error);
       } else {
         var trade = {
-          trade_day: this.trade_day,
-          trade_status: this.trade_status,
-          trade_opening_time: this.trade_opening_time,
-          trade_closing_time: this.trade_closing_time,
+          opening_time: this.company_hour.opening_time,
+          closing_time: this.company_hour.closing_time,
         };
 
         axios
-        .put("/company/profiles/"+this.uuid, {
-           
+          .put("/company/profiles/" + this.uuid, {
             trading_hour: JSON.stringify(trade),
           })
           .then((response) => {
             if (response) {
-              alert(response.data.message);
+              this.$emit("get_message", response.data.message);
             }
           })
           .catch((error) => {
@@ -1188,7 +1502,7 @@ export default {
           })
           .then((response) => {
             if (response) {
-              alert(response.data.message);
+              this.$emit("get_message", response.data.message);
             }
           })
           .catch((error) => {
@@ -1201,7 +1515,6 @@ export default {
       $("#" + field).css("display", "none");
     },
 
-
     getProfile(uuid) {
       if (uuid) {
         axios
@@ -1209,9 +1522,50 @@ export default {
           .then((response) => {
             if (response) {
               this.profile = response.data.company;
-              this.basic_information = JSON.parse(
-                this.profile.basic_information
-              );
+              this.getCompanySector(this.profile.company_category_id);
+              if (this.profile.basic_information != null) {
+                this.basic_information = JSON.parse(
+                  this.profile.basic_information
+                );
+              }
+              if (this.profile.logo != null) {
+                this.imageUrl ="https://api.nit-bd.com/public/" + this.profile.logo.file.path;
+              }
+
+              if (this.profile.auth_person_logo != null) {
+                this.authPersonImageUrl =
+                  "https://api.nit-bd.com/public/" +
+                  this.profile.auth_person_logo.file.path;
+              }
+
+              if (this.profile.authorised_person_details != null) {
+                this.auth_person = JSON.parse(
+                  this.profile.authorised_person_details
+                );
+              }
+              if (this.profile.company_address != null) {
+                this.company_address = JSON.parse(this.profile.company_address);
+              }
+              if (this.profile.trading_hour != null) {
+                this.company_hour = JSON.parse(this.profile.trading_hour);
+              }
+              if (this.profile.files != null) {
+                
+               
+              
+                for(var i = 0; i < this.profile.files.length; i++){
+                  var pdoc = {
+            name: this.profile.files[i].document_name,
+            type: this.profile.files[i].document_type,
+            date: this.profile.files[i].created_at,
+            path: this.profile.files[i].file.path,
+            ext: this.profile.files[i].file.ext
+           
+          }
+            this.pdocs.push(pdoc);
+                }
+
+              }
             }
           })
           .catch((error) => {
@@ -1219,14 +1573,46 @@ export default {
           });
       }
     },
+
+    getCompanyCategory() {
+      axios
+        .get("public/company_categories")
+        .then((response) => {
+          this.company_categories = response.data.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getCompanySector(categoryid) {
+      if (categoryid) {
+        axios
+          .get("public/sector/category/" + categoryid)
+          .then((response) => {
+            this.company_sectors = response.data.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    },
+    getCountry() {
+      axios
+        .get("public/countries")
+        .then((response) => {
+          this.countries = response.data.data;
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    },
   },
 
   mounted: function () {
-
     this.uuid = JSON.parse(localStorage.getItem("user")).user.uuid;
     this.getProfile(this.uuid);
-
-
+    this.getCompanyCategory();
+    this.getCountry();
   },
 };
 </script>

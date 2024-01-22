@@ -12,7 +12,7 @@
           <img height="70px" width="50px" src="/assets/images/logo/user.png" class="ml-3" alt="User Image">
         </div>
         <div class="info ml-2">
-          <a href="#" style="color:gray" class="d-block">MR Brownlly</a>
+          <a href="#" style="color:gray" class="d-block">{{name}}</a>
         </div>
        
       </div>
@@ -26,14 +26,14 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
-                 <li class="nav-item">
+                 <li v-if="modules_name.includes('Dashboard')" class="nav-item">
                 <router-link class="nav-link"  :to="{ name: 'company-dashboard' }">
               <i class="nav-icon fas fa-tachometer-alt sc"></i>
               <p>Dashboard</p>
               </router-link>
              
               </li>
-              <li class="nav-item">
+              <li v-if="modules_name.includes('Profile')" class="nav-item">
                 <router-link class="nav-link"  :to="{ name: 'company-profile-view' }">
                   <i class="nav-icon fa-solid fa-user sc"></i>
               <p>Profile</p>
@@ -44,7 +44,7 @@
           
           
 
-              <li class=" nav-item">
+              <li v-if="modules_name.includes('Administrative')" class=" nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fa-solid fa-person sc"></i>
                
@@ -68,6 +68,41 @@
                 <router-link class="nav-link"  :to="{ name: 'administrative-departments' }">
                   <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
                   <p>Departments</p>
+                  </router-link>
+             
+                 </li>
+                 <li class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'administrative-grades' }">
+                  <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
+                  <p>Grades</p>
+                  </router-link>
+             
+                 </li>
+                 <li class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'positions' }">
+                  <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
+                  <p>Positions</p>
+                  </router-link>
+             
+                 </li>
+                 <li class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'roles' }">
+                  <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
+                  <p>Roles</p>
+                  </router-link>
+             
+                 </li>
+                 <li class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'permissions' }">
+                  <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
+                  <p>Permissions</p>
+                  </router-link>
+             
+                 </li>
+                 <li class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'levels' }">
+                  <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
+                  <p>Levels</p>
                   </router-link>
              
                  </li>
@@ -116,7 +151,7 @@
               
               </ul>
             </li>
-            <li class="nav-item">
+            <li v-if="modules_name.includes('Employee Onboarding')"  class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fa-solid fa-person-snowboarding sc"></i>
                 <p>
@@ -140,13 +175,13 @@
                   </router-link>
              
                  </li>
-                 <li class="nav-item">
+                 <!-- <li class="nav-item">
                 <router-link class="nav-link"  :to="{ name: 'manageresume' }">
                   <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
                   <p>Manage Resume</p>
                   </router-link>
              
-                 </li>
+                 </li> -->
                  <li class="nav-item">
                 <router-link class="nav-link"  :to="{ name: 'shortlisted' }">
                   <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
@@ -155,7 +190,7 @@
              
                  </li>
                  <li class="nav-item">
-                <router-link class="nav-link"  :to="{ name: 'createiq' }">
+                <router-link class="nav-link"  :to="{ name: 'interviewquestions' }">
                   <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
                   <p>Interview Question</p>
                   </router-link>
@@ -204,6 +239,13 @@
                   </router-link>
              
                  </li>
+                 <li class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'assignresource' }">
+                  <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
+                  <p>Assign Resource</p>
+                  </router-link>
+             
+                 </li>
 
                
               
@@ -230,7 +272,7 @@
               
               </ul>
             </li>
-            <li class="nav-item">
+            <li v-if="modules_name.includes('Leave & Attendance')" class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fa-solid fa-clipboard sc"></i>
                 <p>
@@ -278,6 +320,13 @@
                   </router-link>
              
                  </li>
+                 <li class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'attendancelist' }">
+                  <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
+                  <p>Employee attendances</p>
+                  </router-link>
+             
+                 </li>
 
                
                 <!-- <li class="nav-item">
@@ -305,7 +354,7 @@
               </ul>
             </li>
 
-            <li class="nav-item">
+            <li v-if="modules_name.includes('Training Management')" lass="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fa-solid fa-clock sc"></i>
              
@@ -350,7 +399,7 @@
               
               </ul>
             </li>
-            <li class="nav-item">
+            <li v-if="modules_name.includes('Accounts & Payroll')" class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fa-solid fa-dollar-sign sc"></i>
               
@@ -364,6 +413,12 @@
                 <router-link class="nav-link"  :to="{ name: 'payrolls' }">
                   <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
                   <p>Payrolls</p>
+                  
+                  </router-link>
+                <router-link class="nav-link"  :to="{ name: 'createpayslip' }">
+                  <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
+                  <p>Payrolls</p>
+
                   </router-link>
              
                  </li>
@@ -466,7 +521,7 @@
               </ul>
             </li>
 
-            <li class="nav-item">
+            <li v-if="modules_name.includes('Complain Management')" class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-table sc"></i>
                 <p>
@@ -476,15 +531,24 @@
               </a>
             
             </li>
+        
 
-            <li class="nav-item">
+            <li v-if="modules_name.includes('Billings')" class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-table sc"></i>
+                <i class="nav-icon fa-solid fa-file-invoice sc"></i>
                 <p>
                   Billings
                 
                 </p>
               </a>
+            
+            </li>
+            <li v-if="modules_name.includes('Payslips')" class="nav-item">
+              <router-link class="nav-link"  :to="{ name: 'createpayslip' }">
+                  <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
+                  <p>Payslips</p>
+
+                  </router-link>
             
             </li>
           
@@ -504,8 +568,45 @@
 </template>
 
 <script>
+
+
+
+
 export default {
 
+
+    
+data() {
+return {
+  name:"",
+  modules:[],
+  modules_name:[]
+}
+
+},
+
+
+  methods:{
+
+    userInfo(){
+
+
+
+    }
+
+
+  },
+
+  mounted: function(){
+    this.name=JSON.parse(localStorage.getItem("user")).user.name
+    this.modules=JSON.parse(localStorage.getItem("user")).user.price.price.modules
+    for (let i = 0; i < this.modules.length; i++) {
+      this.modules_name.push(this.modules[i].company_module.module_name)
+      
+    }
+  
+
+  }
 
 }
 </script>

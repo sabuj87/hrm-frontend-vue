@@ -18,6 +18,7 @@ import RegisterView from '../views/front_pages/auth/RegisterView'
 
 import SuperAdminDashboardView from '../views/dashboard_pages/superadmin/SuperAdminDashboardView'
 import PriceView from '../views/dashboard_pages/superadmin/priceplan/PriceView'
+import ModulesView from '../views/dashboard_pages/superadmin/ModulesView'
 import AddPriceView from '../views/dashboard_pages/superadmin/priceplan/AddPriceView'
 import EditPriceView from '../views/dashboard_pages/superadmin/priceplan/EditPriceView'
 import CompaniesView from '../views/dashboard_pages/superadmin/CompaniesView'
@@ -28,12 +29,18 @@ import PendingCompaniesView from '../views/dashboard_pages/superadmin/PendingCom
 //Company Component
 
 import CompanyDashboardView from '../views/dashboard_pages/company/CompanyDashboardView'
-import AddEmployeeView from '../views/dashboard_pages/company/AddEmployeeView'
+import AddEmployeeView from '../views/dashboard_pages/company/employee/AddEmployeeView'
+import EmployeeAttendancesListview from '../views/dashboard_pages/company/employee/EmployeeAttendancesListview'
+import EmployeeProfileView from '../views/dashboard_pages/company/employee/EmployeeProfileView'
 import EmployeesView from '../views/dashboard_pages/company/EmployeesView'
 import DepartmentsView from '../views/dashboard_pages/company/DepartmentsView'
+import GradesView from '../views/dashboard_pages/company/GradesView'
 import AddDepartmentView from '../views/dashboard_pages/company/AddDepartmentView'
 import AddPositionView from '../views/dashboard_pages/company/AddPositionView'
 import PositionsView from '../views/dashboard_pages/company/PositionsView'
+import PermissionView from '../views/dashboard_pages/company/PermissionView'
+import LevelsView from '../views/dashboard_pages/company/LevelsView'
+import RolesView from '../views/dashboard_pages/company/RolesView'
 import PayrollsView from '../views/dashboard_pages/company/PayrollsView'
 import CreatePayrollView from '../views/dashboard_pages/company/CreatePayrollView'
 import CompanyProfileUpdateView from '../views/dashboard_pages/company/profile/CompanyProfileUpdateView'
@@ -44,9 +51,17 @@ import RequestedLoanView from '../views/dashboard_pages/company/RequestedLoanVie
 import LoanDetailsView from '../views/dashboard_pages/company/LoanDetailsView'
 import LeaveApprovalView from '../views/dashboard_pages/company/LeaveApprovalView'
 import LeaveListView from '../views/dashboard_pages/company/LeaveListView'
-import JobDemandListView from '../views/dashboard_pages/company/JobDemandListView'
-import JobDetailsView from '../views/dashboard_pages/company/JobDetailsView'
+import LeaveDetailsView from '../views/dashboard_pages/company/onboarding/LeaveDetailsView'
+import CreatePayslipView from '../views/dashboard_pages/company/CreatePayslipView'
+import JobDemandListView from '../views/dashboard_pages/company/onboarding/JobDemandListView'
+import InterviewquestionsView from '../views/dashboard_pages/company/onboarding/InterviewquestionsView'
+import AssignResourceView from '../views/dashboard_pages/company/onboarding/AssignResourceView'
+
+import JobDetailsView from '../views/dashboard_pages/company/onboarding/JobDetailsView'
+import PublishedJobView from '../views/dashboard_pages/company/onboarding/PublishedJobView'
 import GetTheApplicationView from '../views/dashboard_pages/company/GetTheApplicationView'
+import AddJobApplicationView from '../views/dashboard_pages/company/onboarding/AddJobApplicationView'
+import JobApplicationView from '../views/dashboard_pages/company/onboarding/JobApplicationView'
 import MangeResumeView from '../views/dashboard_pages/company/MangeResumeView'
 import ShortListedCandidateView from '../views/dashboard_pages/company/ShortListedCandidateView'
 import CreateInterviewQuestionView from '../views/dashboard_pages/company/CreateInterviewQuestionView'
@@ -63,6 +78,7 @@ import LeaveApplicationView from '../views/dashboard_pages/employee/LeaveApplica
 import LeaveApplicationListView from '../views/dashboard_pages/employee/LeaveApplicationListView'
 import CreateJobDemandView from '../views/dashboard_pages/employee/CreateJobDemandView'
 import EmployeeProfileUpdateView from '../views/dashboard_pages/employee/EmployeeProfileUpdateView'
+import EmployeeJobdemandListView from '../views/dashboard_pages/employee/Jobdemand/EmployeeJobdemandListView'
 import GiveAttendanceView from '../views/dashboard_pages/employee/GiveAttendanceView'
 import PerformanceView from '../views/dashboard_pages/employee/PerformanceView'
 import AllocatedAssetView from '../views/dashboard_pages/employee/AllocatedAssetView'
@@ -172,6 +188,14 @@ const routes = [
           ]
        
         },
+        
+        {
+          path:'modules',
+          name:'superadmin.modules',
+          component: ModulesView
+        },
+      
+
       
        
     ]
@@ -238,6 +262,11 @@ const routes = [
               name:'addemployee',
               component: AddEmployeeView
             },
+            {
+              path:'employee',
+              name:'administrative-employee-profile',
+              component: EmployeeProfileView
+            },
 
             {
               path:'adddepartments',
@@ -249,6 +278,11 @@ const routes = [
               path:'departments',
               name:'administrative-departments',
               component: DepartmentsView
+            },
+            {
+              path:'grades',
+              name:'administrative-grades',
+              component: GradesView
             },
             {
               path: 'performanceindi',
@@ -264,6 +298,22 @@ const routes = [
            name:'positions',
            component: PositionsView
         },
+    
+        {
+           path:'roles',
+           name:'roles',
+           component: RolesView
+        },
+        {
+           path:'permissions',
+           name:'permissions',
+           component: PermissionView
+        },
+        {
+          path:'levels',
+          name:'levels',
+          component: LevelsView
+       },
     
 
 
@@ -348,6 +398,12 @@ const routes = [
   
               component: LeaveApprovalView
             },
+             {
+              path:'attendancelist',
+              name:'attendancelist',
+  
+              component: EmployeeAttendancesListview
+            },
             
 
              {
@@ -356,6 +412,33 @@ const routes = [
   
               component: LeaveListView
             },
+             {
+              path:'leavedetails',
+              name:'leavedetails',
+  
+              component: LeaveDetailsView
+            },
+            {
+              path:'createpayslip',
+              name:'createpayslip',
+  
+              component: CreatePayslipView
+            },
+            {
+              path:'createpayslip',
+              name:'createpayslip',
+  
+              component: CreatePayslipView
+            },
+            {
+              path:'assignresource',
+              name:'assignresource',
+  
+              component: AssignResourceView
+            },
+            
+            
+            
             
           ]
 
@@ -379,10 +462,38 @@ const routes = [
               component: JobDetailsView
             },
             {
+              path:'jobpublish',
+              name:'jobpublish',
+  
+              component: PublishedJobView
+            },
+            {
               path:'gettheapplication',
               name:'gettheapplication',
   
               component: GetTheApplicationView
+            },
+            
+
+            {
+              path:'addjobapplicathon',
+              name:'addjobapplicathon',
+  
+              component: AddJobApplicationView
+            },
+
+          {
+              path:'interviewquestions',
+              name:'interviewquestions',
+  
+              component: InterviewquestionsView
+            },
+
+            {
+              path:'jobapplicathondetails',
+              name:'jobapplicathondetails',
+  
+              component: JobApplicationView
             },
             
             {
@@ -477,6 +588,11 @@ const routes = [
           path: 'createjobdemand',
           name: 'createjobdemand',
           component:CreateJobDemandView,
+         },
+         {
+          path: 'jobdemandlist',
+          name: 'employee-jobdemandlist',
+          component:EmployeeJobdemandListView,
          },
          {
           path: 'profile',

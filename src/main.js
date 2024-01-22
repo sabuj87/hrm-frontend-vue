@@ -9,9 +9,12 @@ import CompanyMasterView from './views/master/CompanyMasterView'
 import EmployeeMasterView from './views/master/EmployeeMasterView'
 
 
+
+
 const app = createApp(App)
 app.use(store)
 app.use(router)
-app.component(MasterView,SuperAdminMasterView,CompanyMasterView,EmployeeMasterView);
+app.component(MasterView,SuperAdminMasterView,CompanyMasterView,EmployeeMasterView).component('vue-multiselect', window.VueMultiselect.default);
 app.mount('#app')
+
 

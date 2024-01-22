@@ -65,11 +65,11 @@
                       <td>{{ d.id }}</td>
                       <td>{{ d.name }}</td>
                       <td>
-                        $100
+                        {{ d.price }}
                       </td>
 
                       <td>
-                        1 year
+                        {{ d.duration }}
                       </td>
                      
                      

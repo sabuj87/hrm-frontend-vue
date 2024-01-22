@@ -66,6 +66,26 @@
             
             </ul>
           </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tree sc"></i>
+              <p>
+                Manage Module
+                <i class="fas fa-angle-left right sc"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'superadmin.modules' }">
+              <i class="nav-icon fas fa-tachometer-alt sc"></i>
+              <p>Modules</p>
+            </router-link>
+             
+              </li>
+          
+            </ul>
+          </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tree sc"></i>

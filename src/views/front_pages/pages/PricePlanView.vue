@@ -1,94 +1,37 @@
 <template>
 
     <div class="container " >
-       <div class="row mt-4">
-
-        <div class="col-md-4">
-            <div class="card" style="width: 100%;">
-  <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDda82EPvkWymmQqzU-_XeaCV2Lu_f1NyJ3w&usqp=CAU" alt="Card image cap">
-  <div class="card-body">
-    <h5 class=" text-center">Basic</h5>
-    <h6 class=" text-center">$350</h6>
+      <div class="text-center p-2">
+      <button class="btn btn-light text-primary btn-sm" >Pricing</button>
+      <h3>Choose your suitable pricing</h3>
+      <p>Our service design to cater to specific needs</p>
 
 
-    <div>
-        <ul>
-        <li>50 employee</li>
-        <li>Role Permission</li>
-        <li>Accounts</li>
-    
+      </div>
+       <div class="row ">
 
-    </ul>
+        <div v-for="price in prices" :key="price" class="col-md-4">
+
+          <div class="p-3" style="background-color: aliceblue;">
+            <h5 class="" >{{ price.name }}</h5>
+            <h2>{{ price.price }}</h2>
+            <p>{{ price.duration }}</p>
+            <p>Completely free for 30 days,all Features are free so you can work out if it's for you</p>
+            <div v-for="feature in JSON.parse(price.features)" :key="feature" ><i class="fa-solid fa-circle-check text-primary"></i> &nbsp; &nbsp;  {{feature.value}} {{feature.feature}}</div>
+            <!-- <div  ><i class="fa-solid fa-circle-check text-primary"></i> &nbsp; &nbsp; 2 theme</div>
+            <div ><i class="fa-solid fa-circle-check text-primary"></i> &nbsp; &nbsp; No Support</div> -->
+            <button @click="gotosignup(price.id)" class="w-100 mt-4 btn btn-dark  " >Get started</button>
+            <button class="w-100  mt-3 btn btn-outline-dark  " >See all features</button>
 
 
-    </div>
-  
 
 
-  
-    <a href="/register" class="btn w-100 btn-primary">Go </a>
-  </div>
-</div>
+          </div>
  
 
         </div>
-        <div class="col-md-4">
-            <div class="card" style="width: 100%;">
-  <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDda82EPvkWymmQqzU-_XeaCV2Lu_f1NyJ3w&usqp=CAU" alt="Card image cap">
-  <div class="card-body">
-    <h5 class=" text-center">Standard</h5>
-    <h6 class=" text-center">$550</h6>
+     
 
-    <div>
-        <ul>
-        <li>50 employee</li>
-        <li>Role Permission</li>
-        <li>Accounts</li>
-    
-
-    </ul>
-
-
-    </div>
-  
-
-
-  
-    <a href="/register" class="btn w-100 btn-primary">Go </a>
-  </div>
-</div>
- 
-
-        </div>
-        <div class="col-md-4">
-            <div class="card" style="width: 100%;">
-  <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDda82EPvkWymmQqzU-_XeaCV2Lu_f1NyJ3w&usqp=CAU" alt="Card image cap">
-  <div class="card-body">
-    <h5 class=" text-center">Advanced</h5>
-    <h6 class=" text-center">$850</h6>
-
-
-    <div>
-        <ul>
-        <li>50 employee</li>
-        <li>Role Permission</li>
-        <li>Accounts</li>
-    
-
-    </ul>
-
-
-    </div>
-  
-
-
-  
-    <a href="#" class="btn w-100 btn-primary">Go </a>
-  </div>
-</div>
- 
-
-        </div>
 
 
        </div>
@@ -100,12 +43,128 @@
   </template>
   
   <script>
-  
-  
-  export default {
-   
+  import $ from "jquery";
+ import axios from "axios";
+ export default {
+   data() {
+     return {
+       errors: {},
+       prices: [],
+       department: {},
+       features: [],
+     };
+   },
+   methods: {
+     getprice() {
+       axios
+         .get("/public/prices")
+         .then((response) => {
+           if (response) {
+             
+             this.prices = response.data.data;
+ 
+            
+           }
+         })
+         .catch((error) => {
+           console.log(error);
+           
+         });
+     },
+     adddepartment() {
+       axios
+         .post("/company/departments", {
+           department_name: this.department_name,
+           code: this.department_code,
+         })
+         .then((response) => {
+           if (response) {
     
-  }
-  </script>
+        
+ 
+          
+              
+            this.$refs.addForm.reset();
+ 
+            this.department_name="";
+            this.department_code="";
+               this.getdepartment();
+               $("#addModal .close").click()
+           }
+         })
+         .catch((error) => {
+           this.errors = error.response.data.errors;
+         });
+     },
+ 
+     editdepartment(uuid) {
+       axios
+         .get("/company/departments/"+uuid)
+         .then((response) => {
+           if (response) {
+             
+             this.department = response.data.data;
+ 
+            
+        
+           }
+         })
+         .catch((error) => {
+           console.log(error);
+           
+         });
+     },
+     updatedepartment(uuid) {
+      
+       axios
+         .put("/company/departments/"+uuid,{
+           department_name: this.department.department_name,
+           code: this.department.code,
+         })
+         .then((response) => {
+           if (response) {
+             
+          
+             this.getdepartment()
+          
+             $("#editModal .close").click()
+        
+           }
+         })
+         .catch((error) => {
+           console.log(error);
+           
+         });
+     },
+     deletedepartment(uuid) {
+      
+      axios
+        .delete("/company/departments/"+uuid)
+        .then((response) => {
+          if (response) {
+            
+         
+            this.getdepartment()
+         
+       
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          
+        });
+    },
+    gotosignup(id){
+        if(id){
+          this.$router.push({ name: "register", query: { id: id } });
+
+        }
+   },
+  },
+   mounted: function () {
+     this.getprice();
+   },
+ };
+ </script>
   
   

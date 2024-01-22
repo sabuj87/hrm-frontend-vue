@@ -40,30 +40,45 @@
                   <form>
 
                     <div class="card-body">
+                      <div class="row" >
+                        <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Leave Type</label>
+                        <select
+                          v-model="leave_type"
+                          class="form-control "
+                          style="width: 100%"
+                        >  
+                        <option disabled value="" >Select leave type</option>
+                          <option value="medical" selected="selected">Medical</option>
+                          <option value="casual" >Casual</option>
+                        </select>
+                      </div>
+                    </div>
+
+
+                      </div>
                         
                         <div class="row">
                         
-                        <div class="col-lg-3 border p-2">
+                        
+                        <div class="col-lg-3 border ms-2   p-2">
 
                             <span style="font-size: 120%;" ><strong class="sc" >Total Leave days :</strong> 22 </span>
                     
                     </div>
                    
+ 
+                   
                         <div class="col-lg-3 border p-2">
 
-                            <span style="font-size: 120%;" ><strong class="sc" >Casual Leave :</strong> 15 </span>
+                            <span style="font-size: 120%;" ><strong class="sc" >Medical Leave :</strong> 2</span>
                     
                     </div>
                    
                         <div class="col-lg-3 border p-2">
 
-                            <span style="font-size: 120%;" ><strong class="sc" >Medical Leave :</strong> 12</span>
-                    
-                    </div>
-                   
-                        <div class="col-lg-3 border p-2">
-
-                            <span style="font-size: 120%;" ><strong class="sc">Casual Remaining :</strong> 8</span>
+                            <span style="font-size: 120%;" ><strong class="sc"> Remaining :</strong> 20</span>
                     
                     </div>
                    
@@ -80,28 +95,21 @@
 
                  
                 </div>
+
+                <hr>
          
                 <h5 class="mt-3" >Apply for leave</h5>
+             
                         <div class="row  mt-3 ">
                             
                         
                            
-                    <div class="col-lg-3">
-                      <div class="form-group">
-                        <label>Leave Type</label>
-                        <select
-                          class="form-control select2"
-                          style="width: 100%"
-                        >
-                          <option selected="selected">Type 1</option>
-                          <option selected="selected">Type 2</option>
-                        </select>
-                      </div>
-                    </div>
+                    
                     <div class="col-lg-3">
                       <div class="form-group">
                         <label>From</label>
                         <input
+                           v-model="from"
                             type="date"
                             class="form-control"
                            
@@ -113,6 +121,7 @@
                       <div class="form-group">
                         <label>To</label>
                         <input
+                         v-model="to"
                             type="date"
                             class="form-control"
                            
@@ -124,11 +133,13 @@
                       <div class="form-group">
                         <label>Approval Authority</label>
                         <select
-                          class="form-control select2"
+                         v-model="authority"
+                          class="form-control "
                           style="width: 100%"
-                        >
+                        > 
+                        <option disabled value="" >Select Authority</option>
+
                           <option selected="selected">Authority 1</option>
-                          <option selected="selected">Authority 2</option>
                         </select>
                       </div>
                     </div>
@@ -141,11 +152,10 @@
                           <label 
                             >Reason
                           </label>
-                          <input
-                            type="number"
-                            class="form-control"
-                           
-                          />
+                          <textarea class="form-control"  v-model="reason">
+                          
+                          </textarea>
+                       
                         </div>
                       </div>
                    
@@ -164,7 +174,7 @@
 
 
 
-                  <button type="button" class="btn-sc" >Apply</button>
+                  <button @click="leaveApply" type="button" class="btn-sc" >Apply</button>
                     </div>
 
 
@@ -193,10 +203,108 @@
   </template>
       
       <script>
+      import { Validator } from "@/other/Validator";
+        import $ from "jquery";
+    import axios from "axios";
+          export default {
+            data() {
+              return {
+                errors: {},
+                departments:[],
+                department_id: "",
+                leave_type:"",
+                authority:"",
+              };
+            },
+            methods: {
+              leaveApply(){
+    
+    
+    
+          
+       
+          var validator = new Validator();
+        var error = validator.validated([
+    
+        { field: "leave_type", value: this.leave_type, type: "required" },
+        { field: "from", value: this.from, type: "required" },
+        { field: "to", value: this.to, type: "required" },
+        { field: "reason", value: this.reason, type: "required" },
 
-  export default {
-
-  
-  }
-  </script>
+    
+        ]);
+    
+        if (error) {
+          console.log(error);
+        }else{ 
+    
       
+        var leave={
+            "leave_type":this.leave_type,
+            "from":this.from,
+            "to":this.to,        
+            "authority":this.authority,        
+   
+        }
+    
+        axios
+            .post("/employee/leaves", 
+            leave
+             
+            )
+            .then((response) => {
+    
+              if(response){
+                this.$emit("get_message", response.data.message);
+               
+               
+              }
+    
+    
+    
+             
+    
+            }).catch((error)=>{
+               
+    
+             this.errors=error.response.data.errors
+    
+          
+    
+          
+    
+            
+            })
+           
+    
+    
+    
+    
+    
+    
+    
+        }
+    
+    
+     
+    
+    
+        },
+        getDepartments(){
+         axios.get("employee/departments").then((response)=>{
+            this.departments=response.data.data;
+         }).catch((error)=>{
+             console.log(error);  
+         })
+        },
+    
+        clearError(field) {
+          $("#" + field).css("display", "none");
+        },
+    
+            },
+            mounted: function () {
+              this.getDepartments();
+            }
+          };
+          </script>

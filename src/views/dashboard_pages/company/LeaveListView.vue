@@ -43,7 +43,7 @@
               <div class="card-body">
                 <table class="table table-striped table-bordered">
                   <thead>
-                    <tr>
+                    <tr >
                       <th style="width: 10px">#</th>
                       <th>Employee name</th>
                       <th>From</th>
@@ -53,19 +53,34 @@
                     
          
                     </tr>
+                    
                   </thead>
                   <tbody>
-                    <tr>
-
-                        <td>1.</td>
-                        <td>Abu Saeed Sabuj</td>
-                      <td>12/4/2023</td>
-                      <td>17/4/2023</td>
-                      <td class="text-success" >Approved</td>
-                    
+                    <tr v-for="leave in leaves" :key="leave">
+                      <td>{{ leave.id }}</td>
+                
+                      <td>{{ JSON.parse(
+                  leave.employee.basic_information
+                ).first_name}} {{ JSON.parse(
+                  leave.employee.basic_information
+                ).last_name}}</td>
+                      <td>{{ leave.from }}</td>
+                      <td>{{ leave.to }}</td>
+                      <td v-if="leave.status==null" >Pending</td>
+                      <td v-if="leave.status==1" >Approved</td>
+                      
                       <td>
-                        <a href="/addemployee" class="btn-sc-sm btn-default ">View</a>
-                      </td>
+
+<router-link    :to="{ name: 'leavedetails', query: { id: leave.id }}">
+
+<span  ><i class="fa-solid fa-eye"></i></span>
+</router-link>
+
+</td>
+
+
+
+
                     
                     </tr>
                 
@@ -107,10 +122,37 @@
   </template>
       
       <script>
-
-  export default {
-
-  
-  }
-  </script>
+      //import $ from "jquery";
+     import axios from "axios";
+     export default {
+       data() {
+         return {
+           errors: {},
+           leaves: [],
+           
+         };
+       },
+       methods: {
+         getemployeeleave() {
+           axios
+             .get("company/leaves")
+             .then((response) => {
+               if (response) {
+                 
+                 this.leaves = response.data.data;
+     
+               }
+             })
+             .catch((error) => {
+               console.log(error);
+               
+             });
+         },
+       
+       },
+       mounted: function () {
+         this.getemployeeleave();
+       },
+     };
+     </script>
       

@@ -193,17 +193,19 @@ export default {
 
            
 
-          }).catch((error)=>{
-             
+          }).catch((error)=>{ 
+            this.$emit("get_message", "Someting went wrong!");
 
-            if(error.response.data.errors.password){
-              $('#password').css("display","block")
-              $('#password').html(error.response.data.errors.password[0])
-            }
-            if(error.response.data.errors.email){
-              $('#email').css("display","block")
-              $('#email').html(error.response.data.errors.email[0])
-            }
+              console.log(error)
+
+            // if(error.response.data.errors.password){
+            //   $('#password').css("display","block")
+            //   $('#password').html(error.response.data.errors.password[0])
+            // }
+            // if(error.response.data.errors.email){
+            //   $('#email').css("display","block")
+            //   $('#email').html(error.response.data.errors.email[0])
+            // }
 
 
         

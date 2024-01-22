@@ -44,15 +44,22 @@
                        
                        <div class="form-group">
                          <label for="exampleInputEmail1"
-                           >Designation name </label
+                           >Grade </label
                          >
-                         <input
-                           type="email"
-                           class="form-control"
-                           v-model="designation_name"
-                         
-                         />
-                         <p class="text-danger mt-1" v-if="errors.designation_name" >{{ errors.designation_name[0] }}</p>
+                       
+                         <select
+                            class="form-custom-select"
+                            style="width: 100%"
+                            v-model="grade"
+                          >
+                            <option disabled value=""  >Select a grade</option>
+                            <option  >A</option>
+                            <option  >B</option>
+                            <option  >C</option>
+                            <option  >D</option>
+                          </select>
+
+                         <p class="text-danger mt-1" v-if="errors.grade" >{{ errors.grade[0] }}</p>
 
                        </div>
 
@@ -81,8 +88,10 @@
                   
                         
                       </div>
-
-                      
+                      <div class="col-lg-4">
+                       
+                  
+                      </div>
                       <div class="col-lg-4">
                        
                        <div class="form-group">
@@ -90,7 +99,7 @@
                            >Basic  </label
                          >
                          <input
-                           type="email"
+                           type="number"
                            class="form-control"
                             v-model="basic"
                          
@@ -98,7 +107,13 @@
                          <p class="text-danger mt-1" v-if="errors.basic" >{{ errors.basic[0] }}</p>
 
                        </div>
+
+                       
                      </div>
+                    
+
+                      
+                    
                       <div class="col-lg-4">
                        
                        <div class="form-group">
@@ -119,14 +134,19 @@
                        
                        <div class="form-group">
                          <label for="exampleInputEmail1"
-                           >Date </label
+                           >Increment Duration </label
                          >
-                         <input
-                           type="email"
-                           class="form-control"
-                           v-model="date"
-                         
-                         />
+                         <select
+                            class="form-custom-select"
+                            style="width: 100%"
+                            v-model="grade"
+                          >
+                            <option disabled value=""  >Select a durration</option>
+                            <option  >6 month</option>
+                            <option  >3 month</option>
+                          
+                          </select>
+                       
                        </div>
                      </div>
 
@@ -175,8 +195,10 @@
                  <div class="form-group">
                    <label for="exampleInputEmail1">Value</label>
                    <input
+                   
                      type="text"
                      class="form-control"
+                     placeholder="Ex..10%"
                      v-model="value"
                     
               
@@ -192,7 +214,7 @@
          
                           <select
                             v-model="type"
-                            class="form-control select2"
+                            class="form-control "
                             style="width: 100%"
                           >
                             <option selected="selected">Adding</option>
@@ -301,6 +323,7 @@ import $ from "jquery";
         allowances:[],
         departments:[],
         errors:{},
+        grade:"",
    
       };
     },
@@ -323,7 +346,7 @@ import $ from "jquery";
 
         axios
           .post("/company/payrolls", {
-            designation_name: this.designation_name,
+            grade: this.grade,
             company_department_id: this.company_department_id,
             basic: this.basic,
             increment: this.increment,
@@ -334,7 +357,7 @@ import $ from "jquery";
           .then((response) => {
 
             if(response){
-              alert(response.data.message)
+              this.$emit("get_message", response.data.message);
               $(".form-control").val('')
              
             }

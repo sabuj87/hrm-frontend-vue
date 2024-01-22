@@ -37,7 +37,11 @@
                 <div class="col-lg-12">
             <div class="card">
               <div  class="card-header pc-bg ">
-                    <h3 class="card-title text-white">Applications</h3>
+                <h3 class="card-title d-inline float-left text-white">Job applications</h3>
+                <router-link  class=" float-right"  :to="{ name: 'addjobapplicathon' }">
+
+<span class="btn-sc-sm" >Add</span>
+</router-link>
                   </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -45,47 +49,37 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Document Description</th>
-                      <th>Document Name</th>
+                      <th>Applicant Name</th>
+                      <th>Job Title</th>
                       <th>Status</th>
-                      <th>Approve Duration</th>
+                 
                       <th>Action</th>
-                    
          
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr v-for="application in applications" :key="application">
 
-                        <td>1.</td>
-                        <td>This my final cv</td>
-                      <td>CV</td>
-                      <td>Approved</td>
-                      <td>3 month</td>
-                 
+                        <td>{{application.id}}</td>
+                        <td>{{application.applicant_name}}</td>
+                      <td>{{application.published_job.job.designation}}</td>
+                      <td>Approve</td>
+            
+                      
+
                     
                       <td>
-                        <a href="/addemployee" class="btn-sc-sm btn-default ">View</a>
+                        <router-link   :to="{ name: 'jobapplicathondetails',query: { uuid: application.uuid } }">
+
+<span  ><i class="fa-solid fa-eye"></i></span>
+</router-link>             
                  
                       </td>
                     
                     </tr>
-                    <tr>
 
-<td>1.</td>
-<td>This my final cv</td>
-<td>CV</td>
-<td>Approved</td>
-<td>3 month</td>
-
-
-<td>
-<a href="/addemployee" class="btn-sc-sm btn-default ">View</a>
-
-</td>
-
-</tr>
-
+        
+   
                 
                   
                  
@@ -93,6 +87,7 @@
                   </tbody>
                 </table>
               </div>
+              
               <!-- /.card-body -->
               <div class="card-footer clearfix">
                 <ul class="pagination pagination-sm m-0 float-right">
@@ -123,9 +118,33 @@
   </template>
       
       <script>
+import axios from "axios";
+  export default { 
+    data() {
+          return {
+            errors: {},
+            applications:[]
+            
+          };
 
-  export default {
+       
+        },
+        methods: {
+          getApplications(){
+     axios.get("company/job_appliocations").then((response)=>{
+        this.applications=response.data.data;
+     }).catch((error)=>{
+         console.log(error);  
+     })
+    },
 
+        },
+        mounted:function(){
+          this.getApplications()
+        }
+
+     
+   
   
   }
   </script>

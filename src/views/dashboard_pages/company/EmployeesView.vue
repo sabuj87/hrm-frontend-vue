@@ -48,81 +48,49 @@
                 <table class="table table-striped table-bordered">
                   <thead>
                     <tr>
-                      <th style="width: 10px">#</th>
+   
                       <th>Employee ID</th>
                       <th>Employee Name</th>
-              
-                      <th>Position</th>
-              
        
-               
                       <th>Email</th>
+                   
+                      <th>Position</th>
                       <th>Action</th>
                      
          
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1.</td>
-                      <td>ABC123</td>
+                    <tr v-for="employee in employees" :key="employee">
+                      <td>{{ employee.id }}</td>
+                      <td>{{ JSON.parse(
+                  employee.basic_information
+                ).first_name}} {{ JSON.parse(
+                  employee.basic_information
+                ).last_name}}</td>
                       <td>
-                        Abu Saeeed Sabuj
+                        {{ JSON.parse(
+                  employee.basic_information
+                ).email}}
                       </td>
                      
                       <td>
                         Software Developer
                        </td>
                      
-                       <td>
-                       sabujsaeed@gmail.com
-                      </td>
+                      
                     
                       <td>
-                        <a href="/addemployee" class="btn-sc-outline-sm ">View</a>
-                      </td>
-                    
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>ABC123</td>
-                      <td>
-                        Abu Saeeed Sabuj
-                      </td>
-                     
-                      <td>
-                        Software Developer
-                       </td>
-                     
-                       <td>
-                       sabujsaeed@gmail.com
-                      </td>
-                    
-                      <td>
-                        <a href="/addemployee" class="btn-sc-outline-sm ">View</a>
+
+                        <router-link    :to="{ name: 'administrative-employee-profile' , query: { uuid: employee.uuid } }">
+
+<span  ><i class="fa-solid fa-eye"></i></span>
+</router-link>
+               
                       </td>
                     
                     </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>ABC123</td>
-                      <td>
-                        Abu Saeeed Sabuj
-                      </td>
-                     
-                      <td>
-                        Software Developer
-                       </td>
-                     
-                       <td>
-                       sabujsaeed@gmail.com
-                      </td>
-                    
-                      <td>
-                        <a href="/addemployee" class="btn-sc-outline-sm ">View</a>
-                      </td>
-                    
-                    </tr>
+               
                 
                 
                 
@@ -164,10 +132,37 @@
   </template>
       
       <script>
-
-  export default {
-
-  
-  }
-  </script>
+      //import $ from "jquery";
+     import axios from "axios";
+     export default {
+       data() {
+         return {
+           errors: {},
+           employees: [],
+           
+         };
+       },
+       methods: {
+         getemployees() {
+           axios
+             .get("/company/employees")
+             .then((response) => {
+               if (response) {
+                 
+                 this.employees = response.data.data;
+     
+               }
+             })
+             .catch((error) => {
+               console.log(error);
+               
+             });
+         },
+       
+       },
+       mounted: function () {
+         this.getemployees();
+       },
+     };
+     </script>
       

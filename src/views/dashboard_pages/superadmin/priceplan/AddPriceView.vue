@@ -38,11 +38,11 @@
                   <!-- /.card-header -->
                   <!-- form start -->
   
-                  <form>
+                  <form ref="addForm"  >
                     <div class="card-body">
                     <div class="row">
              
-                      <div class="col-lg-6">
+                      <div class="col-lg-7">
                        
                           <div class="form-group">
                             <label for="exampleInputEmail1"
@@ -65,7 +65,7 @@
                        
                         </div>
                    
-                      <div class="col-lg-3">
+                      <div class="col-lg-2">
                     
                           <div class="form-group">
                             <label for="exampleInputEmail1">Price</label>
@@ -107,6 +107,7 @@
             
                   
                 </div>
+
 
                     </div>
 
@@ -167,8 +168,41 @@
          
        </div>
 
+       
+       <div class="col-lg-3">
+                       
+                       <div class="form-group">
+                         <label for="exampleInputEmail1"
+                           >Modules </label
+                         >
+
+                     
+                       
+                         <select
+                           class="custom-select" multiple  data-live-search="true"
+                            style="width: 100%"
+                            v-model="selectedModulesID"
+                        
+                          >
+                            <option disabled value=""  >Select a module</option>
+                            <option v-for="module in modules"  :value=" module.id " :key="module" >{{ module.module_name }}</option>
+                          
+                          </select>
+
+                         <p class="text-danger mt-1" v-if="errors.grade" >{{ errors.grade[0] }}</p>
+
+                       </div>
+
+                     
+              
+              
+                    
+                     </div>
+
 
            </div>
+
+
 
 
            <table class="table text-center table-striped table-bordered">
@@ -236,16 +270,20 @@
   </template>
       
       <script>
- import $ from "jquery";
+ //import $ from "jquery";
  import axios from "axios";
 
   export default {
+   
 
     data() {
       return {
     
         features:[],
         errors:{},
+        modules:[],
+        selectedModulesID:[],
+        
    
       };
     },
@@ -268,17 +306,19 @@
 
         axios
           .post("/superadmin/prices", {
-            name: this.name,
-            price: this.price,
-            duration: this.duration,
+            "name": this.name,
+            "price": this.price,
+            "duration": this.duration,
             // features: JSON.stringify(Object.assign({}, this.features))
-            features: JSON.stringify(this.features)
+            "features": JSON.stringify(this.features),
+            "modules": this.selectedModulesID
           })
           .then((response) => {
 
             if(response){
-              alert(response.data.message)
-              $(".form-control").val('')
+              this.$refs.addForm.reset();
+              this.$emit("get_message", response.data.message);
+     
              
             }
 
@@ -304,6 +344,21 @@
 
 
       },
+      getModule() {
+        axios
+          .get("/superadmin/company_modules")
+          .then((response) => {
+            if (response) {
+              
+              this.modules = response.data.data;
+ 
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            
+          });
+      },
 
 
 
@@ -312,6 +367,9 @@
     },
   
     mounted: function () {
+      this.getModule();
+
+
 
     },
   };

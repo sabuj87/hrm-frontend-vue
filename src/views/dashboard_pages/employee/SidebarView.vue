@@ -86,6 +86,15 @@
                  
                 </router-link>
               </li>
+              
+              <li class="nav-item">
+                <router-link class="nav-link" :to="{ name: 'employee-jobdemandlist' }">
+                  <i  class=" fa-brands fa-dropbox nav-icon sc"></i>
+                  <p>Job Demand</p>
+                 
+                </router-link>
+              </li>
+            
             
               <li class="nav-item">
                 <router-link class="nav-link" :to="{ name: 'allocatedasset' }">

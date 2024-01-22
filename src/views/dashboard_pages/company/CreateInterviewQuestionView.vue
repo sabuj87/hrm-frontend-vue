@@ -129,7 +129,7 @@
                         </tr>
                       </tbody>
                     </table>
-                    <button  type="button" class="btn-sc mt-2 mb-4">
+                    <button  @click.prevent="addquestion" type="button" class="btn-sc mt-2 mb-4">
                       Submit
                     </button>
             </div>
@@ -185,7 +185,7 @@
                       </tbody>
                     </table>
 
-                    <button type="button" class="btn-sc mt-4 mb-4">
+                    <button @click.prevent="addquestion" type="button" class="btn-sc mt-4 mb-4">
                       Submit
                     </button>
                 </div>
@@ -210,6 +210,7 @@
 </template>
       
       <script>
+      import axios from "axios";
       import $ from "jquery";
 export default {
     data() {
@@ -274,8 +275,20 @@ point:this.wpoint,
 }
 this.writtens.push(written)
    
- }
+ },
+addquestion(){
 
+  var data={
+    type:this.qtype,
+    mcqs: JSON.stringify(this.mcqs) ,
+    wwrittens:JSON.stringify(this.writtens)
+  }
+  axios.post('/company/interview_questions',data).then((response)=>{
+    this.$emit("get_message", response.data.message);  }).then((error)=>{
+    console.log(error)
+  })
+  
+}
 
 },
 

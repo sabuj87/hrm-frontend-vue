@@ -10,7 +10,7 @@
         <a href="#" class="nav-link">Help</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link "> Sunday, 12-10-2023</a>
+        <a id="date" class="nav-link "> Sunday, 12-10-2023</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a id="clock" class="nav-link sc">  12:45 PM</a>
@@ -145,7 +145,7 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <!-- <span class="dropdown-item dropdown-header">15 Notifications</span> -->
           <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> Profile
+            <i class="fas fa-user mr-2"></i> Profile
             <!-- <span class="float-right text-muted text-sm">3 mins</span> -->
           </a>
           <a href="#" class="dropdown-item">
@@ -153,8 +153,8 @@
             <!-- <span class="float-right text-muted text-sm">3 mins</span> -->
           </a>
        
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> Logout
+          <a href="https://hrm.nit-bd.com/login" class="dropdown-item">
+            <i class="fa-solid fa-arrow-right-from-bracket mr-2"></i> Logout
             <!-- <span class="float-right text-muted text-sm">12 hours</span> -->
           </a>
           <div class="dropdown-divider"></div>

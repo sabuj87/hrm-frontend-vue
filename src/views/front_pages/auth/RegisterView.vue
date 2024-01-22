@@ -157,7 +157,8 @@ export default {
     return {
 
       countries:[],
-      country_id:null
+      country_id:null,
+      priceid:''
     
     }
 
@@ -205,6 +206,7 @@ export default {
             email: this.email,
             password: this.password,
             confirm_password: this.confirm_password,
+            priceid:this.priceid
           })
           .then((response) => {
 
@@ -266,6 +268,8 @@ export default {
   },
   mounted:function(){
     this.getCountry()
+    this.priceid=this.$route.query.id;
+   
   }
 };
 </script>
