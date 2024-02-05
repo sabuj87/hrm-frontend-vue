@@ -29,7 +29,7 @@
                 <div class="card">
                   <div class="card-header pc-bg">
                     <h3 class="card-title d-inline float-left text-white">
-                      Company Modules
+                      Emloyeee Modules
                     </h3>
                     <!-- <router-link  class=" float-right"  :to="{ name: 'administrative-adddepartments' }">
   
@@ -53,7 +53,6 @@
                           <th>Module Name</th>
                           <th>Path Name</th>
                           <th>Parent Module</th>
-
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -291,7 +290,7 @@
     methods: {
       getModule() {
         axios
-          .get("/superadmin/company_modules")
+          .get("/superadmin/employee_modules")
           .then((response) => {
             if (response) {
               
@@ -307,7 +306,7 @@
       },
       addModule() {
         axios
-          .post("/superadmin/company_modules", {
+          .post("/superadmin/employee_modules", {
             module_name: this.module_name,
             path_name: this.path_name,
             parent_id: this.parent_id,

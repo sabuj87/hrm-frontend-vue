@@ -5,7 +5,6 @@ import HomeView from '../views/front_pages/pages/HomeView'
 import PricePlanView from '../views/front_pages/pages/PricePlanView'
 
 
-
 // Auth
 import LoginView from '../views/front_pages/auth/LoginView'
 import RegisterView from '../views/front_pages/auth/RegisterView'
@@ -19,6 +18,7 @@ import RegisterView from '../views/front_pages/auth/RegisterView'
 import SuperAdminDashboardView from '../views/dashboard_pages/superadmin/SuperAdminDashboardView'
 import PriceView from '../views/dashboard_pages/superadmin/priceplan/PriceView'
 import ModulesView from '../views/dashboard_pages/superadmin/ModulesView'
+import EmployeeModulesView from '../views/dashboard_pages/superadmin/EmployeeModulesView'
 import AddPriceView from '../views/dashboard_pages/superadmin/priceplan/AddPriceView'
 import EditPriceView from '../views/dashboard_pages/superadmin/priceplan/EditPriceView'
 import CompaniesView from '../views/dashboard_pages/superadmin/CompaniesView'
@@ -80,7 +80,19 @@ import CreateJobDemandView from '../views/dashboard_pages/employee/CreateJobDema
 import EmployeeProfileUpdateView from '../views/dashboard_pages/employee/EmployeeProfileUpdateView'
 import EmployeeJobdemandListView from '../views/dashboard_pages/employee/Jobdemand/EmployeeJobdemandListView'
 import GiveAttendanceView from '../views/dashboard_pages/employee/GiveAttendanceView'
+import TakeAtteandanceView from '../views/dashboard_pages/employee/TakeAtteandanceView'
+import OtherEmployeeAttendanceView from '../views/dashboard_pages/employee/OtherEmployeeAttendanceView'
+
 import PerformanceView from '../views/dashboard_pages/employee/PerformanceView'
+
+import OtherEmployeeAtteandanceListVIew from '../views/dashboard_pages/employee/OtherEmployeeAtteandanceListVIew'
+import OtherEmployeeLeaveApplicationView from '../views/dashboard_pages/employee/OtherEmployeeLeaveApplicationView'
+import OtherEmployeePerformanceView from '../views/dashboard_pages/employee/OtherEmployeePerformanceView'
+import OtherEmployeeResourceDemandListView from '../views/dashboard_pages/employee/OtherEmployeeResourceDemandListView'
+import OtherEmployeeSetKPIView from '../views/dashboard_pages/employee/OtherEmployeeSetKPIView'
+import OtherEmployeeLeaveApplicaionDetailsView from '../views/dashboard_pages/employee/OtherEmployeeLeaveApplicaionDetailsView'
+
+
 import AllocatedAssetView from '../views/dashboard_pages/employee/AllocatedAssetView'
 import ResourceDemandApplyView from '../views/dashboard_pages/employee/ResourceDemandApplyView'
 import BillSubmisstionView from '../views/dashboard_pages/employee/BillSubmisstionView'
@@ -194,6 +206,12 @@ const routes = [
           name:'superadmin.modules',
           component: ModulesView
         },
+        {
+          path:'employeemodules',
+          name:'superadmin.employeemodules',
+          component: EmployeeModulesView
+        },
+      
       
 
       
@@ -606,6 +624,16 @@ const routes = [
           component:GiveAttendanceView,
          },
          {
+          path: 'takeattendance',
+          name: 'takeattendance',
+          component:TakeAtteandanceView,
+         },
+         {
+          path: 'employeeattendance',
+          name: 'employeeattendance',
+          component:OtherEmployeeAttendanceView,
+         },
+         {
           path: 'performance',
           name: 'performance',
           component:PerformanceView,
@@ -640,6 +668,53 @@ const routes = [
 
           ]
        },
+
+       {
+        path: 'otheremployee',
+        name: 'otheremployee',
+        children: [
+
+
+          {
+            path:'attendance',
+            name:'employee.otheremployee.attendance',
+            component:OtherEmployeeAtteandanceListVIew,
+         },
+         {
+          path:'leave-application',
+          name:'employee.otheremployee.leave-application',
+          component:OtherEmployeeLeaveApplicationView,
+       },
+         {
+          path: 'performance',
+          name: 'employee.otheremployee.performance',
+          component:OtherEmployeePerformanceView,
+       },
+       {
+        path: 'resource',
+        name: 'employee.otheremployee.resource',
+        component:OtherEmployeeResourceDemandListView,
+       },
+       {
+        path: 'setkpi',
+        name: 'employee.otheremployee.setkpi',
+        component:OtherEmployeeSetKPIView,
+       },
+      
+       {
+        path: 'leavedetails',
+        name: 'employee.otheremployee.leavedetails',
+        component:OtherEmployeeLeaveApplicaionDetailsView,
+       },
+      
+      
+    
+  
+    
+
+        ]
+     },
+      
         
      
        

@@ -52,19 +52,21 @@
 
                   <div class="row">
            
-           <div class="col-lg-3">
+           <div class="col-lg-6">
             
                <div class="form-group">
                  <label  class="sc" for="exampleInputEmail1"
-                   > Month
+                   > Year
 </label
                  >
                  <select
                         class="form-control "
+                        v-model="selectedYear"
                         style="width: 100%"
+                        @change="getAttendance"
                       >
                    
-                        <option selected >{{currentMonthName}}</option>
+                        <option :value="2000+n"  v-for="n in 50" :key="n"  >{{ 2000+n }}</option>
                        
                       </select>
                </div>
@@ -74,19 +76,32 @@
       
             
              </div>
-             <div class="col-lg-3">
+             <div class="col-lg-6">
             
             <div class="form-group">
               <label  class="sc" for="exampleInputEmail1"
-                > Year
+                > Month
 </label
               >
               <select
                      class="form-control "
+                     v-model="selectedMonth"
                      style="width: 100%"
+                     @change="getAttendance"
                    >
                 
-                     <option selected >{{currentYear}}</option>
+                     <option value="January">January</option>
+                     <option value="February">February</option>
+                     <option value="March">March</option>
+                     <option value="April">April</option>
+                     <option value="May">May</option>
+                     <option value="June">June</option>
+                     <option value="July">July</option>
+                     <option value="August">August</option>
+                     <option value="September">September</option>
+                     <option value="October">October</option>
+                     <option value="November">November</option>
+                     <option value="December">December</option>
                     
                    </select>
             </div>
@@ -126,11 +141,11 @@
                 </thead>
                 <tbody>
                 
-                  <tr :class="{ disabled: getAttendance.date!=currentDate }"  v-for="getAttendance in getAttendances" :key="getAttendance" >
-                    <td>{{getAttendance.date}}</td>
-                    <td>{{getAttendance.status}}</td>
-                    <td>{{getAttendance.logedin}}</td>
-                    <td >{{getAttendance.logedout}}</td>
+                  <tr :class="{ disabled: attendance.date!=currentDate }"  v-for="attendance in attendances" :key="attendance" >
+                    <td>{{attendance.date}}</td>
+                    <td>{{attendance.status}}</td>
+                    <td>{{attendance.logedin}}</td>
+                    <td >{{attendance.logedout}}</td>
                 
                  
                     <td >
@@ -204,7 +219,11 @@ export default {
     attenStatus:"",
     currentDate:"",
     attenStatusFinal:"",
-    getAttendances:[]
+    selectedMonth:"",
+    selectedYear:"",
+    check:false,
+    uuid:"",
+   
    
   };
 },
@@ -216,75 +235,29 @@ methods: {
 
 
   giveAttendance(){
-    this.attendances=[]
-    for( var attendance of this.getAttendances){
 
-      var attendanceg=""
-
-      if(attendance.date==this.currentDate){
-        attendanceg={
-         date:attendance.date,
+    this.attendances = this.attendances.map(attendance => {
+  if (attendance.date === this.currentDate) {
+    return  {
+         date:this.currentDate,
          status:"Attend",
          logedin:"Not assigned",
          logedout:"Not assigned",
          action:"Attend",
          remarks:"",
         }
-        this.attendances.push(attendanceg);
-
-       }else{
-        attendanceg={
-         date:attendance.date,
-         status:"No status",
-         logedin:"Not assigned",
-         logedout:"Not assigned",
-         action:"",
-         remarks:"",
-       }
-       this.attendances.push(attendanceg);
-
-
-      }
-
-
-  
-    }
-
-    
-    //  for(let index = 1; index <= this.endOfMonth; index++){
-    //    this.date=index+"/"+this.currentMonth+"/"+this.currentYear;
-    //    var attendance=""
-    //   if(index==this.currentDate){
-    //      attendance={
-    //      date:this.date,
-    //      status:"No status",
-    //      logedin:"Not assigned",
-    //      logedout:"Not assigned",
-    //      action:this.attenStatus,
-    //      remarks:"",
-    //     }
-    //     this.attendances.push(attendance);
-
-    //    }else{
-    //  attendance={
-    //      date:this.date,
-    //      status:"No status",
-    //      logedin:"Not assigned",
-    //      logedout:"Not assigned",
-    //      action:"",
-    //      remarks:"",
-    //    }
-    //    this.attendances.push(attendance);
-
-
-    //   }
-      
-    //  }
+  }
+  return attendance;
+});
    
+    
+    
+if(this.uuid!=""){
 
 
-     axios
-          .put("/employee/attendances/"+"1hgfghhfghrrrrrrrrr", {
+
+  axios
+          .put("/employee/attendances/"+this.uuid, {
             year:this.currentYear,
             month:this.currentMonthName,
             attendances: JSON.stringify(this.attendances),
@@ -299,6 +272,29 @@ methods: {
             this.errors = error.response.data.errors;
           });
       
+
+}else{
+
+  axios
+          .post("/employee/attendances", {
+            year:this.currentYear,
+            month:this.currentMonthName,
+            attendances: JSON.stringify(this.attendances),
+          })
+          .then((response) => {
+            if (response) {
+       
+              this.getAttendance();
+            }
+          })
+          .catch((error) => {
+            this.errors = error.response.data.errors;
+          });
+
+
+}
+
+   
 
 
 
@@ -316,20 +312,68 @@ this.currentDate   = moment().format('D/MM/YYYY');
 this.currentMonth = moment().format('MM');
 this.currentMonthName = moment().format('MMMM');
 this.currentYear  = moment().format('YYYY');
+this.selectedYear=this.currentYear
+this.selectedMonth=this.currentMonthName
 
 
 
   },
   getAttendance(){
     axios
-          .get("/employee/attendances/getbymonth/"+this.currentMonthName+"/"+this.currentYear)
+          .get("/employee/attendances/getbymonth/"+this.selectedMonth+"/"+this.selectedYear)
           .then((response) => {
             if (response) {
-              this.getAttendances=JSON.parse(response.data.data.attendances);
+
+              this.attendances=JSON.parse(response.data.data.attendances);
+            
+              this.uuid=response.data.data.uuid
+
             }
           })
           .catch((error) => {
-            this.errors = error.response.data.errors;
+            if(error.response.status==404){
+        
+              if(this.selectedMonth==this.currentMonthName && this.selectedYear==this.currentYear){
+
+             
+                for(let index = 1; index <= this.endOfMonth; index++){
+    this.date=index+"/"+this.currentMonth+"/"+this.currentYear;
+       var attendance=""
+      if(index==this.currentDate){
+         attendance={
+         date:this.date,
+         status:"No status",
+         logedin:"Not assigned",
+         logedout:"Not assigned",
+         action:this.attenStatus,
+         remarks:"",
+        }
+        this.attendances.push(attendance);
+
+       }else{
+     attendance={
+         date:this.date,
+         status:"No status",
+         logedin:"Not assigned",
+         logedout:"Not assigned",
+         action:"",
+         remarks:"",
+       }
+       this.attendances.push(attendance);
+
+
+      }
+      
+     }
+  
+              }else{
+                this.attendances=[]
+              }
+
+   
+         
+            }
+   
           });
 
   }

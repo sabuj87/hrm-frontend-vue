@@ -169,23 +169,52 @@
        </div>
 
        
-       <div class="col-lg-3">
+       <div class="col-lg-6">
                        
                        <div class="form-group">
                          <label for="exampleInputEmail1"
-                           >Modules </label
+                           >Company Modules </label
+                         >
+
+                     p
+                       
+                         <select
+                           class="custom-select" multiple  data-live-search="true"
+                            style="width: 100%;height:200px"
+                            v-model="selectedModulesID"
+                        
+                          >
+                            <option disabled value=""  >Select modules</option>
+                            <option v-for="module in modules"   :value=" module.id " :key="module" ><span v-if="module.parent_id==null" >{{module.module_name}}</span><span v-if="module.parent_id!=null" >{{module.module_name }}({{ module.parent.module_name }})</span></option>
+                          
+                          </select>
+
+                         <p class="text-danger mt-1" v-if="errors.grade" >{{ errors.grade[0] }}</p>
+
+                       </div>
+
+                     
+              
+              
+                    
+                     </div>
+                     <div class="col-lg-6">
+                       
+                       <div class="form-group">
+                         <label for="exampleInputEmail1"
+                           >Employee Modules </label
                          >
 
                      
                        
                          <select
                            class="custom-select" multiple  data-live-search="true"
-                            style="width: 100%"
-                            v-model="selectedModulesID"
+                            style="width: 100%;height:200px"
+                            v-model="selectedEmployeeModulesID"
                         
                           >
-                            <option disabled value=""  >Select a module</option>
-                            <option v-for="module in modules"  :value=" module.id " :key="module" >{{ module.module_name }}</option>
+                            <option disabled value=""  >Select modules</option>
+                            <option v-for="module in employeemodules"   :value=" module.id " :key="module" ><span v-if="module.parent_id==null" >{{module.module_name}}</span><span v-if="module.parent_id!=null" >{{module.module_name }}({{ module.parent.module_name }})</span></option>
                           
                           </select>
 
@@ -282,7 +311,9 @@
         features:[],
         errors:{},
         modules:[],
+        employeemodules:[],
         selectedModulesID:[],
+        selectedEmployeeModulesID:[],
         
    
       };
@@ -311,7 +342,8 @@
             "duration": this.duration,
             // features: JSON.stringify(Object.assign({}, this.features))
             "features": JSON.stringify(this.features),
-            "modules": this.selectedModulesID
+            "modules": this.selectedModulesID,
+            "employeemodules": this.selectedEmployeeModulesID
           })
           .then((response) => {
 
@@ -360,6 +392,22 @@
           });
       },
 
+      getCompanyModule() {
+        axios
+          .get("/superadmin/employee_modules")
+          .then((response) => {
+            if (response) {
+              
+              this.employeemodules = response.data.data;
+ 
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            
+          });
+      },
+
 
 
      
@@ -368,6 +416,7 @@
   
     mounted: function () {
       this.getModule();
+      this.getCompanyModule();
 
 
 

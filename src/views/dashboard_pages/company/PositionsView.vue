@@ -117,7 +117,7 @@
       aria-labelledby="addModal"
       aria-hidden="true"
     >
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" >Add new position</h5>
@@ -195,6 +195,64 @@
 
                 </div>
               </div>
+                 <div class="col-lg-12">
+                       
+                       <div class="form-group">
+                         <label for="exampleInputEmail1"
+                           >Company Modules </label
+                         >
+
+                     
+                       
+                         <select
+                           class="custom-select" multiple  data-live-search="true"
+                            style="width: 100%;height:200px"
+                            v-model="selectedModulesID"
+                        
+                          >
+                            <option disabled value=""  >Select  modules</option>
+                            <option v-for="module in modules"   :value=" module.company_module.id " :key="module" ><span v-if="module.company_module.parent_id==null" >{{module.company_module.module_name}}</span><span v-if="module.company_module.parent_id!=null" >{{module.company_module.module_name }}({{ module.company_module.parent.module_name }})</span></option>
+                          
+                          </select>
+
+                         <p class="text-danger mt-1" v-if="errors.grade" >{{ errors.grade[0] }}</p>
+
+                       </div>
+
+                     
+              
+              
+                    
+                     </div>
+                     <div class="col-lg-12">
+                       
+                       <div class="form-group">
+                         <label for="exampleInputEmail1"
+                           >Employee Modules </label
+                         >
+
+                     
+                       
+                         <select
+                           class="custom-select" multiple  data-live-search="true"
+                            style="width: 100%;height:200px"
+                            v-model="selectedEmployeeModulesID"
+                        
+                          >
+                            <option disabled value=""  >Select  modules</option>
+                            <option v-for="module in employee_modules"   :value=" module.employee_module.id " :key="module" ><span v-if="module.employee_module.parent_id==null" >{{module.employee_module.module_name}}</span><span v-if="module.employee_module.parent_id!=null" >{{module.employee_module.module_name }}({{ module.employee_module.parent.module_name }})</span></option>
+                          
+                          </select>
+
+                         <p class="text-danger mt-1" v-if="errors.grade" >{{ errors.grade[0] }}</p>
+
+                       </div>
+
+                     
+              
+              
+                    
+                     </div>
             </div>
             </form>
            
@@ -267,6 +325,9 @@
 
                 </div>
               </div>
+
+                
+    
             </div>
             </form>
            
@@ -310,6 +371,10 @@ export default {
       level_id:null,
       department: "",
       positions: [],
+      modules:[],
+      employee_modules:[],
+      selectedModulesID:[],
+      selectedEmployeeModulesID:[],
     };
   },
   methods: {
@@ -372,6 +437,8 @@ export default {
           level_id: this.level_id,
           position_name: this.position_name,
           code: this.code,
+          modules:this.selectedModulesID,
+          employeemodules:this.selectedEmployeeModulesID
         })
         .then((response) => {
           if (response) {
@@ -457,7 +524,8 @@ export default {
     this.getdepartment();
     this.getlevel();
     this.getposition();
-    
+    this.modules=JSON.parse(localStorage.getItem("user")).user.price.price.modules
+    this.employee_modules=JSON.parse(localStorage.getItem("user")).user.price.price.employee_modules
   },
 };
 </script>

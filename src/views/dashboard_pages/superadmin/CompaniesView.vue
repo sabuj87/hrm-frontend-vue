@@ -40,34 +40,55 @@
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Companay name</th>
-                      <th>Type</th>
+                      <th>Category</th>
                       <th>Address</th>
                       <th>Email</th>
+                     
                       <th>Status</th>
+                      <th>Price</th>
                       <th>Action</th>
                      
          
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr v-for="company in companies" :key="company">
                       <td>1.</td>
-                      <td>New company</td>
+                      <td>{{ JSON.parse(
+                  company.basic_information
+                ).company_name}} </td>
                       <td>
-                         IT
+                       {{  company.company_category_id }}
                       </td>
 
-                      <td>
-                       Dhaka
+                      <td v-if="company.company_address!=null">
+                        
+                        {{ JSON.parse(
+                  company.company_address
+                ).address_line_1}}
+                      </td>
+                      <td v-else>
+                     
                       </td>
 
-                      <td>
-                       compay@gmail.com
-                      </td>
+                      <td>{{ JSON.parse(
+                  company.basic_information
+                ).sigin_email}} </td>
 
                       <td>
+                        
                        Confirmed
                       </td>
+                      <td v-if="company.price!=null">
+
+                        {{ company.price.price.name }}
+                        
+                       
+                      </td>
+                      <td v-else>
+                     
+                      </td>
+
                      
                      
                        
@@ -82,37 +103,7 @@
                     
                     </tr>
 
-                    <tr>
-                      <td>1.</td>
-                      <td>New company</td>
-                      <td>
-                         IT
-                      </td>
-
-                      <td>
-                       Dhaka
-                      </td>
-
-                      <td>
-                       compay@gmail.com
-                      </td>
-
-                      <td>
-                       Confirmed
-                      </td>
-                     
-                     
-                       
-                      
-                    
-                      <td>
-                        <a href="/addemployee" class="btn-sc-sm">View</a>
-
-<a href="/addemployee" class="btn-dn-sm ml-2 ">Delete</a>
-
-                      </td>
-                    
-                    </tr>
+                  
                
                  
                   
@@ -153,8 +144,52 @@
       
       <script>
 
-  export default {
-   
-  };
-  </script>
+ import axios from "axios";
+
+
+
+
+      export default {
+    
+    
+          
+    data() {
+      return {
+        name:"",
+        companies:[],
+      }
+    
+    },
+    
+    
+        methods:{
+    
+          
+
+          getcompanies() {
+        axios
+          .get("/superadmin/companies")
+          .then((response) => {
+            if (response) {
+              
+              this.companies = response.data.company;
+  
+     
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            
+          });
+      },
+    
+    
+        },
+    
+        mounted: function(){
+          this.name=JSON.parse(localStorage.getItem("user")).user.name
+          this.getcompanies();
+        }
       
+      }
+      </script>

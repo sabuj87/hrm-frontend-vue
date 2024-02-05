@@ -144,8 +144,9 @@
       
       <script>
 // import $ from "jquery";
+import moment from "moment";
+
 import axios from "axios";
-//import moment from "moment";
 export default {
   data() {
     return {
@@ -156,26 +157,130 @@ export default {
       leave:{},
       employee:{},
       basic_information:"",
+      monthname:"",
+      year:"",
+      datefrom:"",
+      dateto:"",
+      employeeid:"",
+      attandances:"",
+      onlydatefrom:"",
+      onlydateto:"",
+      onlymonthfrom:"",
+     
+
     };
   },
   methods: {
     getLeaveDetails(id) {
       axios
-        .get("/company/leaves/"+id)
+        .get("/employee/leaves/"+id)
         .then((response) => {
           if (response) {
             this.leave = response.data.data;
             this.employee = response.data.data.employee;
+            this.employeeid=this.employee.id
             this.basic_information=response.data.data.employee.basic_information;
-        
+            this.monthname=moment(this.leave.from).format("MMMM") 
+            this.year=moment(this.leave.from).format("YYYY") 
+            this.datefrom=moment(this.leave.from).format('D/MM/YYYY') 
+            this.dateto=moment(this.leave.to).format('D/MM/YYYY') 
+            this.onlydatefrom=moment(this.leave.from).format('D') 
+            this.onlydateto=moment(this.leave.to).format('D') 
+            this.onlymonthfrom=moment(this.leave.from).format('MM') 
+      
+
+            this.getAttendance()
           }
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
         });
     },
+
+    
+  getAttendance(){
+    axios
+            .get("/employee/attendances/getbymonthid/"+this.monthname+"/"+this.year+"/"+this.employeeid)
+            .then((response) => {
+              if (response) {
+  
+                this.attendances=JSON.parse(response.data.data.attendances);
+              
+                this.uuid=response.data.data.uuid
+  
+              }
+          })
+          .catch((error) => {
+            this.errors = error.response.data.errors;
+
+          });
+        },
+
+
+        giveattendance(){
+         if(this.attendances.length!=0){
+          this.attendances = this.attendances.map(attendance => {
+
+            for(let index = this.onlydatefrom; index <= this.onlydateto; index++){
+              var  date=index+"/"+this.onlymonthfrom+"/"+this.year
+            
+
+              if (attendance.date === date) {
+    return  {
+         date:date,
+         status:"Leave",
+         logedin:"Not assigned",
+         logedout:"Not assigned",
+         action:"Attend",
+         remarks:"",
+        }
+  }
+
+              
+            }
+ 
+  return attendance;
+});
+
+         }
+
+
+         axios
+          .put("/employee/attendances/"+this.uuid, {
+            year:this.year,
+            month:this.monthname,
+            attendances: JSON.stringify(this.attendances),
+          })
+          .then((response) => {
+            if (response) {
+              this.$emit("get_message", response.data.message);
+            
+            }
+          })
+          .catch((error) => {
+            this.errors = error.response.data.errors;
+          });
+      
+
+
+
+
+
+
+
+        },
     approve() {
-         this.$emit("get_message", "Approved");
+      axios
+        .get("employee/leave/approve/"+this.leave.id)
+        .then((response) => {
+          if (response) {
+            alert(response.data.message);
+            this.giveattendance();
+          }
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+        });
 
     },
     reject() {

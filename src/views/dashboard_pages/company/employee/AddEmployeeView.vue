@@ -136,10 +136,7 @@
   
                     
                     </div>
-                    <div>
-                      <button @click.prevent="addbasicinfo" class="btn-sc-wd mr-2">Create</button>
-                      <button class="btn-pc-wd " data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Next</button>
-                    </div>
+                  
         </div>
   
         
@@ -164,14 +161,15 @@
                             v-model="department_id"
                             class="form-control "
                             style="width: 100%"
-                            @change="clearError('degree')"
-                          >
-                            <option selected="selected">SSC</option>
-                            <option>HSC</option>
-                            <option>Bachalor</option>
-                            <option>Masters</option>
+                            @change="departmentpostions()"
+                          >Positions
+                            <option disabled value=null>Select a Department</option>
+                            <option v-for="department in departments" :key="department" :value="department.id">{{department.department_name}}</option>
+
                           </select>
-                          <sapn id="degree" class="error" ></sapn>
+                          <p class="text-danger mt-1" v-if="errors.department_id" >{{ errors.department_id[0] }}</p>
+
+                          
   
                         </div>
                       </div>
@@ -179,33 +177,34 @@
                         <div class="form-group">
                           <label>Position</label>
                           <select
-                            v-model="degree"
+                            v-model="position_id"
                             class="form-control "
                             style="width: 100%"
-                            @change="clearError('degree')"
+                            @change="getlevel()"
                           >
-                            <option selected="selected">SSC</option>
-                            <option>HSC</option>
-                            <option>Bachalor</option>
-                            <option>Masters</option>
+                            <option disabled value=null>Select a Position</option>
+                            <option v-for="position in positions" :key="position" :value="position.id">{{position.position_name}}</option>
+
                           </select>
-                          <sapn id="degree" class="error" ></sapn>
-  
+                          <p class="text-danger mt-1" v-if="errors.position_id" >{{ errors.position_id[0] }}</p>
+
+                         
                         </div>
                       </div>
+                  
+
                       <div class="col-lg-4">
                         <div class="form-group">
-                          <label>Level</label>
+                          <label>Assign Under</label>
                           <select
-                            v-model="degree"
-                            class="form-control "
+                            v-model="assigned_under"
+                            class="form-control"
+                        
                             style="width: 100%"
-                            @change="clearError('degree')"
                           >
-                            <option selected="selected">SSC</option>
-                            <option>HSC</option>
-                            <option>Bachalor</option>
-                            <option>Masters</option>
+                            <option disabled value=null>Select a position</option>
+                            <option v-for="position in newpostiions" :key="position" :value="position.id">{{position.position_name}}</option>
+
                           </select>
                           <sapn id="degree" class="error" ></sapn>
   
@@ -236,11 +235,10 @@
   
                    
   
-                    <div class="mt-3">
-                      <button @click.prevent="addeducationall" class="btn-sc-wd mr-2">Save</button>
-                      <button class="btn-pc-wd " data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Next</button>
+                    <div>
+                      <button @click.prevent="addbasicinfo" class="btn-sc-wd mr-2">Create</button>
+                      <button class="btn-pc-wd " data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Next</button>
                     </div>
-  
   
   
         </div>
@@ -815,9 +813,19 @@
     data() {
       return {
         educations: [],
+        departments: [],
+        positions: [],
+        newpostiions:[],
+        levels: [],
         works:[],
         cers:[],
         tras:[],
+        errors:"",
+        department_id:null,
+        position_id:null,
+        level_id:null,
+        assigned_under:null
+
       };
     },
     methods: {
@@ -954,7 +962,10 @@
           .post("/company/employees", {
            
             basic_information:JSON.stringify(basic_info),
-           
+            company_department_id:this.department_id,
+            position_id:this.position_id,
+            assigned_under:this.assigned_under,
+
           })
           .then((response) => {
   
@@ -1106,6 +1117,138 @@
     
     
         },
+
+        getdepartment() {
+      axios
+        .get("/company/departments")
+        .then((response) => {
+          if (response) {
+            
+            this.departments = response.data.data;
+
+            this.$refs.addForm.reset();
+
+        }
+        })
+        .catch((error) => {
+          console.log(error);
+          
+        });
+    },
+    getposition() {
+      axios
+        .get("/company/positions")
+        .then((response) => {
+          if (response) {
+            
+            this.positions = response.data.data;
+
+            
+        }
+        })
+        .catch((error) => {
+          console.log(error);
+          
+        });
+    },
+
+    departmentpostions() {
+  
+      axios
+        .get("/company/positions/department/"+this.department_id)
+        .then((response) => {
+          if (response) {
+            
+            this.positions = response.data.data;
+
+          
+        }
+        })
+        .catch((error) => {
+          console.log(error);
+          
+        });
+    },
+    levelpostions() {
+
+      let level = this.levels.find(el => el.id === this.level_id);
+
+      var level_name=level.level_name
+      const myArray = level_name.split(" ")
+      var levelid=myArray[1]-1;
+      
+      if(levelid>0){
+        var newlevelname="Level "+levelid
+      
+        var newlevel=this.levels.find(el => el.level_name === newlevelname)
+        alert(newlevel)
+        this.newpostiions=[]
+        for(let i=0;i<this.positions.length;i++){
+          if(this.positions[i].level_id==newlevel.id){
+            this.newpostiions.push(this.positions[i])
+ 
+          }
+        }
+     
+      }else{
+        this.newpostiions=[]
+      }
+
+
+
+
+
+  
+    },
+    getlevel() {
+      axios
+        .get("/company/levels")
+        .then((response) => {
+          if (response) {
+            
+            this.levels = response.data.data;
+
+
+            let position = this.positions.find(el => el.id === this.position_id);
+
+            var level = this.levels.find(el => el.id === position.level_id);
+
+
+var level_name=level.level_name
+const myArray = level_name.split(" ")
+var levelid=myArray[1]-1;
+
+if(levelid>0){
+  var newlevelname="Level "+levelid
+  
+
+
+  var newlevel=this.levels.find(el => el.level_name === newlevelname)
+  
+  this.newpostiions=[]
+  for(let i=0;i<this.positions.length;i++){
+    if(this.positions[i].level_id==newlevel.id){
+      this.newpostiions.push(this.positions[i])
+
+    }
+  }
+
+}else{
+  this.newpostiions=[]
+}
+
+
+
+            
+        }
+        })
+        .catch((error) => {
+          console.log(error);
+          
+        });
+    },
+
+
   
         addtraall(){
         
@@ -1239,8 +1382,10 @@
   
   
       },
+      
       clearError(field) {
         $("#" + field).css("display", "none");
+        
       },
   
   
@@ -1250,6 +1395,11 @@
   
   
     },
+    mounted: function () {
+      this.getdepartment()
+
+   
+    }
   };
   </script>
     

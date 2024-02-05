@@ -79,7 +79,14 @@
               <li class="nav-item">
                 <router-link class="nav-link"  :to="{ name: 'superadmin.modules' }">
               <i class="nav-icon fas fa-tachometer-alt sc"></i>
-              <p>Modules</p>
+              <p>Company Modules</p>
+            </router-link>
+             
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'superadmin.employeemodules' }">
+              <i class="nav-icon fas fa-tachometer-alt sc"></i>
+              <p>Employee Modules</p>
             </router-link>
              
               </li>

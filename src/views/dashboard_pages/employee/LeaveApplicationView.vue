@@ -129,22 +129,7 @@
                        
                       </div>
                     </div>
-                    <div class="col-lg-3">
-                      <div class="form-group">
-                        <label>Approval Authority</label>
-                        <select
-                         v-model="authority"
-                          class="form-control "
-                          style="width: 100%"
-                        > 
-                        <option disabled value="" >Select Authority</option>
-
-                          <option selected="selected">Authority 1</option>
-                        </select>
-                      </div>
-                    </div>
-             
-
+                 
              
 
                       <div class="col-lg-12">
@@ -244,6 +229,7 @@
             "from":this.from,
             "to":this.to,        
             "authority":this.authority,        
+            "reason":this.reason,        
    
         }
     
