@@ -148,10 +148,11 @@
             <i class="fas fa-user mr-2"></i> Profile
             <!-- <span class="float-right text-muted text-sm">3 mins</span> -->
           </a>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> Change Password
-            <!-- <span class="float-right text-muted text-sm">3 mins</span> -->
-          </a>
+       
+          <router-link class="dropdown-item"  :to="{ name: 'company.change.password' }">
+                  <i class="nav-icon fa-solid fa-user  mr-2"></i>Change Password
+          
+          </router-link>
        
           <a href="https://hrm.nit-bd.com/login" class="dropdown-item">
             <i class="fa-solid fa-arrow-right-from-bracket mr-2"></i> Logout

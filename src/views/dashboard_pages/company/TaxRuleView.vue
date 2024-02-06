@@ -29,7 +29,7 @@
                 <div class="card">
                   <div class="card-header pc-bg">
                     <h3 class="card-title d-inline float-left text-white">
-                      Company Modules
+                      Tax Rule
                     </h3>
                     <!-- <router-link  class=" float-right"  :to="{ name: 'administrative-adddepartments' }">
   
@@ -40,7 +40,7 @@
                       class="btn-sc-sm float-right"
                       data-toggle="modal"
                       data-target="#addModal"
-                      >Add</a
+                      >Set New Tax Rule</a
                     >
                   </div>
                   <!-- /.card-header -->
@@ -48,30 +48,29 @@
                     <table class="table text-center table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th style="width: 10px">#</th>
+                          <th style="width: 10px"> ID</th>
   
-                          <th>Module Name</th>
-                          <th>Path Name</th>
-                          <th>Parent Module</th>
-
+                      
+                          <th>Tax Cap</th>
+                          <th>Tax %</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="module in modules" :key="module">
+                        <tr v-for="position in positions" :key="position">
                           <td>#</td>
-                          <td>{{ module.module_name }}</td>
-                          <td>{{ module.path_name }}</td>
-                          <td v-if="module.parent!=null" >{{ module.parent.module_name }}</td>
-                          <td v-else ></td>
+                          <td>{{ position.position_name }}</td>
+                          <td>{{ position.company_department.department_name}}</td>
+                          <td>{{ position.level.level_name}}</td>
+  
                           <td>
-                            <a @click.prevent="editmodule(module.uuid)"   
+                            <a @click.prevent="editdepartment(position.uuid)"   
                       data-toggle="modal"
                       data-target="#editModal" 
                               ><i class="fa-solid fa-pen-to-square"></i></a
                             >
   
-                            <a  @click.prevent="deletemodule(module.uuid)" class="-sm ml-2"
+                            <a  @click.prevent="deletedepartment(position.uuid)" class="-sm ml-2"
                               ><i class="fa-solid fa-trash text-red"></i></a
                             >
                           </td>
@@ -118,10 +117,10 @@
         aria-labelledby="addModal"
         aria-hidden="true"
       >
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog " role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" >Add new Module</h5>
+              <h5 class="modal-title" >Add new Tax Rule</h5>
               <button
                 type="button"
                 class="close"
@@ -136,44 +135,31 @@
   
                 <form ref="addForm" >
                   <div class="row">
+                    
+  
+      
                 <div class="col-lg-6">
               
   
   
             
                   <div class="form-group">
-                    <label>Module name</label>
-                    <input type="text"   @input="errors.module_name=null"  v-model="module_name" class="form-control" />
-                    <p class="text-danger mt-1" v-if="errors.module_name" >{{ errors.module_name[0] }}</p>
+                    <label>Tax Cap</label>
+                    <input type="text"   @input="errors.position_name=null"  v-model="tax_cap" class="form-control" />
+                    <p class="text-danger mt-1" v-if="errors.position_name" >{{ errors.position_name[0] }}</p>
   
-          
+                 
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label>Path name </label>
-                    <input type="text"  @input="errors.path_name=null" v-model="path_name" class="form-control" />
-                    <p class="text-danger mt-1" v-if="errors.path_name" >{{ errors.path_name[0] }}</p>
+                    <label>Tax % </label>
+                    <input type="text"  @input="errors.code=null" v-model="p_tax" class="form-control" />
+                    <p class="text-danger mt-1" v-if="errors.code" >{{ errors.code[0] }}</p>
   
                   </div>
                 </div>
-                <div class="col-lg-6">
-                  <label>Parent module</label>
-
-                  <select
-                            v-model="parent_id"
-                            class="form-control "
-                            style="width: 100%"
-                          >
-                            <option disabled value=null>Select a parent module</option>
-                            <option v-for="module in modules" :key="module" :value="module.id">{{module.module_name}}</option>
-
-                          </select>
-                          <p class="text-danger mt-1" v-if="errors.department_id" >{{ errors.department_id[0] }}</p>
-
-
-                </div>
-                
+              
               </div>
               </form>
              
@@ -188,7 +174,7 @@
               >
                 Cancle
               </button>
-              <button  @click.prevent="addModule" type="button" class="btn-sc-sm">Add</button>
+              <button  @click.prevent="addposition" type="button" class="btn-sc-sm">Add</button>
   
            
             </div>
@@ -210,7 +196,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" >Edit Module</h5>
+              <h5 class="modal-title" >Edit Position</h5>
               <button
                 type="button"
                 class="close"
@@ -222,27 +208,33 @@
             </div>
             <div class="modal-body">
           
+  
                 <form ref="addForm" >
                   <div class="row">
                 <div class="col-lg-6">
               
-
+  
+  
+            
                   <div class="form-group">
-                    <label>Module name</label>
-                    <input id="okk" type="text"   @input="errors.module_name=null"  v-model="module.module_name" class="form-control" />
-                    <p class="text-danger mt-1" v-if="errors.module_name" >{{ errors.module_name[0] }}</p>
+                    <label>Position name</label>
+                    <input id="okk" type="text"   @input="errors.department_name=null"  v-model="department.department_name" class="form-control" />
+                    <p class="text-danger mt-1" v-if="errors.department_name" >{{ errors.department_name[0] }}</p>
   
                  
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label>Path name </label>
-                    <input i type="text"  @input="errors.code=null" v-model="module.path_name" class="form-control" />
-                    <p class="text-danger mt-1" v-if="errors.path_name" >{{ errors.path_name[0] }}</p>
+                    <label>Code </label>
+                    <input i type="text"  @input="errors.code=null" v-model="code" class="form-control" />
+                    <p class="text-danger mt-1" v-if="errors.code" >{{ errors.code[0] }}</p>
   
                   </div>
                 </div>
+  
+                  
+      
               </div>
               </form>
              
@@ -257,7 +249,7 @@
               >
                 Cancle
               </button>
-              <button  @click.prevent="updatemodule(module.uuid)" type="button" class="btn-sc-sm">Update</button>
+              <button  @click.prevent="updatedepartment(department.uuid)" type="button" class="btn-sc-sm">Update</button>
   
            
             </div>
@@ -280,34 +272,71 @@
     data() {
       return {
         errors: {},
-        modules: [],
-        module: {},
-        parent_id:null
+       
       };
     },
     methods: {
-      getModule() {
+      getdepartment() {
         axios
-          .get("/superadmin/company_modules")
+          .get("/company/departments")
           .then((response) => {
             if (response) {
               
-              this.modules = response.data.data;
+              this.departments = response.data.data;
   
               this.$refs.addForm.reset();
-            }
+          }
           })
           .catch((error) => {
             console.log(error);
             
           });
       },
-      addModule() {
+  
+      getlevel() {
         axios
-          .post("/superadmin/company_modules", {
-            module_name: this.module_name,
-            path_name: this.path_name,
-            parent_id: this.parent_id,
+          .get("/company/levels")
+          .then((response) => {
+            if (response) {
+              
+              this.levels = response.data.data;
+  
+              this.$refs.addForm.reset();
+          }
+          })
+          .catch((error) => {
+            console.log(error);
+            
+          });
+      },
+      getposition() {
+        axios
+          .get("/company/positions")
+          .then((response) => {
+            if (response) {
+              
+              this.positions = response.data.data;
+  
+              this.$refs.addForm.reset();
+          }
+          })
+          .catch((error) => {
+            console.log(error);
+            
+          });
+      },
+  
+  
+      
+      addposition() {
+        axios
+          .post("/company/positions", {
+            department_id: this.department_id,
+            level_id: this.level_id,
+            position_name: this.position_name,
+            code: this.code,
+            modules:this.selectedModulesID,
+            employeemodules:this.selectedEmployeeModulesID
           })
           .then((response) => {
             if (response) {
@@ -318,9 +347,11 @@
                
              this.$refs.addForm.reset();
   
-             this.module_name="";
-             this.module_name="";
-                this.getModule();
+             this.department_id=null;
+             this.level_id=null;
+             this.position_name="";
+             this.code="";
+                this.getposition();
                 $("#addModal .close").click()
             }
           })
@@ -329,13 +360,13 @@
           });
       },
   
-      editmodule(uuid) {
+      editdepartment(uuid) {
         axios
-          .get("/superadmin/company_modules/"+uuid)
+          .get("/company/departments/"+uuid)
           .then((response) => {
             if (response) {
               
-              this.module = response.data.data;
+              this.department = response.data.data;
   
              
          
@@ -346,18 +377,18 @@
             
           });
       },
-      updatemodule(uuid) {
+      updatedepartment(uuid) {
        
         axios
-          .put("/superadmin/company_modules/"+uuid,{
-            module_name: this.module.module_name,
-            path_name: this.module.path_name,
+          .put("/company/departments/"+uuid,{
+            department_name: this.department.department_name,
+            code: this.department.code,
           })
           .then((response) => {
             if (response) {
               
            
-              this.getModule()
+              this.getdepartment()
            
               $("#editModal .close").click()
          
@@ -368,15 +399,15 @@
             
           });
       },
-      deletemodule(uuid) {
+      deletedepartment(uuid) {
        
        axios
-         .delete("/superadmin/company_modules/"+uuid)
+         .delete("/company/departments/"+uuid)
          .then((response) => {
            if (response) {
              
           
-            this.getModule()
+             this.getdepartment()
           
         
            }
@@ -388,7 +419,11 @@
      },
     },
     mounted: function () {
-      this.getModule();
+      this.getdepartment();
+      this.getlevel();
+      this.getposition();
+      this.modules=JSON.parse(localStorage.getItem("user")).user.price.price.modules
+      this.employee_modules=JSON.parse(localStorage.getItem("user")).user.price.price.employee_modules
     },
   };
   </script>

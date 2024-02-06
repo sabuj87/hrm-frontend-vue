@@ -448,6 +448,13 @@
                   </router-link>
              
                  </li>
+                 <li class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'taxrule' }">
+                  <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
+                  <p>Tax Rule</p>
+                  </router-link>
+             
+                 </li>
                  <li v-if="modules_name.includes('Employee Payslip')" class="nav-item">
                 <router-link class="nav-link"  :to="{ name: 'assignpayroll' }">
                   <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>

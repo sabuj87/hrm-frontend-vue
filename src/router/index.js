@@ -23,6 +23,7 @@ import AddPriceView from '../views/dashboard_pages/superadmin/priceplan/AddPrice
 import EditPriceView from '../views/dashboard_pages/superadmin/priceplan/EditPriceView'
 import CompaniesView from '../views/dashboard_pages/superadmin/CompaniesView'
 import PendingCompaniesView from '../views/dashboard_pages/superadmin/PendingCompaniesView'
+import SuperadminChangePasswordView from '../views/dashboard_pages/superadmin/SuperadminChangePasswordView'
 
 
 
@@ -46,6 +47,7 @@ import CreatePayrollView from '../views/dashboard_pages/company/CreatePayrollVie
 import CompanyProfileUpdateView from '../views/dashboard_pages/company/profile/CompanyProfileUpdateView'
 import CompanyProfileView from '../views/dashboard_pages/company/profile/CompanyProfileView'
 import AssignPayrollView from '../views/dashboard_pages/company/AssignPayrollView'
+import TaxRuleView from '../views/dashboard_pages/company/TaxRuleView'
 import AdvancedPaymentView from '../views/dashboard_pages/company/AdvancedPaymentView'
 import RequestedLoanView from '../views/dashboard_pages/company/RequestedLoanView'
 import LoanDetailsView from '../views/dashboard_pages/company/LoanDetailsView'
@@ -69,9 +71,12 @@ import ScheduleMangeView from '../views/dashboard_pages/company/ScheduleMangeVie
 import InterviewResultManageView from '../views/dashboard_pages/company/InterviewResultManageView'
 import FinalCandidateView from '../views/dashboard_pages/company/FinalCandidateView'
 import PerformanceIndicatorView from '../views/dashboard_pages/company/PerformanceIndicatorView'
+import CompanyChangePasswordView from '../views/dashboard_pages/company/CompanyChangePasswordView'
 
 
 //Employee Component
+
+
 import EmployeeDashboardView from '../views/dashboard_pages/employee/EmployeeDashboardView'
 import RequestLoanView from '../views/dashboard_pages/employee/RequestLoanView'
 import LeaveApplicationView from '../views/dashboard_pages/employee/LeaveApplicationView'
@@ -98,6 +103,12 @@ import ResourceDemandApplyView from '../views/dashboard_pages/employee/ResourceD
 import BillSubmisstionView from '../views/dashboard_pages/employee/BillSubmisstionView'
 import BillStatusView from '../views/dashboard_pages/employee/BillStatusView'
 import PaySlipView from '../views/dashboard_pages/employee/PaySlipView'
+import EmployeeChangePasswordView from '../views/dashboard_pages/employee/EmployeeChangePasswordView'
+
+//Common
+import ChangePasswordView from '../views/dashboard_pages/common/ChangePasswordView'
+
+
 
 
 
@@ -130,7 +141,20 @@ const routes = [
     component: RegisterView
   },
 
-
+//Common
+{
+  path: '/common',
+  name: 'common',
+  meta: { layout: "common"},
+  children: [
+      {
+         path: 'changepassword',
+         name: 'changepassword',
+ 
+         component: ChangePasswordView,
+      },
+    ]
+  },
 
   //Super Admin Route
 
@@ -145,6 +169,12 @@ const routes = [
            name: 'superadmin-dashboard',
    
            component: SuperAdminDashboardView,
+        },
+        {
+           path: 'change-password',
+           name: 'superadmin.change.password',
+   
+           component: SuperadminChangePasswordView,
         },
 
         {
@@ -239,6 +269,13 @@ const routes = [
            name: 'company-dashboard',
            component:CompanyDashboardView,
         },
+        {
+          path: 'change-password',
+          name: 'company.change.password',
+  
+          component: CompanyChangePasswordView,
+       },
+       
 
         {
           path: 'companyprofile',
@@ -396,6 +433,12 @@ const routes = [
               name:'loandetails',
   
               component: LoanDetailsView
+            },
+            {
+              path:'taxrule',
+              name:'taxrule',
+  
+              component: TaxRuleView
             },
             
           
@@ -581,6 +624,12 @@ const routes = [
            name: 'employee-dashboard', 
            component:EmployeeDashboardView,
         },
+        {
+          path: 'change-password',
+          name: 'employee.change.password',
+  
+          component: EmployeeChangePasswordView,
+       },
         {
           path: 'manageinfo',
           name: 'manageinfo',

@@ -2,8 +2,10 @@
 
   <master-view v-if="this.$route.meta.layout == null" />
   <super-admin-master-view v-if="this.$route.meta.layout == 'superadmin'" />
-  <company-master-view v-if="this.$route.meta.layout == 'company'" />
-  <employee-master-view v-if="this.$route.meta.layout == 'employee' " />
+  <company-master-view v-if="this.$route.meta.layout == 'company'"  />
+  <employee-master-view v-if="this.$route.meta.layout == 'employee'" />
+
+  
 </template>
   
   <script>
