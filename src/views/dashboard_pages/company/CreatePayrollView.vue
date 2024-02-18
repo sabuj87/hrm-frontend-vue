@@ -50,16 +50,13 @@
                          <select
                             class="form-custom-select"
                             style="width: 100%"
-                            v-model="grade"
+                            v-model="grade_id"
                           >
                             <option disabled value=""  >Select a grade</option>
-                            <option  >A</option>
-                            <option  >B</option>
-                            <option  >C</option>
-                            <option  >D</option>
+                            <option :value="grade.id"  v-for="grade in grades" :key="grade" >{{grade.grade_name}}</option>
                           </select>
 
-                         <p class="text-danger mt-1" v-if="errors.grade" >{{ errors.grade[0] }}</p>
+                         <p class="text-danger mt-1" v-if="errors.grade_id" >{{ errors.grade_id[0] }}</p>
 
                        </div>
 
@@ -323,7 +320,9 @@ import $ from "jquery";
         allowances:[],
         departments:[],
         errors:{},
-        grade:"",
+        grades:[],
+        grade_id:""
+
    
       };
     },
@@ -346,7 +345,7 @@ import $ from "jquery";
 
         axios
           .post("/company/payrolls", {
-            grade: this.grade,
+            grade_id: this.grade_id,
             company_department_id: this.company_department_id,
             basic: this.basic,
             increment: this.increment,
@@ -416,6 +415,23 @@ import $ from "jquery";
   
   },
 
+  getgrades() {
+      axios
+        .get("/company/grades")
+        .then((response) => {
+          if (response) {
+            
+            this.grades = response.data.data;
+
+            this.$refs.addForm.reset();
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          
+        });
+    },
+
 
      
       
@@ -423,6 +439,7 @@ import $ from "jquery";
   
     mounted: function () {
        this.getdepartment()
+       this.getgrades();
     },
   }
   </script>

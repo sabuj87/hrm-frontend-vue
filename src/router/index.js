@@ -24,6 +24,8 @@ import EditPriceView from '../views/dashboard_pages/superadmin/priceplan/EditPri
 import CompaniesView from '../views/dashboard_pages/superadmin/CompaniesView'
 import PendingCompaniesView from '../views/dashboard_pages/superadmin/PendingCompaniesView'
 import SuperadminChangePasswordView from '../views/dashboard_pages/superadmin/SuperadminChangePasswordView'
+import TaxRuleView from '../views/dashboard_pages/superadmin/TaxRuleView'
+
 
 
 
@@ -43,11 +45,17 @@ import PermissionView from '../views/dashboard_pages/company/PermissionView'
 import LevelsView from '../views/dashboard_pages/company/LevelsView'
 import RolesView from '../views/dashboard_pages/company/RolesView'
 import PayrollsView from '../views/dashboard_pages/company/PayrollsView'
+import PFRuleView from '../views/dashboard_pages/company/PFRuleView'
+import HolidaysView from '../views/dashboard_pages/company/HolidaysView'
+import WeekendsView from '../views/dashboard_pages/company/WeekendsView'
+import PaySlipsEmployeeListView from '../views/dashboard_pages/company/PaySlipsEmployeeListView'
+import PaySlipListView from '../views/dashboard_pages/company/PaySlipListView'
+
+
 import CreatePayrollView from '../views/dashboard_pages/company/CreatePayrollView'
 import CompanyProfileUpdateView from '../views/dashboard_pages/company/profile/CompanyProfileUpdateView'
 import CompanyProfileView from '../views/dashboard_pages/company/profile/CompanyProfileView'
 import AssignPayrollView from '../views/dashboard_pages/company/AssignPayrollView'
-import TaxRuleView from '../views/dashboard_pages/company/TaxRuleView'
 import AdvancedPaymentView from '../views/dashboard_pages/company/AdvancedPaymentView'
 import RequestedLoanView from '../views/dashboard_pages/company/RequestedLoanView'
 import LoanDetailsView from '../views/dashboard_pages/company/LoanDetailsView'
@@ -102,7 +110,7 @@ import AllocatedAssetView from '../views/dashboard_pages/employee/AllocatedAsset
 import ResourceDemandApplyView from '../views/dashboard_pages/employee/ResourceDemandApplyView'
 import BillSubmisstionView from '../views/dashboard_pages/employee/BillSubmisstionView'
 import BillStatusView from '../views/dashboard_pages/employee/BillStatusView'
-import PaySlipView from '../views/dashboard_pages/employee/PaySlipView'
+// import PaySlipView from '../views/dashboard_pages/employee/PaySlipView'
 import EmployeeChangePasswordView from '../views/dashboard_pages/employee/EmployeeChangePasswordView'
 
 //Common
@@ -240,6 +248,12 @@ const routes = [
           path:'employeemodules',
           name:'superadmin.employeemodules',
           component: EmployeeModulesView
+        },
+      
+        {
+          path:'taxrule',
+          name:'superadmin.taxrule',
+          component: TaxRuleView
         },
       
       
@@ -434,12 +448,25 @@ const routes = [
   
               component: LoanDetailsView
             },
+
+
             {
-              path:'taxrule',
-              name:'taxrule',
+              path:'pfrules',
+              name:'pfrules',
   
-              component: TaxRuleView
+              component: PFRuleView
             },
+            {
+              path: 'payslipsemployee',
+              name: 'payslipsemployee',
+              component:PaySlipsEmployeeListView,
+             },
+            {
+              path: 'paysliplist',
+              name: 'paysliplist',
+              component:PaySlipListView,
+             },
+          
             
           
  
@@ -465,7 +492,19 @@ const routes = [
   
               component: EmployeeAttendancesListview
             },
-            
+            {
+              path:'holidays',
+              name:'holidays',
+  
+              component: HolidaysView
+            },
+            {
+              path:'weekends',
+              name:'weekends',
+  
+              component: WeekendsView
+            },
+           
 
              {
               path:'leaveaplylist',
@@ -708,12 +747,7 @@ const routes = [
           name: 'billstatus',
           component:BillStatusView,
          },
-         {
-          path: 'payslip',
-          name: 'payslip',
-          component:PaySlipView,
-         },
-      
+       
 
           ]
        },

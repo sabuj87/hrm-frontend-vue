@@ -110,13 +110,15 @@ $(function () {
       document.getElementById("date").innerHTML= date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear(); 
    
   
-
+  
 
 
   })
 
 
-
+  $(document).ready( function () {
+    $('#example').DataTable();
+});
   
   // BS-Stepper Init
   document.addEventListener('DOMContentLoaded', function () {

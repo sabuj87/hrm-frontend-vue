@@ -344,6 +344,20 @@
                   </router-link>
              
                  </li>
+                 <li  class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'holidays' }">
+                  <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
+                  <p>Holidays</p>
+                  </router-link>
+             
+                 </li>
+                 <li  class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'weekends' }">
+                  <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
+                  <p>Weekends</p>
+                  </router-link>
+             
+                 </li>
 
                
                 <!-- <li class="nav-item">
@@ -371,51 +385,7 @@
               </ul>
             </li>
 
-            <li v-if="modules_name.includes('Training Management')" lass="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa-solid fa-clock sc"></i>
-             
-                
-                <p>
-                  Training Management
-                  <i class="fas fa-angle-left right sc"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li v-if="modules_name.includes('Training cost estimation')" class="nav-item">
-                  <a href="pages/tables/simple.html" class="nav-link">
-                    <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
-                    <p>Training cost estimation</p>
-                  </a>
-                </li>
-                <li v-if="modules_name.includes('Trainings')" class="nav-item">
-                  <a href="pages/tables/data.html" class="nav-link">
-                    <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
-                    <p>Trainings</p>
-                  </a>
-                </li>
-                <li v-if="modules_name.includes('Trainers')" class="nav-item">
-                  <a href="pages/tables/data.html" class="nav-link">
-                    <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
-                    <p>Trainers</p>
-                  </a>
-                </li>
-                <li v-if="modules_name.includes('Assign Training')" class="nav-item">
-                  <a href="pages/tables/data.html" class="nav-link">
-                    <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
-                    <p>Assign Training</p>
-                  </a>
-                </li>
-                <li v-if="modules_name.includes('Training result')" class="nav-item">
-                  <a href="pages/tables/data.html" class="nav-link">
-                    <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
-                    <p>Training result</p>
-                  </a>
-                </li>
-              
-              
-              </ul>
-            </li>
+         
             <li v-if="modules_name.includes('Basic Payroll')" class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fa-solid fa-dollar-sign sc"></i>
@@ -448,17 +418,11 @@
                   </router-link>
              
                  </li>
-                 <li class="nav-item">
-                <router-link class="nav-link"  :to="{ name: 'taxrule' }">
+               
+                 <li  class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'payslipsemployee' }">
                   <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
-                  <p>Tax Rule</p>
-                  </router-link>
-             
-                 </li>
-                 <li v-if="modules_name.includes('Employee Payslip')" class="nav-item">
-                <router-link class="nav-link"  :to="{ name: 'assignpayroll' }">
-                  <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
-                  <p>Employee Payslip</p>
+                  <p>Payslips</p>
                   </router-link>
              
                  </li>
@@ -569,24 +533,38 @@
              
                  </li>
           
-                <li v-if="modules_name.includes('Provident fund')" class="nav-item">
-                  <a href="pages/tables/data.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Provident Fund </p>
-                  </a>
-                </li>
+
+                 <li v-if="modules_name.includes('Provident fund')" class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'advancedpayment' }">
+                  <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
+                  <p>Provident Fund</p>
+                  </router-link>
+             
+                 </li>
+                 <li class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'pfrules' }">
+                  <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
+                  <p>PF Rule</p>
+                  </router-link>
+             
+                 </li>
+          
+                 <li v-if="modules_name.includes('Payment for Employees')" class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'advancedpayment' }">
+                  <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
+                  <p>Payment for Employees</p>
+                  </router-link>
+             
+                 </li>
+          
+               
                 <!-- <li class="nav-item">
                   <a href="pages/tables/data.html" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Project Estimates</p>
                   </a>
                 </li> -->
-                 <li v-if="modules_name.includes('Payment for Employees')" class="nav-item">
-                  <a href="pages/tables/data.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Payment for Employees</p>
-                  </a>
-                </li>
+            
                 <!-- <li class="nav-item">
                   <a href="pages/tables/data.html" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>

@@ -29,7 +29,7 @@
               <div class="card">
                 <div class="card-header pc-bg">
                   <h3 class="card-title d-inline float-left text-white">
-                    Levels
+                    Weekends
                   </h3>
                   <!-- <router-link  class=" float-right"  :to="{ name: 'administrative-adddepartments' }">
 
@@ -50,23 +50,27 @@
                       <tr>
                         <th style="width: 10px">#</th>
 
-                        <th>Level </th>
+                        <th>Day</th>
+                        <th>note</th>
+                        <th>Rate</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="level in levels" :key="level">
+                      <tr v-for="weekend in weekends" :key="weekend">
                         <td>#</td>
-                        <td>{{ level.level_name }}</td>
+                        <td>{{ weekend.day }}</td>
+                        <td>{{ weekend.note }}</td>
+                        <td>{{ weekend.rate }}</td>
 
                         <td>
-                          <a @click.prevent="editdepartment(level.uuid)"   
+                          <a @click.prevent="editdepartment(weekend.uuid)"   
                     data-toggle="modal"
                     data-target="#editModal" 
                             ><i class="fa-solid fa-pen-to-square"></i></a
                           >
 
-                          <a  @click.prevent="deletedepartment(level.uuid)" class="-sm ml-2"
+                          <a  @click.prevent="deletedepartment(weekend.uuid)" class="-sm ml-2"
                             ><i class="fa-solid fa-trash text-red"></i></a
                           >
                         </td>
@@ -116,7 +120,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" >Add new level</h5>
+            <h5 class="modal-title" >Add new weekend</h5>
             <button
               type="button"
               class="close"
@@ -133,22 +137,42 @@
                 <div class="row">
               <div class="col-lg-6">
             
-
-
           
                 <div class="form-group">
-                  <label>Level Name </label>
-                  <input type="text"   @input="errors.level_name=null"  v-model="level_name" class="form-control" />
-                  <p class="text-danger mt-1" v-if="errors.level_name" >{{ errors.level_name[0] }}</p>
+                  <label>Day</label>
+         
+         <select
+           v-model="day"
+           class="form-control "
+           style="width: 100%"
+         >
+           <option disabled value=null>Select a day</option>
+           <option >Saturday</option>
+           <option >Sunday</option>
+           <option >Monday</option>
+           <option >Tuesday</option>
+           <option >Wednesday</option>
+           <option >Thursday</option>
+           <option >Friday</option>
+         </select>
+         <p class="text-danger mt-1" v-if="errors.day" >{{ errors.day[0] }}</p>
 
                
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="form-group">
-                  <label>Code </label>
-                  <input type="text"  @input="errors.code=null" v-model="code" class="form-control" />
-                  <p class="text-danger mt-1" v-if="errors.code" >{{ errors.code[0] }}</p>
+                  <label>note </label>
+                  <input type="text"  @input="errors.note=null" v-model="note" class="form-control" />
+                  <p class="text-danger mt-1" v-if="errors.note" >{{ errors.note[0] }}</p>
+
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label>Rate</label>
+                  <input type="text"  @input="errors.rate=null" v-model="rate" class="form-control" />
+                  <p class="text-danger mt-1" v-if="errors.rate" >{{ errors.rate[0] }}</p>
 
                 </div>
               </div>
@@ -166,7 +190,7 @@
             >
               Cancle
             </button>
-            <button  @click.prevent="addlevel" type="button" class="btn-sc-sm">Add</button>
+            <button  @click.prevent="addweekend" type="button" class="btn-sc-sm">Add</button>
 
          
           </div>
@@ -188,7 +212,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" >Edit Position</h5>
+            <h5 class="modal-title" >Edit Grade</h5>
             <button
               type="button"
               class="close"
@@ -209,7 +233,7 @@
 
           
                 <div class="form-group">
-                  <label>Level name</label>
+                  <label>Day</label>
                   <input id="okk" type="text"   @input="errors.department_name=null"  v-model="department.department_name" class="form-control" />
                   <p class="text-danger mt-1" v-if="errors.department_name" >{{ errors.department_name[0] }}</p>
 
@@ -218,7 +242,7 @@
               </div>
               <div class="col-lg-6">
                 <div class="form-group">
-                  <label>Code </label>
+                  <label>Note </label>
                   <input i type="text"  @input="errors.code=null" v-model="department.code" class="form-control" />
                   <p class="text-danger mt-1" v-if="errors.code" >{{ errors.code[0] }}</p>
 
@@ -261,44 +285,45 @@ export default {
   data() {
     return {
       errors: {},
-      levels: [],
+      weekends: [],
       department: {},
+      day:null
     };
   },
   methods: {
-    getlevel() {
+    getweekends() {
       axios
-        .get("/company/levels")
+        .get("/company/weekends")
         .then((response) => {
           if (response) {
             
-            this.levels = response.data.data;
+            this.weekends = response.data.data;
+
             this.$refs.addForm.reset();
-        }
+          }
         })
         .catch((error) => {
           console.log(error);
           
         });
     },
-    addlevel() {
+    addweekend() {
       axios
-        .post("/company/levels", {
-          level_name: this.level_name,
-          code: this.code,
+        .post("/company/weekends", {
+          note: this.note,
+          day: this.day,
+          rate: this.rate,
         })
         .then((response) => {
           if (response) {
    
-       
-
-         
              
            this.$refs.addForm.reset();
-           this.level_name=""
-           this.code=""
+           this.rate
 
-              this.getlevel();
+           this.holiday_name="";
+           this.note="";
+              this.getweekends();
               $("#addModal .close").click()
           }
         })
@@ -366,7 +391,7 @@ export default {
    },
   },
   mounted: function () {
-    this.getlevel();
+    this.getweekends();
   },
 };
 </script>

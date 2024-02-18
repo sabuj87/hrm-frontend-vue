@@ -138,12 +138,12 @@
                   <p>Performance</p>
                 </router-link>
               </li>
-              <li v-if="employee_modules_name.includes('Download Payslip')" class="nav-item">
+              <!-- <li v-if="employee_modules_name.includes('Download Payslip')" class="nav-item">
                 <router-link class="nav-link" :to="{ name: 'payslip' }">
                   <i class="far fa-circle nav-icon sc"></i>
                   <p>Download Payslip</p>
                 </router-link>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <router-link class="nav-link" :to="{ name: 'billstatus' }">
                   <i class="far fa-circle nav-icon sc"></i>

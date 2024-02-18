@@ -112,6 +112,25 @@
           
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tree sc"></i>
+              <p>
+                Manage Tax
+                <i class="fas fa-angle-left right sc"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'superadmin.taxrule' }">
+              <i class="nav-icon fas fa-tachometer-alt sc"></i>
+              <p>Tax Rule</p>
+            </router-link>
+             
+              </li>
+          
+            </ul>
+          </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">

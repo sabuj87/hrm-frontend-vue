@@ -227,6 +227,25 @@
   
                         </div>
                       </div>
+
+
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <label>Grade</label>
+                          <select
+                            v-model="grade_id"
+                            class="form-control"
+                        
+                            style="width: 100%"
+                          >
+                            <option disabled value=null>Select a grade</option>
+                            <option v-for="grade in grades" :key="grade" :value="grade.id">{{grade.grade_name}}</option>
+
+                          </select>
+                          <sapn id="degree" class="error" ></sapn>
+  
+                        </div>
+                      </div>
                   
   
                      
@@ -824,7 +843,9 @@
         department_id:null,
         position_id:null,
         level_id:null,
-        assigned_under:null
+        assigned_under:null,
+        grades:[],
+        grade_id:null,
 
       };
     },
@@ -964,6 +985,7 @@
             basic_information:JSON.stringify(basic_info),
             company_department_id:this.department_id,
             position_id:this.position_id,
+            grade_id:this.grade_id,
             assigned_under:this.assigned_under,
 
           })
@@ -1387,6 +1409,22 @@ if(levelid>0){
         $("#" + field).css("display", "none");
         
       },
+      getgrades() {
+      axios
+        .get("/company/grades")
+        .then((response) => {
+          if (response) {
+            
+            this.grades = response.data.data;
+
+            this.$refs.addForm.reset();
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          
+        });
+    },
   
   
   
@@ -1397,6 +1435,7 @@ if(levelid>0){
     },
     mounted: function () {
       this.getdepartment()
+      this.getgrades()
 
    
     }

@@ -180,12 +180,7 @@ export default {
  
               }
               if(response.data.user.roles[0]=="employee"){
-                this.$router.push({ name: "employee" }).then(() => {
-       window.location.reload();
-     })
-      .catch(error => {
-      console.error(error);
-      });
+                this.$router.push({ name: "employee" })
             
 
  

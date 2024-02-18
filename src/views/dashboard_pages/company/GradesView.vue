@@ -133,13 +133,11 @@
                 <div class="row">
               <div class="col-lg-6">
             
-
-
           
                 <div class="form-group">
                   <label>Grade name</label>
-                  <input type="text"   @input="errors.department_name=null"  v-model="department_name" class="form-control" />
-                  <p class="text-danger mt-1" v-if="errors.department_name" >{{ errors.department_name[0] }}</p>
+                  <input type="text"   @input="errors.grade_name=null"  v-model="grade_name" class="form-control" />
+                  <p class="text-danger mt-1" v-if="errors.grade_name" >{{ errors.grade_name[0] }}</p>
 
                
                 </div>
@@ -147,7 +145,7 @@
               <div class="col-lg-6">
                 <div class="form-group">
                   <label>Code </label>
-                  <input type="text"  @input="errors.code=null" v-model="department_code" class="form-control" />
+                  <input type="text"  @input="errors.code=null" v-model="code" class="form-control" />
                   <p class="text-danger mt-1" v-if="errors.code" >{{ errors.code[0] }}</p>
 
                 </div>
@@ -166,7 +164,7 @@
             >
               Cancle
             </button>
-            <button  @click.prevent="adddepartment" type="button" class="btn-sc-sm">Add</button>
+            <button  @click.prevent="addgrade" type="button" class="btn-sc-sm">Add</button>
 
          
           </div>
@@ -266,7 +264,7 @@ export default {
     };
   },
   methods: {
-    getdepartment() {
+    getgrades() {
       axios
         .get("/company/grades")
         .then((response) => {
@@ -282,11 +280,11 @@ export default {
           
         });
     },
-    adddepartment() {
+    addgrade() {
       axios
-        .post("/company/departments", {
-          department_name: this.department_name,
-          code: this.department_code,
+        .post("/company/grades", {
+          grade_name: this.grade_name,
+          code: this.code,
         })
         .then((response) => {
           if (response) {
@@ -297,9 +295,9 @@ export default {
              
            this.$refs.addForm.reset();
 
-           this.department_name="";
-           this.department_code="";
-              this.getdepartment();
+           this.grade_name="";
+           this.code="";
+              this.getgrades();
               $("#addModal .close").click()
           }
         })
@@ -367,7 +365,7 @@ export default {
    },
   },
   mounted: function () {
-    this.getdepartment();
+    this.getgrades();
   },
 };
 </script>

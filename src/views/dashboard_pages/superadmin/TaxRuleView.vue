@@ -50,27 +50,29 @@
                         <tr>
                           <th style="width: 10px"> ID</th>
   
-                      
-                          <th>Tax Cap</th>
-                          <th>Tax %</th>
+                          <th>Country</th>
+                          <th>State</th>
+                          <th>Type</th>
+
+                         
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="position in positions" :key="position">
+                        <tr v-for="taxrule in taxrules" :key="taxrule">
                           <td>#</td>
-                          <td>{{ position.position_name }}</td>
-                          <td>{{ position.company_department.department_name}}</td>
-                          <td>{{ position.level.level_name}}</td>
+                          <td>{{ taxrule.country.country_name }}</td>
+                          <td>{{ taxrule.state}}</td>
+                          <td>{{ taxrule.type}}</td>
   
                           <td>
-                            <a @click.prevent="editdepartment(position.uuid)"   
+                            <a @click.prevent="editdepartment(taxrule.uuid)"   
                       data-toggle="modal"
                       data-target="#editModal" 
                               ><i class="fa-solid fa-pen-to-square"></i></a
                             >
   
-                            <a  @click.prevent="deletedepartment(position.uuid)" class="-sm ml-2"
+                            <a  @click.prevent="deletedepartment(taxrule.uuid)" class="-sm ml-2"
                               ><i class="fa-solid fa-trash text-red"></i></a
                             >
                           </td>
@@ -117,7 +119,7 @@
         aria-labelledby="addModal"
         aria-hidden="true"
       >
-        <div class="modal-dialog " role="document">
+        <div class="modal-dialog modal-xl" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" >Add new Tax Rule</h5>
@@ -135,32 +137,224 @@
   
                 <form ref="addForm" >
                   <div class="row">
-                    
-  
-      
-                <div class="col-lg-6">
+                    <div class="col-lg-4">
+           
+                    <div class="form-group">
+             <label >Country</label>
+         
+                          <select
+                            v-model="country_id"
+                            class="form-control "
+                            style="width: 100%"
+                            @change="errors.country_id=null"
+                          >
+                            <option disabled value=null>Select a country</option>
+                            <option v-for="country in countries" :key="country" :value="country.id">{{country.country_name}}</option>
+
+                          </select>
+                          <p class="text-danger mt-1" v-if="errors.country_id" >{{ errors.country_id[0] }}</p>
+
+
+           </div>
+   
+       </div>
+    
+
+       <div class="col-lg-4">
               
   
   
             
-                  <div class="form-group">
-                    <label>Tax Cap</label>
-                    <input type="text"   @input="errors.position_name=null"  v-model="tax_cap" class="form-control" />
-                    <p class="text-danger mt-1" v-if="errors.position_name" >{{ errors.position_name[0] }}</p>
+              <div class="form-group">
+                <label>State</label>
+                <input type="text"   @input="errors.state=null"  v-model="state" class="form-control" />
+                <p class="text-danger mt-1" v-if="errors.state" >{{ errors.state[0] }}</p>
+
+             
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              
   
-                 
-                  </div>
-                </div>
-                <div class="col-lg-6">
+  
+            
+              <div class="form-group">
+                <label>Type</label>
+                <input type="text"   @input="errors.state=null"  v-model="type" class="form-control" />
+                <p class="text-danger mt-1" v-if="errors.state" >{{ errors.state[0] }}</p>
+
+             
+              </div>
+            </div>
+
+
+
+              
+          </div>
+
+          <label style="font-size: medium;" >Tax Cap</label>
+
+
+          <div style="height: 2px;background-color: rgb(216, 216, 216);"></div>
+
+          <div class="row mt-2">
+
+            
+            <div class="col-lg-3">
+              
+  
+  
+            
+              <div class="form-group">
+                <label>Tax low Cap</label>
+                <input type="text"   @input="errors.tax_low_cap=null"  v-model="tax_low_cap" class="form-control" />
+                <p class="text-danger mt-1" v-if="errors.tax_low_cap" >{{ errors.tax_low_cap[0] }}</p>
+
+             
+              </div>
+            </div>
+
+
+            
+            <div class="col-lg-3">
+              
+  
+  
+            
+              <div class="form-group">
+                <label>Tax high Cap</label>
+                <input type="text"   @input="errors.tax_high_cap=null"  v-model="tax_high_cap" class="form-control" />
+                <p class="text-danger mt-1" v-if="errors.tax_high_cap" >{{ errors.tax_high_cap[0] }}</p>
+
+             
+              </div>
+            </div>
+
+            
+            <div class="col-lg-3">
+              
+  
+  
+            
+              <div class="form-group">
+                <label>Tax Cap Difference</label>
+                <input type="text"   @input="errors.tax_cap_difference=null"  v-model="tax_cap_difference" class="form-control" />
+                <p class="text-danger mt-1" v-if="errors.tax_cap_difference" >{{ errors.tax_cap_difference[0] }}</p>
+
+             
+              </div>
+            </div>
+
+
+
+            <div class="col-lg-3">
+              
+  
+  
+            
+              <div class="form-group">
+                <label>Age</label>
+                <input type="text"   @input="errors.age=null"  v-model="age" class="form-control" />
+                <p class="text-danger mt-1" v-if="errors.age" >{{ errors.age[0] }}</p>
+
+             
+              </div>
+            </div>
+
+
+             
+              <div class="col-lg-3">
                   <div class="form-group">
                     <label>Tax % </label>
-                    <input type="text"  @input="errors.code=null" v-model="p_tax" class="form-control" />
-                    <p class="text-danger mt-1" v-if="errors.code" >{{ errors.code[0] }}</p>
+                    <input type="text"  @input="errors.p_tax=null" v-model="p_tax" class="form-control" />
+                    <p class="text-danger mt-1" v-if="errors.p_tax" >{{ errors.p_tax[0] }}</p>
   
                   </div>
                 </div>
+
+                <div class="col-lg-9">
+                  <div class="form-group">
+                    <label>Remark</label>
+                    <input type="text"  @input="errors.remark=null" v-model="remark" class="form-control" />
+                    <p class="text-danger mt-1" v-if="errors.remark" >{{ errors.remark[0] }}</p>
+  
+                  </div>
+                </div>
+
+                <div class="col-lg-2">
+                  <button  @click.prevent="adddetail" type="button" class="btn-sc-sm">Add</button>
+
+                </div>
+
+
+
+
+          </div>
+
+
+          <table class="table text-center table-striped table-bordered mt-2">
+                  <thead>
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Low tax cap</th>
+                      <th>High tax cap</th>
+                      <th>Tax Cap Difference</th>
+                      <th>Age</th>
+                      <th>Tax%</th>
+                      <th>Remarks</th>
+                     
+                     
+                     
+         
+                    </tr>
+                  </thead>
+                  <tbody>
+                  
+                    <tr v-for="cap_detail in cap_details" :key="cap_detail" >
+                      <td>1.</td>
+                      <td>{{cap_detail.tax_low_cap}}</td>
+                      <td>
+                        {{cap_detail.tax_high_cap}}
+                      </td>
+                      <td>
+                        {{cap_detail.tax_cap_difference}}
+                      </td>
+                   
+                      <td>
+                        {{cap_detail.age}}
+                      </td>
+                      <td>
+                        {{cap_detail.p_tax}}
+                      </td>
+                    
+                      <td>
+                        {{cap_detail.remark}}
+                      </td>
+                    
+                       
+                    
+                    
+                    </tr>
+                
+                  
+                   
+                 
+                  
+                  </tbody>
+                </table>
+
+
+
+                    
+  
+      
+
+        
+
+        
               
-              </div>
+            
               </form>
              
               
@@ -174,7 +368,7 @@
               >
                 Cancle
               </button>
-              <button  @click.prevent="addposition" type="button" class="btn-sc-sm">Add</button>
+              <button  @click.prevent="createtax" type="button" class="btn-sc-sm">Create</button>
   
            
             </div>
@@ -211,28 +405,7 @@
   
                 <form ref="addForm" >
                   <div class="row">
-                <div class="col-lg-6">
-              
-  
-  
-            
-                  <div class="form-group">
-                    <label>Position name</label>
-                    <input id="okk" type="text"   @input="errors.department_name=null"  v-model="department.department_name" class="form-control" />
-                    <p class="text-danger mt-1" v-if="errors.department_name" >{{ errors.department_name[0] }}</p>
-  
-                 
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label>Code </label>
-                    <input i type="text"  @input="errors.code=null" v-model="code" class="form-control" />
-                    <p class="text-danger mt-1" v-if="errors.code" >{{ errors.code[0] }}</p>
-  
-                  </div>
-                </div>
-  
+             
                   
       
               </div>
@@ -272,71 +445,80 @@
     data() {
       return {
         errors: {},
+        countries:[],
+        taxrules:[],
+        cap_details:[],
+        country_id:null
+
        
       };
     },
     methods: {
-      getdepartment() {
-        axios
-          .get("/company/departments")
-          .then((response) => {
-            if (response) {
-              
-              this.departments = response.data.data;
+ 
   
-              this.$refs.addForm.reset();
-          }
-          })
-          .catch((error) => {
-            console.log(error);
-            
-          });
-      },
-  
-      getlevel() {
-        axios
-          .get("/company/levels")
-          .then((response) => {
-            if (response) {
-              
-              this.levels = response.data.data;
-  
-              this.$refs.addForm.reset();
-          }
-          })
-          .catch((error) => {
-            console.log(error);
-            
-          });
-      },
-      getposition() {
-        axios
-          .get("/company/positions")
-          .then((response) => {
-            if (response) {
-              
-              this.positions = response.data.data;
-  
-              this.$refs.addForm.reset();
-          }
-          })
-          .catch((error) => {
-            console.log(error);
-            
-          });
-      },
-  
+   
+     
+      getCountry(){
+
+
+axios.get("public/countries").then((response) => {
+
+
+this.countries=response.data.data;
+
+
+}).catch((error)=>{
+console.log(error.response)
+})
+},
+
+
+gettaxrule(){
+
+
+axios.get("/superadmin/taxrules").then((response) => {
+
+
+this.taxrules=response.data.data;
+
+
+}).catch((error)=>{
+console.log(error.response)
+})
+},
+
+adddetail(){
+
+var cap_detail =
+
+{
+  tax_low_cap:this.tax_low_cap,
+  tax_high_cap:this.tax_high_cap,
+  tax_cap_difference:this.tax_cap_difference,
+  age:this.age,
+  p_tax:this.p_tax,
+  remark:this.remark
+
+}
+
+
+
+this.cap_details.push(cap_detail);
+
+
+
+},
   
       
-      addposition() {
+       createtax() {
         axios
-          .post("/company/positions", {
-            department_id: this.department_id,
-            level_id: this.level_id,
-            position_name: this.position_name,
-            code: this.code,
-            modules:this.selectedModulesID,
-            employeemodules:this.selectedEmployeeModulesID
+          .post("/superadmin/taxrules", {
+            country_id: this.country_id,
+            state: this.state,
+            type: this.type,
+            cap_details: JSON.stringify(this.cap_details),
+            status: 1,
+         
           })
           .then((response) => {
             if (response) {
@@ -345,13 +527,13 @@
   
            
                
-             this.$refs.addForm.reset();
+             this.$refs.addForm.reset();  
   
-             this.department_id=null;
-             this.level_id=null;
-             this.position_name="";
-             this.code="";
-                this.getposition();
+             this.country_id=null;
+             this.state="";
+             this.type="";
+             this.cap_details=[];
+               this.gettaxrule();
                 $("#addModal .close").click()
             }
           })
@@ -419,11 +601,9 @@
      },
     },
     mounted: function () {
-      this.getdepartment();
-      this.getlevel();
-      this.getposition();
-      this.modules=JSON.parse(localStorage.getItem("user")).user.price.price.modules
-      this.employee_modules=JSON.parse(localStorage.getItem("user")).user.price.price.employee_modules
+      this.getCountry()
+      this.gettaxrule()
+   
     },
   };
   </script>

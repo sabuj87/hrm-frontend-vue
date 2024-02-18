@@ -228,9 +228,10 @@ export default {
               if (attendance.date === date) {
     return  {
          date:date,
+         daytype:attendance.daytype,
          status:"Leave",
-         logedin:"Not assigned",
-         logedout:"Not assigned",
+         logedin:attendance.logedin,
+         logedout:attendance.logedout,
          action:"Attend",
          remarks:"",
         }
