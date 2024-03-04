@@ -59,7 +59,7 @@
                        
                 <span><strong>Leave Type</strong>
                   <div class="custom-card text-center mt-3">
-                    {{ leave.leave_type}}
+                    {{ type}}
                   
                   </div>
                   
@@ -166,6 +166,7 @@ export default {
       onlydatefrom:"",
       onlydateto:"",
       onlymonthfrom:"",
+      type:""
      
 
     };
@@ -177,6 +178,7 @@ export default {
         .then((response) => {
           if (response) {
             this.leave = response.data.data;
+            this.type=this.leave.leave.type
             this.employee = response.data.data.employee;
             this.employeeid=this.employee.id
             this.basic_information=response.data.data.employee.basic_information;

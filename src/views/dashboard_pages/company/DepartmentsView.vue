@@ -45,7 +45,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <table class="table text-center table-striped table-bordered">
+                  <!-- <table class="table text-center table-striped table-bordered">
                     <thead>
                       <tr>
                         <th style="width: 10px">#</th>
@@ -72,11 +72,27 @@
                         </td>
                       </tr>
                     </tbody>
-                  </table>
+                  </table> -->
+
+                  <DataTable
+                    :data="departments"
+                    class="display table table-striped table-bordered mt-2"
+                  >
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Department Name</th>
+                        <th>Department ID</th>
+
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </DataTable>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                  <ul class="pagination pagination-sm m-0 float-right">
+                  <!-- <ul class="pagination pagination-sm m-0 float-right">
                     <li class="page-item">
                       <a class="page-link" href="#">&laquo;</a>
                     </li>
@@ -92,7 +108,7 @@
                     <li class="page-item">
                       <a class="page-link" href="#">&raquo;</a>
                     </li>
-                  </ul>
+                  </ul> -->
                 </div>
               </div>
               <!-- /.card -->
@@ -116,7 +132,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" >Add new department</h5>
+            <h5 class="modal-title">Add new department</h5>
             <button
               type="button"
               class="close"
@@ -127,55 +143,54 @@
             </button>
           </div>
           <div class="modal-body">
-        
-
-              <form ref="addForm" >
-                <div class="row">
-              <div class="col-lg-6">
-            
-
-
-          
-                <div class="form-group">
-                  <label>Department name</label>
-                  <input type="text"   @input="errors.department_name=null"  v-model="department_name" class="form-control" />
-                  <p class="text-danger mt-1" v-if="errors.department_name" >{{ errors.department_name[0] }}</p>
-
-               
+            <form ref="addForm">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>Department name</label>
+                    <input
+                      type="text"
+                      @input="errors.department_name = null"
+                      v-model="department_name"
+                      class="form-control"
+                    />
+                    <p class="text-danger mt-1" v-if="errors.department_name">
+                      {{ errors.department_name[0] }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>Department ID(Max 2 Digit)</label>
+                    <input
+                      type="number"
+                      min="0"
+                      @input="errors.d_id = null"
+                      v-model="d_id"
+                      class="form-control"
+                    />
+                    <p class="text-danger mt-1" v-if="errors.d_id">
+                      {{ errors.d_id[0] }}
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label>Code </label>
-                  <input type="text"  @input="errors.code=null" v-model="department_code" class="form-control" />
-                  <p class="text-danger mt-1" v-if="errors.code" >{{ errors.code[0] }}</p>
-
-                </div>
-              </div>
-            </div>
             </form>
-           
-            
-            
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn-pc-sm"
-              data-dismiss="modal"
-            >
+            <button type="button" class="btn-pc-sm" data-dismiss="modal">
               Cancle
             </button>
-            <button  @click.prevent="adddepartment" type="button" class="btn-sc-sm">Add</button>
-
-         
+            <button
+              @click.prevent="adddepartment"
+              type="button"
+              class="btn-sc-sm"
+            >
+              Add
+            </button>
           </div>
-
-       
         </div>
-     
       </div>
-   
     </div>
     <div
       class="modal fade"
@@ -188,7 +203,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" >Edit department</h5>
+            <h5 class="modal-title">Edit department</h5>
             <button
               type="button"
               class="close"
@@ -199,69 +214,72 @@
             </button>
           </div>
           <div class="modal-body">
-        
-
-              <form ref="addForm" >
-                <div class="row">
-              <div class="col-lg-6">
-            
-
-
-          
-                <div class="form-group">
-                  <label>Department name</label>
-                  <input id="okk" type="text"   @input="errors.department_name=null"  v-model="department.department_name" class="form-control" />
-                  <p class="text-danger mt-1" v-if="errors.department_name" >{{ errors.department_name[0] }}</p>
-
-               
+            <form ref="addForm">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>Department name</label>
+                    <input
+                      id="okk"
+                      type="text"
+                      @input="errors.department_name = null"
+                      v-model="department.department_name"
+                      class="form-control"
+                    />
+                    <p class="text-danger mt-1" v-if="errors.department_name">
+                      {{ errors.department_name[0] }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>Department ID (Max 2 Digit) </label>
+                    <input
+                      type="number"
+                      @input="errors.d_id = null"
+                      v-model="department.d_id"
+                      class="form-control"
+                    />
+                    <p class="text-danger mt-1" v-if="errors.d_id">
+                      {{ errors.d_id[0] }}
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label>Code </label>
-                  <input i type="text"  @input="errors.code=null" v-model="department.code" class="form-control" />
-                  <p class="text-danger mt-1" v-if="errors.code" >{{ errors.code[0] }}</p>
-
-                </div>
-              </div>
-            </div>
             </form>
-           
-            
-            
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn-pc-sm"
-              data-dismiss="modal"
-            >
+            <button type="button" class="btn-pc-sm" data-dismiss="modal">
               Cancle
             </button>
-            <button  @click.prevent="updatedepartment(department.uuid)" type="button" class="btn-sc-sm">Update</button>
-
-         
+            <button
+              @click.prevent="updatedepartment(department.uuid)"
+              type="button"
+              class="btn-sc-sm"
+            >
+              Update
+            </button>
           </div>
-
-       
         </div>
-     
       </div>
-   
     </div>
-
-
   </div>
 </template>
       
       <script>
- import $ from "jquery";
+import $ from "jquery";
 import axios from "axios";
+import DataTable from "datatables.net-vue3";
+import DataTablesCore from "datatables.net";
+DataTable.use(DataTablesCore);
 export default {
+  components: { DataTable },
+
   data() {
     return {
       errors: {},
       departments: [],
+  
       department: {},
     };
   },
@@ -271,36 +289,40 @@ export default {
         .get("/company/departments")
         .then((response) => {
           if (response) {
-            
-            this.departments = response.data.data;
+            var departments = response.data.data;
 
-            this.$refs.addForm.reset();
-        }
+            this.departments = [];
+
+            for (var department of departments) {
+              var id = department.id;
+
+              var department_name = department.department_name;
+              var d_id = department.d_id;
+              var action =
+                "<i  data-toggle='modal' data-target='#editModal'  class='fa-solid fa-pen-to-square sc text-large '></i>  <i class='fa-solid fa-trash text-red ms-2 pc'></i>";
+
+              this.departments.push([id, department_name, d_id, action]);
+            }
+          }
         })
         .catch((error) => {
           console.log(error);
-          
         });
     },
     adddepartment() {
       axios
         .post("/company/departments", {
           department_name: this.department_name,
-          code: this.department_code,
+          d_id: this.d_id,
         })
         .then((response) => {
           if (response) {
-   
-       
+            //  this.$refs.addForm.reset();
 
-         
-             
-           this.$refs.addForm.reset();
-
-           this.department_name="";
-           this.department_code="";
-              this.getdepartment();
-              $("#addModal .close").click()
+            this.department_name = "";
+            this.d_id = "";
+            this.getdepartment();
+            $("#addModal .close").click();
           }
         })
         .catch((error) => {
@@ -310,61 +332,45 @@ export default {
 
     editdepartment(uuid) {
       axios
-        .get("/company/departments/"+uuid)
+        .get("/company/departments/" + uuid)
         .then((response) => {
           if (response) {
-            
             this.department = response.data.data;
-
-           
-       
           }
         })
         .catch((error) => {
           console.log(error);
-          
         });
     },
     updatedepartment(uuid) {
-     
       axios
-        .put("/company/departments/"+uuid,{
+        .put("/company/departments/" + uuid, {
           department_name: this.department.department_name,
-          code: this.department.code,
+          d_id: this.department.d_id,
         })
         .then((response) => {
           if (response) {
-            
-         
-            this.getdepartment()
-         
-            $("#editModal .close").click()
-       
+            this.getdepartment();
+
+            $("#editModal .close").click();
           }
         })
         .catch((error) => {
           console.log(error);
-          
         });
     },
     deletedepartment(uuid) {
-     
-     axios
-       .delete("/company/departments/"+uuid)
-       .then((response) => {
-         if (response) {
-           
-        
-           this.getdepartment()
-        
-      
-         }
-       })
-       .catch((error) => {
-         console.log(error);
-         
-       });
-   },
+      axios
+        .delete("/company/departments/" + uuid)
+        .then((response) => {
+          if (response) {
+            this.getdepartment();
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
   mounted: function () {
     this.getdepartment();

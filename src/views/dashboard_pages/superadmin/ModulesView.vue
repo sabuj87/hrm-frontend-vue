@@ -45,7 +45,7 @@
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
-                    <table class="table text-center table-striped table-bordered">
+                    <!-- <table class="table text-center table-striped table-bordered">
                       <thead>
                         <tr>
                           <th style="width: 10px">#</th>
@@ -77,27 +77,28 @@
                           </td>
                         </tr>
                       </tbody>
-                    </table>
+                    </table> -->
+
+                    <DataTable
+                        :data="modules"
+  
+                        class="display table table-striped table-bordered mt-2"
+                      >
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Module Name</th>
+                            <th>Path Name</th>
+                            <th>Parent Module</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </DataTable>
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-right">
-                      <li class="page-item">
-                        <a class="page-link" href="#">&laquo;</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">&raquo;</a>
-                      </li>
-                    </ul>
+                 
                   </div>
                 </div>
                 <!-- /.card -->
@@ -276,7 +277,12 @@
         <script>
    import $ from "jquery";
   import axios from "axios";
+  import DataTable from "datatables.net-vue3";
+import DataTablesCore from "datatables.net";
+DataTable.use(DataTablesCore);
   export default {
+    components: { DataTable },
+
     data() {
       return {
         errors: {},
@@ -292,9 +298,21 @@
           .then((response) => {
             if (response) {
               
-              this.modules = response.data.data;
+             var modules = response.data.data;
+             for(var module of modules){
+              var id=module.id;
+              var module_name=module.module_name;
+              var path_name=module.path_name;
+              var parent_module=module.parent!=null ? module.parent.module_name:"";
+              var action = "<i  data-toggle='modal' data-target='#editModal'  class='fa-solid fa-pen-to-square sc text-large '></i>  <i class='fa-solid fa-trash text-red ms-2 pc'></i>";
+             
+
+              this.modules.push([id,module_name,path_name,parent_module,action]);
+
+               
+             }
   
-              this.$refs.addForm.reset();
+     
             }
           })
           .catch((error) => {

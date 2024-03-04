@@ -6,9 +6,15 @@
     </div> -->
     <div v-if="msg" id="message_popup" class="alert alert-success">
     <div class="text-center">
+
+      <!-- <img style="color: aqua;" src="https://www.svgrepo.com/show/506432/check-circle.svg" alt="AdminLTELogo" height="60" width="60"> -->
+
+      <span style="font-size:500% ;" class="material-symbols-outlined sc">
+        task_alt
+</span>
    
-      <i style="display: block;color:rgb(240, 144, 19);font-size:200%" class="fa-solid fa-check"></i>
-    <h4>{{ msg }}</h4>
+      <!-- <i style="display: block;color:rgb(240, 144, 19);font-size:200%" class="fa-solid fa-check"></i> -->
+    <h5  class="mt-3 pc">{{ msg }}</h5>
 
     </div>
   
@@ -33,16 +39,17 @@
     <control-sidebar-view></control-sidebar-view>
     <div class="bs-stepper" ></div>
     <!-- /.control-sidebar -->
+    <footer-view></footer-view>
   </div>
 </template>
     
     <script>
 import SidebarView from "@/views/dashboard_pages/employee/SidebarView.vue";
 import NavbarView from "@/views/dashboard_pages/employee/NavbarView.vue";
-// import FooterView from "@/views/dashboard_pages/employee/FooterView.vue";
+import FooterView from "@/views/dashboard_pages/employee/FooterView.vue";
 import ControlSidebarView from "@/views/dashboard_pages/employee/ControlSidebarView.vue";
 export default {
-  components: { SidebarView, NavbarView, ControlSidebarView },
+  components: { SidebarView, NavbarView, ControlSidebarView, FooterView },
 
   data() {
     return {
@@ -79,7 +86,7 @@ this.delete_msg = message;
 this.delete_popup_show();
 
 if ( document.getElementById('delete_popup') ){
-  const box = document.getElementById("delete_popup");
+const box = document.getElementById("delete_popup");
 box.style.display = "block";
 
 
@@ -106,7 +113,7 @@ setTimeout(() => {
 
 document.getElementById("message_popup").style.display = "none";
 
-}, 2000);
+}, 5000);
 
 
 if ( document.getElementById('message_popup') ){

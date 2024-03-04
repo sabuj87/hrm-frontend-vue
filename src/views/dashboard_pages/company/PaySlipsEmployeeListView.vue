@@ -88,32 +88,22 @@
                     </tbody>
                   </table> -->
 
-
-             
-
-          
-        
-
-
-    <DataTable @edit="editEmployee" :data="data" :options="options" class="display table table-striped table-bordered mt-2">
-
-        <thead>
-            <tr>
-                <th>Employee ID</th>
-                <th>Employee Name</th>
-                <th>Email</th>
-                <th>Position</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        
-        </tbody>
-
-    </DataTable>
-
-
+                  <DataTable
+                    :data="data"
+                    :options="options"
+                    class="display table table-striped table-bordered mt-2"
+                  >
+                    <thead>
+                      <tr>
+                        <th>Employee ID</th>
+                        <th>Employee Name</th>
+                        <th>Email</th>
+                        <th>Position</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </DataTable>
                 </div>
                 <!-- /.card-body -->
                 <!-- <div class="card-footer clearfix">
@@ -144,6 +134,8 @@
         </div>
       </section>
 
+  
+
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
@@ -157,43 +149,26 @@ import DataTable from "datatables.net-vue3";
 import DataTablesCore from "datatables.net";
 DataTable.use(DataTablesCore);
 
-
 export default {
   components: { DataTable },
-
-  
-
-
-
 
   data() {
     return {
       errors: {},
       employees: [],
-      new_employees:[],
+      new_employees: [],
 
-
-
- 
       columns: [
-  { data: 'name', title: 'Name' },
-  { data: 'position', title: 'Position' },
-
-],
-      data: [
-  [1, 2,3,4,5],
-
-
-],
-options: {
-  responsive: true,
-  select: true,
-  searching: true,
-  paging: true,
-
-}
-
-  
+        { data: "name", title: "Name" },
+        { data: "position", title: "Position" },
+      ],
+      data: [[1, 2, 3, 4, 5]],
+      options: {
+        responsive: true,
+        select: true,
+        searching: true,
+        paging: true,
+      },
     };
   },
   methods: {
@@ -203,24 +178,33 @@ options: {
         .then((response) => {
           if (response) {
             this.employees = response.data.data;
-            $('#example2').DataTable();
+            $("#example2").DataTable();
 
-            for(let i=0;i<this.employees.length;i++){
+            for (let i = 0; i < this.employees.length; i++) {
               // var uuid=String(this.employees[i].uuid)
-              var employeee_id=this.employees[i].id
-              var employee_name=JSON.parse(this.employees[i].basic_information).first_name +" "+JSON.parse(this.employees[i].basic_information).last_name
-              var email=JSON.parse(this.employees[i].basic_information).email
-              var position=this.employees[i].position.position_name
-              var action='<button onclick="handleClick('+employeee_id+')" class="btn btn-sm btn-default">Payslips</button>'
+              var employeee_id = this.employees[i].id;
+              var employee_name =
+                JSON.parse(this.employees[i].basic_information).first_name +
+                " " +
+                JSON.parse(this.employees[i].basic_information).last_name;
+              var email = JSON.parse(this.employees[i].basic_information).email;
+              var position = this.employees[i].position.position_name;
+              var action =
+                '<button onclick="handleClick(' +
+                employeee_id +
+                ')" class="btn btn-sm btn-default">Payslips</button>';
 
-              var arrayobject=[employeee_id,employee_name,email,position,action]
+              var arrayobject = [
+                employeee_id,
+                employee_name,
+                email,
+                position,
+                action,
+              ];
 
-
-               
-              this.new_employees.push(arrayobject)
-              this.data= this.new_employees
+              this.new_employees.push(arrayobject);
+              this.data = this.new_employees;
             }
-
           }
         })
         .catch((error) => {
@@ -229,20 +213,13 @@ options: {
     },
 
     handleClick(id) {
-      
-     this.$router.push({ name: "paysliplist", query: { uuid: id } });
-
-    }
+      this.$router.push({ name: "paysliplist", query: { uuid: id } });
+    },
   },
   mounted: function () {
     this.getemployees();
     window.handleClick = this.handleClick;
-   
-
-
-    
   },
 };
-
 </script>
       

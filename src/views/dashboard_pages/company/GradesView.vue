@@ -45,7 +45,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <table class="table text-center table-striped table-bordered">
+                  <!-- <table class="table text-center table-striped table-bordered">
                     <thead>
                       <tr>
                         <th style="width: 10px">#</th>
@@ -72,27 +72,27 @@
                         </td>
                       </tr>
                     </tbody>
-                  </table>
+                  </table> -->
+                  <DataTable
+                        :data="grades"
+  
+                        class="display table table-striped table-bordered mt-2"
+                      >
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Grade Name</th>
+                            <th>Code</th>
+                
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </DataTable>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                  <ul class="pagination pagination-sm m-0 float-right">
-                    <li class="page-item">
-                      <a class="page-link" href="#">&laquo;</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">&raquo;</a>
-                    </li>
-                  </ul>
+       
                 </div>
               </div>
               <!-- /.card -->
@@ -255,7 +255,12 @@
       <script>
  import $ from "jquery";
 import axios from "axios";
+import DataTable from "datatables.net-vue3";
+import DataTablesCore from "datatables.net";
+DataTable.use(DataTablesCore);
 export default {
+  components: { DataTable },
+
   data() {
     return {
       errors: {},
@@ -270,7 +275,15 @@ export default {
         .then((response) => {
           if (response) {
             
-            this.grades = response.data.data;
+            var grades = response.data.data;
+
+            for(var grade of grades){
+              var id=grade.id;
+              var grade_name=grade.grade_name;
+              var code = grade.code;
+              var action = "<i  data-toggle='modal' data-target='#editModal'  class='fa-solid fa-pen-to-square sc text-large '></i>  <i class='fa-solid fa-trash text-red ms-2 pc'></i>";
+             this.grades.push([id,grade_name,code,action]);
+            }
 
             this.$refs.addForm.reset();
           }

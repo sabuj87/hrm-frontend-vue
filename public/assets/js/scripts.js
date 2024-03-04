@@ -1,4 +1,7 @@
+
+
 $(function () {
+ 
     //Initialize Select2 Elements
     $('.select2').select2()
 
@@ -110,7 +113,6 @@ $(function () {
       document.getElementById("date").innerHTML= date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear(); 
    
   
-  
 
 
   })
@@ -118,6 +120,19 @@ $(function () {
 
   $(document).ready( function () {
     $('#example').DataTable();
+ 
+    // ClassicEditor
+    // .create( document.querySelector( '#editor' ),
+    
+    
+    
+    
+    // )
+    // .catch( error => {
+    //     console.error( error );
+    // } );
+
+
 });
   
   // BS-Stepper Init

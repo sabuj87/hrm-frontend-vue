@@ -180,7 +180,7 @@ export default {
  
               }
               if(response.data.user.roles[0]=="employee"){
-                this.$router.push({ name: "employee" })
+                this.$router.push({ name: "employee.otheremployee.attendance" })
             
 
  

@@ -9,7 +9,7 @@
 
     <div class="user-panel  py-3  d-flex">
         <div class="image">
-          <img height="70px" width="50px" src="/assets/images/logo/user.png" class="ml-3" alt="User Image">
+          <img height="70px" width="50px" style="border-radius: 50%;" :src="logourl" class="ml-3" alt="User Image">
         </div>
         <div class="info ml-2">
           <a href="#" style="color:gray" class="d-block">{{name}}</a>
@@ -181,7 +181,7 @@
                 <li v-if="modules_name.includes('Create Job Demand')" class="nav-item">
                 <router-link class="nav-link"  :to="{ name: 'jobdemandlist' }">
                   <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
-                  <p>Create Job Demand</p>
+                  <p>Job Demand List</p>
                   </router-link>
              
                  </li>
@@ -355,6 +355,13 @@
                 <router-link class="nav-link"  :to="{ name: 'weekends' }">
                   <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
                   <p>Weekends</p>
+                  </router-link>
+             
+                 </li>
+                 <li  class="nav-item">
+                <router-link class="nav-link"  :to="{ name: 'leaves' }">
+                  <i class="far fa-circle nav-icon fs80 ml-3 sc"></i>
+                  <p>Leaves</p>
                   </router-link>
              
                  </li>
@@ -784,7 +791,7 @@
 </template>
 
 <script>
-
+import Constant from "@/other/Constant";
 export default {
 
 
@@ -793,7 +800,8 @@ data() {
 return {
   name:"",
   modules:[],
-  modules_name:[]
+  modules_name:[],
+  logourl:""
 }
 
 },
@@ -802,7 +810,7 @@ return {
   methods:{
 
     userInfo(){
-
+  
 
 
     }
@@ -812,6 +820,13 @@ return {
 
   mounted: function(){
     this.name=JSON.parse(localStorage.getItem("user")).user.name
+    var logo=JSON.parse(localStorage.getItem("user")).user.logo
+
+    if(logo!=null){
+    this.logourl=Constant.filebaseurl+JSON.parse(localStorage.getItem("user")).user.logo.file.path
+
+  }
+
     this.modules=JSON.parse(localStorage.getItem("user")).user.price.price.modules
     for (let i = 0; i < this.modules.length; i++) {
       this.modules_name.push(this.modules[i].company_module.module_name)

@@ -29,7 +29,7 @@
               <div class="card">
                 <div class="card-header pc-bg">
                   <h3 class="card-title d-inline float-left text-white">
-                    Weekends
+                    Leaves
                   </h3>
                   <!-- <router-link  class=" float-right"  :to="{ name: 'administrative-adddepartments' }">
 
@@ -45,20 +45,47 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-               
+                  <!-- <table class="table text-center table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th style="width: 10px">#</th>
 
-                  
+                        <th>Department Name</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="department in departments" :key="department">
+                        <td>#</td>
+                        <td>{{ department.department_name }}</td>
+
+                        <td>
+                          <a @click.prevent="editdepartment(department.uuid)"   
+                    data-toggle="modal"
+                    data-target="#editModal" 
+                            ><i class="fa-solid fa-pen-to-square"></i></a
+                          >
+
+                          <a  @click.prevent="deletedepartment(department.uuid)" class="-sm ml-2"
+                            ><i class="fa-solid fa-trash text-red"></i></a
+                          >
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table> -->
+
                   <DataTable
-                        :data="weekends"
+                        :data="leaves"
   
-                        class="display table table-striped table-bordered mt-2"
+                        class="display  table table-striped table-bordered mt-2"
                       >
                         <thead>
                           <tr>
-                            <th>Employee ID</th>
-                            <th>Employee Name</th>
-                            <th>Email</th>
-                            <th>Position</th>
+                            <th style="width: 10px;" >#</th>
+                            <th>Type</th>
+                            <th>Days</th>
+
+    
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -67,7 +94,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                  <ul class="pagination pagination-sm m-0 float-right">
+                  <!-- <ul class="pagination pagination-sm m-0 float-right">
                     <li class="page-item">
                       <a class="page-link" href="#">&laquo;</a>
                     </li>
@@ -83,7 +110,7 @@
                     <li class="page-item">
                       <a class="page-link" href="#">&raquo;</a>
                     </li>
-                  </ul>
+                  </ul> -->
                 </div>
               </div>
               <!-- /.card -->
@@ -107,7 +134,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" >Add new weekend</h5>
+            <h5 class="modal-title" >Add new leave</h5>
             <button
               type="button"
               class="close"
@@ -124,42 +151,22 @@
                 <div class="row">
               <div class="col-lg-6">
             
+
+
           
                 <div class="form-group">
-                  <label>Day</label>
-         
-         <select
-           v-model="day"
-           class="form-control "
-           style="width: 100%"
-         >
-           <option disabled value=null>Select a day</option>
-           <option >Saturday</option>
-           <option >Sunday</option>
-           <option >Monday</option>
-           <option >Tuesday</option>
-           <option >Wednesday</option>
-           <option >Thursday</option>
-           <option >Friday</option>
-         </select>
-         <p class="text-danger mt-1" v-if="errors.day" >{{ errors.day[0] }}</p>
+                  <label>Leave Type</label>
+                  <input type="text"   @input="errors.type=null"  v-model="type" class="form-control" />
+                  <p class="text-danger mt-1" v-if="errors.type" >{{ errors.type[0] }}</p>
 
                
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="form-group">
-                  <label>note </label>
-                  <input type="text"  @input="errors.note=null" v-model="note" class="form-control" />
-                  <p class="text-danger mt-1" v-if="errors.note" >{{ errors.note[0] }}</p>
-
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label>Rate</label>
-                  <input type="text"  @input="errors.rate=null" v-model="rate" class="form-control" />
-                  <p class="text-danger mt-1" v-if="errors.rate" >{{ errors.rate[0] }}</p>
+                  <label>Days</label>
+                  <input type="number"  min="0" @input="errors.days=null" v-model="days" class="form-control" />
+                  <p class="text-danger mt-1" v-if="errors.days" >{{ errors.days[0] }}</p>
 
                 </div>
               </div>
@@ -177,7 +184,7 @@
             >
               Cancle
             </button>
-            <button  @click.prevent="addweekend" type="button" class="btn-sc-sm">Add</button>
+            <button  @click.prevent="addleave" type="button" class="btn-sc-sm">Add</button>
 
          
           </div>
@@ -199,7 +206,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" >Edit Grade</h5>
+            <h5 class="modal-title" >Edit department</h5>
             <button
               type="button"
               class="close"
@@ -220,18 +227,18 @@
 
           
                 <div class="form-group">
-                  <label>Day</label>
-                  <input id="okk" type="text"   @input="errors.department_name=null"  v-model="department.department_name" class="form-control" />
-                  <p class="text-danger mt-1" v-if="errors.department_name" >{{ errors.department_name[0] }}</p>
+                  <label>Leave Type</label>
+                  <input  type="text"   @input="errors.leave=null"  v-model="leave.type" class="form-control" />
+                  <p class="text-danger mt-1" v-if="errors.leave" >{{ errors.leave[0] }}</p>
 
                
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="form-group">
-                  <label>Note </label>
-                  <input i type="text"  @input="errors.code=null" v-model="department.code" class="form-control" />
-                  <p class="text-danger mt-1" v-if="errors.code" >{{ errors.code[0] }}</p>
+                  <label>Days</label>
+                  <input  type="number"  @input="errors.days=null" v-model="leave.days" class="form-control" />
+                  <p class="text-danger mt-1" v-if="errors.days" >{{ errors.days[0] }}</p>
 
                 </div>
               </div>
@@ -249,7 +256,7 @@
             >
               Cancle
             </button>
-            <button  @click.prevent="updatedepartment(department.uuid)" type="button" class="btn-sc-sm">Update</button>
+            <button  @click.prevent="updatedepartment(leave.uuid)" type="button" class="btn-sc-sm">Update</button>
 
          
           </div>
@@ -270,64 +277,73 @@
 import axios from "axios";
 import DataTable from "datatables.net-vue3";
 import DataTablesCore from "datatables.net";
-DataTable.use(DataTablesCore);
+import api from "@/other/Api";
 
+DataTable.use(DataTablesCore);
 export default {
   components: { DataTable },
 
   data() {
     return {
       errors: {},
-      weekends: [],
-      department: {},
-      day:null
+      leaves: [],
+      leave: {},
     };
   },
   methods: {
-    getweekends() {
+    getleaves() {
       axios
-        .get("/company/weekends")
+        .get(api.company_leaves)
         .then((response) => {
           if (response) {
             
-            var weekends = response.data.data;
+           var leaves = response.data.data;
 
-            for(var weekend of weekends){
-              var id=weekend.id
-              var day=weekend.day
-              var note=weekend.note
-              var rate=weekend.rate
-              var action = "<i  data-toggle='modal' data-target='#editModal'  class='fa-solid fa-pen-to-square sc text-large '></i>  <i class='fa-solid fa-trash text-red ms-2 pc'></i>";
+           this.leaves=[]
+           var serial=0;
+           for(var leave of leaves){
+            //  var id=leave.id
 
-              this.weekends.push([id,day,note,rate,action]);
+            serial++
 
-            }
+            var type=leave.type
+            var days=leave.days;
+            var action = "<i  data-toggle='modal' data-target='#editModal'  class='fa-solid fa-pen-to-square sc text-large '></i>  <i class='fa-solid fa-trash text-red ms-2 pc'></i>";
 
-   
-          }
+            this.leaves.push([serial,type,days,action]);
+
+           }
+          
+
+
+
+
+            
+        }
         })
         .catch((error) => {
           console.log(error);
           
         });
     },
-    addweekend() {
+    addleave() {
       axios
-        .post("/company/weekends", {
-          note: this.note,
-          day: this.day,
-          rate: this.rate,
+        .post(api.company_leaves, {
+          type: this.type,
+          days: this.days,
         })
         .then((response) => {
           if (response) {
    
-             
-           this.$refs.addForm.reset();
-           this.rate
+       
 
-           this.holiday_name="";
-           this.note="";
-              this.getweekends();
+         
+             
+          //  this.$refs.addForm.reset();
+
+           this.type="";
+           this.days="";
+              this.getleaves();
               $("#addModal .close").click()
           }
         })
@@ -358,7 +374,7 @@ export default {
       axios
         .put("/company/departments/"+uuid,{
           department_name: this.department.department_name,
-          code: this.department.code,
+          d_id: this.department.d_id,
         })
         .then((response) => {
           if (response) {
@@ -395,7 +411,7 @@ export default {
    },
   },
   mounted: function () {
-    this.getweekends();
+    this.getleaves();
   },
 };
 </script>

@@ -12,8 +12,8 @@
         <div class="image">
           <img height="70px" width="50px" src="/assets/images/logo/user.png" class="ml-3" alt="User Image">
         </div>
-        <div class="info ml-2">
-          <a href="#" style="color:gray" class="d-block">MR Brownlly</a>
+        <div class="info  ml-2">
+          <a  href="#" style="color:gray" class="d-block ">MR Brownlly</a>
         </div>
        
       </div>
@@ -39,7 +39,7 @@
           <li v-if="employee_modules_name.includes('Employee Dashboard')" class="nav-item">
             <router-link class="nav-link" :to="{ name: 'employee-dashboard' }">
               <i  class="nav-icon fas fa-tachometer-alt sc"></i>
-              <p>Employee Dashboard</p>
+              <p id="sdd" >Employee Dashboard</p>
             </router-link>
           </li>
 
@@ -69,6 +69,16 @@
             
                 </router-link>
               </li>
+
+              <li class="nav-item">
+                <router-link class="nav-link" :to="{ name: 'employee-jobdemandlist' }">
+                  <i  class="fa-solid fa-clipboard-user nav-icon sc"></i>
+                  <p>Job demand</p>
+                  
+            
+                </router-link>
+              </li>
+            
             
             
 <!-- 
@@ -117,16 +127,10 @@
                 
                 </router-link>
               </li>
-              <li v-if="employee_modules_name.includes('Leaves')" class="nav-item">
-                <router-link class="nav-link" :to="{ name: 'leavelist' }">
-                  <i class="fa-solid fa-l nav-icon sc"></i>
-                  <p>Leaves</p>
-                </router-link>
-               
-              </li>
+           
             
               <li v-if="employee_modules_name.includes('Leave Application')" class="nav-item">
-                <router-link class="nav-link" :to="{ name: 'leaveapplication' }">
+                <router-link class="nav-link" :to="{ name: 'leavelist' }">
                   <i class="fa-solid fa-arrow-right nav-icon sc"></i>
                   <p>Leave Application</p>
          

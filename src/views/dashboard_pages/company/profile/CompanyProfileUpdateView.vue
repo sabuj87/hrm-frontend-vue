@@ -52,12 +52,14 @@
                   <div class="row">
                     <div class="col-lg-3">
                       <label
+                        @mouseover="mouseOver()"
+                        @mouseleave="mouseleave()"
                         for="file-input"
                         style="height: 100px; width: 100px; position: relative"
                       >
                         <img
-                         cursor="pointer"
-                         title="Upload Logo"
+                          cursor="pointer"
+                          title="Upload Logo"
                           onerror="this.onerror=null;this.src='/assets/images/logo/user.png';"
                           :src="imageUrl"
                           class=" "
@@ -66,10 +68,36 @@
                             height: 100px;
                             width: 100px;
                             position: absolute;
+                            border-radius: 50%;
                             top: 0;
                             left: 0;
                           "
                         />
+
+                        <div
+                          v-show="active"
+                          id="shadow"
+                          style="
+                            height: 100px;
+                            width: 100px;
+                            position: absolute;
+                            cursor: pointer;
+
+                            background-color: rgba(15, 14, 14, 0.385);
+
+                            border-radius: 50%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            top: 0;
+                            left: 0;
+                          "
+                        >
+                          <i
+                            style="font-size: 200%"
+                            class="fa-solid fa-camera text-white"
+                          ></i>
+                        </div>
                       </label>
                       <input
                         @change="handleImageSelect"
@@ -221,13 +249,14 @@
                       <div class="col-lg-12">
                         <div class="form-group">
                           <label>Details info </label>
-                          <textarea
-                            style="height: 100px !important"
-                            v-model="basic_information.details_info"
-                            type="text"
-                            row="4"
-                            class="form-control"
-                          ></textarea>
+
+                          <div class="mt-2">
+                            <ckeditor
+                              :editor="editor"
+                              v-model="basic_information.details_info"
+                              :config="editorConfig"
+                            ></ckeditor>
+                          </div>
                         </div>
                       </div>
                       <div class="col-lg-4">
@@ -836,41 +865,31 @@
                         <span id="doc_name" class="error"></span>
                       </div>
                     </div>
-                  
+
                     <div class="col-lg-3">
-                        <div class="form-group">
-                          <label>Document Type</label>
-                          <select
-                            v-model="document_type"
-                            class="form-custom-select"
-                            style="width: 100%"
-                          >
-                            <option disabled value="">
-                              Select a type
-                            </option>
-                            <option>
-                              Trade licence
-                            </option>
-                            <option>
-                              BIN Certificate
-                            </option>
-                           
-                          </select>
-                        </div>
+                      <div class="form-group">
+                        <label>Document Type</label>
+                        <select
+                          v-model="document_type"
+                          class="form-custom-select"
+                          style="width: 100%"
+                        >
+                          <option disabled value="">Select a type</option>
+                          <option>Trade licence</option>
+                          <option>BIN Certificate</option>
+                        </select>
                       </div>
+                    </div>
                     <div class="col-lg-3">
                       <div class="form-group">
                         <label for="exampleInputFile">File</label>
-               
-                            <input
-                                                            type="file"
-                              @change="handleMultipleFileUpload"
-class="form-control"
-                              id="exampleInputFile"
-                            />
-                         
-                          
-                       
+
+                        <input
+                          type="file"
+                          @change="handleMultipleFileUpload"
+                          class="form-control"
+                          id="exampleInputFile"
+                        />
                       </div>
                     </div>
 
@@ -883,104 +902,68 @@ class="form-control"
                         <i class="fa-solid fa-plus"></i>
                       </button>
                     </div>
-
-                   
-
-   
                   </div>
 
                   <p>New file</p>
 
                   <table class="table table-striped table-bordered">
-                  <thead>
-                    <tr>
-   
-                      <th>Document name</th>
-                      <th>Document Type</th>
-                      <th>Date</th>
-                      <th>View</th>
-                     
-         
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="doc in docs" :key="doc">
-                      <td>{{ doc.document_name }}</td>
-                      <td>{{ doc.document_type }}</td>
-                      <td>{{ doc.date }}</td>
+                    <thead>
+                      <tr>
+                        <th>Document name</th>
+                        <th>Document Type</th>
+                        <th>Date</th>
+                        <th>View</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="doc in docs" :key="doc">
+                        <td>{{ doc.document_name }}</td>
+                        <td>{{ doc.document_type }}</td>
+                        <td>{{ doc.date }}</td>
 
-                    <td> <a href="">
-                      <img style="height: 50px; width: 50px" src="/assets/images/resource/pdf.png" alt="" />
-                          <p>{{ doc.file.name }}</p>
+                        <td>
+                          <a href="">
+                            <img
+                              style="height: 50px; width: 50px"
+                              src="/assets/images/resource/pdf.png"
+                              alt=""
+                            />
+                            <p>{{ doc.file.name }}</p>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p>Exiting file</p>
 
-                    </a>
-                    </td> 
-                     
-                     
-                     
-                      
-                    
-                    
-                    
-                    </tr>
-               
-                
-                
-                
-                   
+                  <table class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Document name</th>
+                        <th>Document Type</th>
+                        <th>Date</th>
+                        <th>View</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="pdoc in pdocs" :key="pdoc">
+                        <td>{{ pdoc.name }}</td>
+                        <td>{{ pdoc.type }}</td>
+                        <td>{{ pdoc.date }}</td>
 
-                  
-                 
-                  
-                  </tbody>
-                </table>
-                <p>Exiting  file</p>
-
-<table class="table table-striped table-bordered">
-<thead>
-  <tr>
-
-    <th>Document name</th>
-    <th>Document Type</th>
-    <th>Date</th>
-    <th>View</th>
-   
-
-  </tr>
-</thead>
-<tbody>
-  <tr v-for="pdoc in pdocs" :key="pdoc">
-    <td>{{ pdoc.name }}</td>
-    <td>{{ pdoc.type }}</td>
-    <td>{{ pdoc.date }}</td>
-
-  <td> <a href="">
-    <img style="height: 50px; width: 50px" src="/assets/images/resource/pdf.png" alt="" />
-        <p></p>
-
-  </a>
-  </td> 
-   
-   
-   
-    
-  
-  
-  
-  </tr>
-
-
-
-
- 
-
-
-
-
-</tbody>
-</table>
-
-
+                        <td>
+                          <a href="">
+                            <img
+                              style="height: 50px; width: 50px"
+                              src="/assets/images/resource/pdf.png"
+                              alt=""
+                            />
+                            <p></p>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
 
                   <div class="mt-2">
                     <button
@@ -1006,11 +989,20 @@ class="form-control"
 import { Validator } from "@/other/Validator";
 import $ from "jquery";
 import axios from "axios";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import Constant from "@/other/Constant";
 
 export default {
   data() {
     return {
       profile: {},
+
+      editor: ClassicEditor,
+      editorData: "",
+      editorConfig: {
+        // The configuration of the editor.
+      },
+
       uuid: "",
       email: "",
       basic_information: {},
@@ -1029,14 +1021,21 @@ export default {
       authPersonImageUrl: "",
       document_name: "",
       document_type: "",
-      pdocs:[],
-       docs: [],
+      pdocs: [],
+      docs: [],
       images: [],
       isDragging: false,
+      active: false,
     };
   },
 
   methods: {
+    mouseOver() {
+      this.active = true;
+    },
+    mouseleave() {
+      this.active = false;
+    },
     selectFiles() {
       this.$refs.fileInput.click();
     },
@@ -1076,7 +1075,6 @@ export default {
       this.isDragging = false;
       const files = event.dataTransfer.files;
 
-   
       for (let i = 0; i < files.length; i++) {
         if (!this.docs.some((e) => e.name === files[i].name)) {
           var doc = {
@@ -1098,6 +1096,7 @@ export default {
 
     // Creating Feature list
     addbasicinfo() {
+      alert(this.editorData);
       var validator = new Validator();
       var error = validator.validated([
         {
@@ -1185,7 +1184,6 @@ export default {
           .then((response) => {
             if (response) {
               this.$emit("get_message", response.data.message);
-
             }
           })
           .catch((error) => {
@@ -1246,7 +1244,12 @@ export default {
           document_type: this.document_type,
 
           document_name: this.document_name,
-          date: new Date().getDate()+"/"+(new Date().getMonth()+1)+"/"+new Date().getFullYear(),
+          date:
+            new Date().getDate() +
+            "/" +
+            (new Date().getMonth() + 1) +
+            "/" +
+            new Date().getFullYear(),
         };
 
         this.docs.push(doc);
@@ -1529,12 +1532,23 @@ export default {
                 );
               }
               if (this.profile.logo != null) {
-                this.imageUrl ="https://api.nit-bd.com/public/" + this.profile.logo.file.path;
+                this.imageUrl =
+                  Constant.filebaseurl + this.profile.logo.file.path;
+
+                var user = JSON.parse(localStorage.getItem("user")).user;
+                user.logo.file = this.profile.logo.file;
+                var data = {
+                  succes: true,
+                  message: "Data retrive sucessfully",
+                  user: user,
+                };
+
+                localStorage.setItem("user", JSON.stringify(data));
               }
 
               if (this.profile.auth_person_logo != null) {
                 this.authPersonImageUrl =
-                  "https://api.nit-bd.com/public/" +
+                  Constant.filebaseurl +
                   this.profile.auth_person_logo.file.path;
               }
 
@@ -1550,21 +1564,16 @@ export default {
                 this.company_hour = JSON.parse(this.profile.trading_hour);
               }
               if (this.profile.files != null) {
-                
-               
-              
-                for(var i = 0; i < this.profile.files.length; i++){
+                for (var i = 0; i < this.profile.files.length; i++) {
                   var pdoc = {
-            name: this.profile.files[i].document_name,
-            type: this.profile.files[i].document_type,
-            date: this.profile.files[i].created_at,
-            path: this.profile.files[i].file.path,
-            ext: this.profile.files[i].file.ext
-           
-          }
-            this.pdocs.push(pdoc);
+                    name: this.profile.files[i].document_name,
+                    type: this.profile.files[i].document_type,
+                    date: this.profile.files[i].created_at,
+                    path: this.profile.files[i].file.path,
+                    ext: this.profile.files[i].file.ext,
+                  };
+                  this.pdocs.push(pdoc);
                 }
-
               }
             }
           })
@@ -1616,4 +1625,15 @@ export default {
   },
 };
 </script>
+<style>
+.ck-content {
+  min-height: 150px !important;
+}
+.ck-powered-by__label {
+  display: none !important;
+}
+.ck.ck-balloon-panel.ck-powered-by-balloon[class*="position_border"] {
+  display: none !important;
+}
+</style>
 

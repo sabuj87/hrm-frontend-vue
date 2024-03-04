@@ -44,13 +44,14 @@
                       <img
                         :src="imageUrl"
                         alt="logo"
-                        class="text-center"
-                        style="height: 50px; width: 50px"
+                    
+                        style="height: 60px; width: 60px;border-radius: 50%;"
                       />
                     </div>
                     <div class="col-lg-6">
                       <h5>{{ basic_information.company_name }}</h5>
-                      <p>{{ basic_information.company_email }}</p>
+                      <p>{{ basic_information.sigin_email }}</p>
+                     
                     </div>
                     <div class="col-lg-5">
                       <router-link
@@ -153,6 +154,8 @@
       <script>
 import $ from "jquery";
 import axios from "axios";
+import Constant from "@/other/Constant";
+
 export default {
   data() {
     return {
@@ -204,7 +207,7 @@ export default {
                 );
               }
               if (this.profile.logo != null) {
-                this.imageUrl ="https://api.nit-bd.com/public/" + this.profile.logo.file.path;
+                this.imageUrl =Constant.filebaseurl+ this.profile.logo.file.path;
               }
 
               if (this.profile.authorised_person_details != null) {

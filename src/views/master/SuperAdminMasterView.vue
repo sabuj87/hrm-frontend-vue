@@ -26,16 +26,17 @@
       <div class="bs-stepper" ></div>
     
       <!-- /.control-sidebar -->
+      <footer-view></footer-view>
     </div>
   </template>
       
       <script>
   import SidebarView from "@/views/dashboard_pages/superadmin/SidebarView.vue";
   import NavbarView from "@/views/dashboard_pages/superadmin/NavbarView.vue";
-  // import FooterView from "@/views/dashboard_pages/superadmin/FooterView.vue";
+  import FooterView from "@/views/dashboard_pages/superadmin/FooterView.vue";
   import ControlSidebarView from "@/views/dashboard_pages/superadmin/ControlSidebarView.vue";
   export default {
-    components: { SidebarView, NavbarView,  ControlSidebarView },
+    components: { SidebarView, NavbarView,  ControlSidebarView, FooterView },
 
   };
   </script>

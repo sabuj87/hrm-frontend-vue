@@ -48,6 +48,7 @@ import PayrollsView from '../views/dashboard_pages/company/PayrollsView'
 import PFRuleView from '../views/dashboard_pages/company/PFRuleView'
 import HolidaysView from '../views/dashboard_pages/company/HolidaysView'
 import WeekendsView from '../views/dashboard_pages/company/WeekendsView'
+import CompanyLeaveView from '../views/dashboard_pages/company/CompanyLeaveView'
 import PaySlipsEmployeeListView from '../views/dashboard_pages/company/PaySlipsEmployeeListView'
 import PaySlipListView from '../views/dashboard_pages/company/PaySlipListView'
 
@@ -505,6 +506,13 @@ const routes = [
               component: WeekendsView
             },
            
+            {
+              path:'leaves',
+              name:'leaves',
+  
+              component: CompanyLeaveView
+            },
+           
 
              {
               path:'leaveaplylist',
@@ -696,7 +704,7 @@ const routes = [
           component:CreateJobDemandView,
          },
          {
-          path: 'jobdemandlist',
+          path: 'employee-jobdemandlist',
           name: 'employee-jobdemandlist',
           component:EmployeeJobdemandListView,
          },

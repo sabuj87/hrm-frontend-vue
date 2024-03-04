@@ -52,7 +52,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <!-- <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle"> -->
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Brad Diesel
@@ -68,7 +68,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <!-- <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3"> -->
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   John Pierce
@@ -84,7 +84,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <!-- <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3"> -->
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Nora Silvester
@@ -139,7 +139,7 @@
       </li> -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="fa-solid fa-user"></i>
+          <img :src="logopath" style="height: 40px;width: 40px;margin-top: -10px;border-radius: 50%;">
           <!-- <span class="badge badge-warning navbar-badge">15</span> -->
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -168,8 +168,27 @@
 </template>
 
 <script>
+
+import Constant from "@/other/Constant";
 export default {
+data(){
+  return{
+    logopath:"",
+    basurl:Constant.filebaseurl
+  }
+},
+
 mounted:function(){
+
+  var logo=JSON.parse(localStorage.getItem("user")).user.logo
+  if(logo!=null){
+    this.logopath=Constant.filebaseurl+JSON.parse(localStorage.getItem("user")).user.logo.file.path
+
+  }
+
+
+
+
 
 
 

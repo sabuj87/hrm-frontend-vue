@@ -45,7 +45,7 @@
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
-                    <table class="table text-center table-striped table-bordered">
+                    <!-- <table class="table text-center table-striped table-bordered">
                       <thead>
                         <tr>
                           <th style="width: 10px">#</th>
@@ -76,27 +76,29 @@
                           </td>
                         </tr>
                       </tbody>
-                    </table>
+                    </table> -->
+
+                    <DataTable
+                        :data="holidays"
+  
+                        class="display table table-striped table-bordered mt-2"
+                      >
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+
+                            <th>Holiday name</th>
+                            <th>Work Rate</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </DataTable>
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-right">
-                      <li class="page-item">
-                        <a class="page-link" href="#">&laquo;</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">&raquo;</a>
-                      </li>
-                    </ul>
+                 
                   </div>
                 </div>
                 <!-- /.card -->
@@ -267,7 +269,12 @@
         <script>
    import $ from "jquery";
   import axios from "axios";
+  import DataTable from "datatables.net-vue3";
+import DataTablesCore from "datatables.net";
+DataTable.use(DataTablesCore);
   export default {
+    components: { DataTable },
+
     data() {
       return {
         errors: {},
@@ -282,9 +289,18 @@
           .then((response) => {
             if (response) {
               
-              this.holidays = response.data.data;
+              var holidays = response.data.data;
+
+              for(var holiday of holidays){
+
+                var id=holiday.id;
+                var date=holiday.date;
+                var holiday_name=holiday.holiday_name;
+                var rate=holiday.rate;
+                var action="<i class='fa-solid fa-pen-to-square sc text-large '></i>  <i class='fa-solid fa-trash text-red ms-2 pc'></i>"
+                this.holidays.push([id,date,holiday_name,rate,action]);
+              }
   
-              this.$refs.addForm.reset();
             }
           })
           .catch((error) => {

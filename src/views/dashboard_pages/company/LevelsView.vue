@@ -45,7 +45,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <table class="table text-center table-striped table-bordered">
+                  <!-- <table class="table text-center table-striped table-bordered">
                     <thead>
                       <tr>
                         <th style="width: 10px">#</th>
@@ -72,11 +72,26 @@
                         </td>
                       </tr>
                     </tbody>
-                  </table>
+                  </table> -->
+
+                  <DataTable
+                    :data="levels"
+                    class=" table table-striped table-bordered mt-2"
+                  >
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>level name</th>
+                        <th>code</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                  </DataTable>
+                  
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                  <ul class="pagination pagination-sm m-0 float-right">
+                  <!-- <ul class="pagination pagination-sm m-0 float-right">
                     <li class="page-item">
                       <a class="page-link" href="#">&laquo;</a>
                     </li>
@@ -92,7 +107,7 @@
                     <li class="page-item">
                       <a class="page-link" href="#">&raquo;</a>
                     </li>
-                  </ul>
+                  </ul> -->
                 </div>
               </div>
               <!-- /.card -->
@@ -257,7 +272,13 @@
       <script>
  import $ from "jquery";
 import axios from "axios";
+import DataTable from "datatables.net-vue3";
+import DataTablesCore from "datatables.net";
+DataTable.use(DataTablesCore);
+
 export default {
+  components: { DataTable },
+
   data() {
     return {
       errors: {},
@@ -272,9 +293,21 @@ export default {
         .then((response) => {
           if (response) {
             
-            this.levels = response.data.data;
-            this.$refs.addForm.reset();
-        }
+           var levels = response.data.data;
+
+           for (var level of levels){
+
+            var id=level.id;
+            var level_name=level.level_name;
+            var code=level.code
+            var action = "<i class='fa-solid fa-pen-to-square sc text-large '></i>  <i class='fa-solid fa-trash text-red ms-2 pc'></i>";
+            
+
+            this.levels.push([id,level_name,code,action]);
+
+           }
+          }
+          
         })
         .catch((error) => {
           console.log(error);
